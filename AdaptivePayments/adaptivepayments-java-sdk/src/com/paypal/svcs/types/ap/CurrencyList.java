@@ -5,12 +5,12 @@
 
 package com.paypal.svcs.types.ap;
 
+import com.paypal.core.NVPUtil;
+import com.paypal.svcs.types.common.CurrencyType;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-
-import com.paypal.svcs.types.common.CurrencyType;
 
 
 /**
@@ -53,11 +53,15 @@ public class CurrencyList {
 	}
 
 	public CurrencyList(Map<String, String> map, String prefix) {
-		for(int i=0; i<10; i++) {
+		int i=0; 
+		 i=0; 
+		 while(true) {
 			if( map.containsKey(prefix + "currency" + '(' + i + ')'+ ".code") ) {
 				String newPrefix = prefix + "currency" + '(' + i + ')' + '.';
 				this.currency.add(new CurrencyType(map, newPrefix));
 			}
+			else break;
+			i++;
 		}
 	}
 }

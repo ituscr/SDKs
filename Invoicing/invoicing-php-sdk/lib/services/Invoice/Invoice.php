@@ -288,13 +288,16 @@ class ErrorData {
 			if($map != null && array_key_exists($mapKeyName, $map)) {
 				$this->exceptionId = $map[$mapKeyName];
 			}
-			for($i=0; $i<10;$i++) {
+			$i=0;
+			while(true) {
 				if( PPUtils::array_match_key($map, $prefix."parameter($i)") ) {
 					$newPrefix = $prefix."parameter($i).";
-				$this->parameter[$i] = new ErrorParameter();
-				$this->parameter[$i]->init($map, $newPrefix);
+					$this->parameter[$i] = new ErrorParameter();
+					$this->parameter[$i]->init($map, $newPrefix);
+				}
+				else break;
+				$i++;
 			}
-			 }
 		}
 	}
 }
@@ -307,11 +310,21 @@ class ErrorParameter {
 	 * @access public
 	 * @var string
 	 */
+	public $name;
+
+	/**
+	 * @access public
+	 * @var string
+	 */
 	public $value;
 
 
 	public function init($map = null, $prefix='') {
 		if($map != null) {
+			$mapKeyName =  $prefix . 'name';
+			if($map != null && array_key_exists($mapKeyName, $map)) {
+				$this->name = $map[$mapKeyName];
+			}
 			$mapKeyName =  $prefix . 'value';
 			if($map != null && array_key_exists($mapKeyName, $map)) {
 				$this->value = $map[$mapKeyName];
@@ -347,13 +360,16 @@ class FaultMessage {
 				$this->responseEnvelope = new ResponseEnvelope();
 				$this->responseEnvelope->init($map, $newPrefix);
 			}
-			for($i=0; $i<10;$i++) {
+			$i=0;
+			while(true) {
 				if( PPUtils::array_match_key($map, $prefix."error($i)") ) {
 					$newPrefix = $prefix."error($i).";
-				$this->error[$i] = new ErrorData();
-				$this->error[$i]->init($map, $newPrefix);
+					$this->error[$i] = new ErrorData();
+					$this->error[$i]->init($map, $newPrefix);
+				}
+				else break;
+				$i++;
 			}
-			 }
 		}
 	}
 }
@@ -742,7 +758,7 @@ class InvoiceItemType {
 	}
 
 	public function toNVPString($prefix='') { 
-		$str = '&';
+		$str = '';
 		$delim = '';
 		if( $this->name != null ) {
 			$str .= $delim .  $prefix . 'name=' . urlencode($this->name);
@@ -793,13 +809,16 @@ class InvoiceItemListType {
 
 	public function init($map = null, $prefix='') {
 		if($map != null) {
-			for($i=0; $i<10;$i++) {
+			$i=0;
+			while(true) {
 				if( PPUtils::array_match_key($map, $prefix."item($i)") ) {
 					$newPrefix = $prefix."item($i).";
-				$this->item[$i] = new InvoiceItemType();
-				$this->item[$i]->init($map, $newPrefix);
+					$this->item[$i] = new InvoiceItemType();
+					$this->item[$i]->init($map, $newPrefix);
+				}
+				else break;
+				$i++;
 			}
-			 }
 		}
 	}
 
@@ -985,6 +1004,14 @@ class InvoiceType {
 	 */
 	public $logoUrl;
 
+	/**
+	 * BN code for tracking transactions with a particular partner. 
+	 *
+	 * @access public
+	 * @var string
+	 */
+	public $referrerCode;
+
 
 	public function init($map = null, $prefix='') {
 		if($map != null) {
@@ -1071,6 +1098,10 @@ class InvoiceType {
 			$mapKeyName =  $prefix . 'logoUrl';
 			if($map != null && array_key_exists($mapKeyName, $map)) {
 				$this->logoUrl = $map[$mapKeyName];
+			}
+			$mapKeyName =  $prefix . 'referrerCode';
+			if($map != null && array_key_exists($mapKeyName, $map)) {
+				$this->referrerCode = $map[$mapKeyName];
 			}
 		}
 	}
@@ -1168,6 +1199,10 @@ class InvoiceType {
 		}
 		if( $this->logoUrl != null ) {
 			$str .= $delim .  $prefix . 'logoUrl=' . urlencode($this->logoUrl);
+			$delim = '&';
+		}
+		if( $this->referrerCode != null ) {
+			$str .= $delim .  $prefix . 'referrerCode=' . urlencode($this->referrerCode);
 			$delim = '&';
 		}
 
@@ -1870,6 +1905,14 @@ class InvoiceSummaryType {
 	 */
 	public $origin;
 
+	/**
+	 * BN code for tracking transactions with a particular partner. 
+	 *
+	 * @access public
+	 * @var string
+	 */
+	public $referrerCode;
+
 
 	public function init($map = null, $prefix='') {
 		if($map != null) {
@@ -1937,6 +1980,10 @@ class InvoiceSummaryType {
 			if($map != null && array_key_exists($mapKeyName, $map)) {
 				$this->origin = $map[$mapKeyName];
 			}
+			$mapKeyName =  $prefix . 'referrerCode';
+			if($map != null && array_key_exists($mapKeyName, $map)) {
+				$this->referrerCode = $map[$mapKeyName];
+			}
 		}
 	}
 }
@@ -1956,13 +2003,16 @@ class InvoiceSummaryListType {
 
 	public function init($map = null, $prefix='') {
 		if($map != null) {
-			for($i=0; $i<10;$i++) {
+			$i=0;
+			while(true) {
 				if( PPUtils::array_match_key($map, $prefix."invoice($i)") ) {
 					$newPrefix = $prefix."invoice($i).";
-				$this->invoice[$i] = new InvoiceSummaryType();
-				$this->invoice[$i]->init($map, $newPrefix);
+					$this->invoice[$i] = new InvoiceSummaryType();
+					$this->invoice[$i]->init($map, $newPrefix);
+				}
+				else break;
+				$i++;
 			}
-			 }
 		}
 	}
 }
@@ -2047,6 +2097,14 @@ class CreateInvoiceResponse {
 	public $invoiceURL;
 
 	/**
+	 * The total amount of the invoice (cost of items, shipping and tax, less any discount).
+	 *
+	 * @access public
+	 * @var long
+	 */
+	public $totalAmount;
+
+	/**
 	 * array
 	 * @access public
 	 * @var ErrorData
@@ -2073,13 +2131,20 @@ class CreateInvoiceResponse {
 			if($map != null && array_key_exists($mapKeyName, $map)) {
 				$this->invoiceURL = $map[$mapKeyName];
 			}
-			for($i=0; $i<10;$i++) {
+			$mapKeyName =  $prefix . 'totalAmount';
+			if($map != null && array_key_exists($mapKeyName, $map)) {
+				$this->totalAmount = $map[$mapKeyName];
+			}
+			$i=0;
+			while(true) {
 				if( PPUtils::array_match_key($map, $prefix."error($i)") ) {
 					$newPrefix = $prefix."error($i).";
-				$this->error[$i] = new ErrorData();
-				$this->error[$i]->init($map, $newPrefix);
+					$this->error[$i] = new ErrorData();
+					$this->error[$i]->init($map, $newPrefix);
+				}
+				else break;
+				$i++;
 			}
-			 }
 		}
 	}
 }
@@ -2177,13 +2242,16 @@ class SendInvoiceResponse {
 			if($map != null && array_key_exists($mapKeyName, $map)) {
 				$this->invoiceURL = $map[$mapKeyName];
 			}
-			for($i=0; $i<10;$i++) {
+			$i=0;
+			while(true) {
 				if( PPUtils::array_match_key($map, $prefix."error($i)") ) {
 					$newPrefix = $prefix."error($i).";
-				$this->error[$i] = new ErrorData();
-				$this->error[$i]->init($map, $newPrefix);
+					$this->error[$i] = new ErrorData();
+					$this->error[$i]->init($map, $newPrefix);
+				}
+				else break;
+				$i++;
 			}
-			 }
 		}
 	}
 }
@@ -2268,6 +2336,14 @@ class CreateAndSendInvoiceResponse {
 	public $invoiceURL;
 
 	/**
+	 * The total amount of the invoice (cost of items, shipping and tax, less any discount).
+	 *
+	 * @access public
+	 * @var long
+	 */
+	public $totalAmount;
+
+	/**
 	 * array
 	 * @access public
 	 * @var ErrorData
@@ -2294,13 +2370,20 @@ class CreateAndSendInvoiceResponse {
 			if($map != null && array_key_exists($mapKeyName, $map)) {
 				$this->invoiceURL = $map[$mapKeyName];
 			}
-			for($i=0; $i<10;$i++) {
+			$mapKeyName =  $prefix . 'totalAmount';
+			if($map != null && array_key_exists($mapKeyName, $map)) {
+				$this->totalAmount = $map[$mapKeyName];
+			}
+			$i=0;
+			while(true) {
 				if( PPUtils::array_match_key($map, $prefix."error($i)") ) {
 					$newPrefix = $prefix."error($i).";
-				$this->error[$i] = new ErrorData();
-				$this->error[$i]->init($map, $newPrefix);
+					$this->error[$i] = new ErrorData();
+					$this->error[$i]->init($map, $newPrefix);
+				}
+				else break;
+				$i++;
 			}
-			 }
 		}
 	}
 }
@@ -2398,6 +2481,14 @@ class UpdateInvoiceResponse {
 	public $invoiceURL;
 
 	/**
+	 * The total amount of the invoice (cost of items, shipping and tax, less any discount).
+	 *
+	 * @access public
+	 * @var long
+	 */
+	public $totalAmount;
+
+	/**
 	 * array
 	 * @access public
 	 * @var ErrorData
@@ -2424,13 +2515,20 @@ class UpdateInvoiceResponse {
 			if($map != null && array_key_exists($mapKeyName, $map)) {
 				$this->invoiceURL = $map[$mapKeyName];
 			}
-			for($i=0; $i<10;$i++) {
+			$mapKeyName =  $prefix . 'totalAmount';
+			if($map != null && array_key_exists($mapKeyName, $map)) {
+				$this->totalAmount = $map[$mapKeyName];
+			}
+			$i=0;
+			while(true) {
 				if( PPUtils::array_match_key($map, $prefix."error($i)") ) {
 					$newPrefix = $prefix."error($i).";
-				$this->error[$i] = new ErrorData();
-				$this->error[$i]->init($map, $newPrefix);
+					$this->error[$i] = new ErrorData();
+					$this->error[$i]->init($map, $newPrefix);
+				}
+				else break;
+				$i++;
 			}
-			 }
 		}
 	}
 }
@@ -2555,13 +2653,16 @@ class GetInvoiceDetailsResponse {
 			if($map != null && array_key_exists($mapKeyName, $map)) {
 				$this->invoiceURL = $map[$mapKeyName];
 			}
-			for($i=0; $i<10;$i++) {
+			$i=0;
+			while(true) {
 				if( PPUtils::array_match_key($map, $prefix."error($i)") ) {
 					$newPrefix = $prefix."error($i).";
-				$this->error[$i] = new ErrorData();
-				$this->error[$i]->init($map, $newPrefix);
+					$this->error[$i] = new ErrorData();
+					$this->error[$i]->init($map, $newPrefix);
+				}
+				else break;
+				$i++;
 			}
-			 }
 		}
 	}
 }
@@ -2706,13 +2807,16 @@ class CancelInvoiceResponse {
 			if($map != null && array_key_exists($mapKeyName, $map)) {
 				$this->invoiceURL = $map[$mapKeyName];
 			}
-			for($i=0; $i<10;$i++) {
+			$i=0;
+			while(true) {
 				if( PPUtils::array_match_key($map, $prefix."error($i)") ) {
 					$newPrefix = $prefix."error($i).";
-				$this->error[$i] = new ErrorData();
-				$this->error[$i]->init($map, $newPrefix);
+					$this->error[$i] = new ErrorData();
+					$this->error[$i]->init($map, $newPrefix);
+				}
+				else break;
+				$i++;
 			}
-			 }
 		}
 	}
 }
@@ -2887,13 +2991,16 @@ class SearchInvoicesResponse {
 			if($map != null && array_key_exists($mapKeyName, $map)) {
 				$this->hasPreviousPage = $map[$mapKeyName];
 			}
-			for($i=0; $i<10;$i++) {
+			$i=0;
+			while(true) {
 				if( PPUtils::array_match_key($map, $prefix."error($i)") ) {
 					$newPrefix = $prefix."error($i).";
-				$this->error[$i] = new ErrorData();
-				$this->error[$i]->init($map, $newPrefix);
+					$this->error[$i] = new ErrorData();
+					$this->error[$i]->init($map, $newPrefix);
+				}
+				else break;
+				$i++;
 			}
-			 }
 		}
 	}
 }
@@ -3017,15 +3124,19 @@ class MarkInvoiceAsPaidResponse {
 			if($map != null && array_key_exists($mapKeyName, $map)) {
 				$this->invoiceURL = $map[$mapKeyName];
 			}
-			for($i=0; $i<10;$i++) {
+			$i=0;
+			while(true) {
 				if( PPUtils::array_match_key($map, $prefix."error($i)") ) {
 					$newPrefix = $prefix."error($i).";
-				$this->error[$i] = new ErrorData();
-				$this->error[$i]->init($map, $newPrefix);
+					$this->error[$i] = new ErrorData();
+					$this->error[$i]->init($map, $newPrefix);
+				}
+				else break;
+				$i++;
 			}
-			 }
 		}
 	}
 }
 
 ?>
+

@@ -89,6 +89,7 @@ public class CreateAccountResponse {
 	public CreateAccountResponse() {
 	}
 	public CreateAccountResponse(Map<String, String> map, String prefix) {
+		int i=0; 
 		if( map.containsKey(prefix + "responseEnvelope" + ".timestamp") ) {
 			String newPrefix = prefix + "responseEnvelope" + '.';
 			this.responseEnvelope =  new ResponseEnvelope(map, newPrefix);
@@ -105,11 +106,14 @@ public class CreateAccountResponse {
 		if( map.containsKey(prefix + "accountId") ) {
 			this.accountId = map.get(prefix + "accountId");
 		}
-		for(int i=0; i<10; i++) {
+		 i=0; 
+		 while(true) {
 			if( map.containsKey(prefix + "error" + '(' + i + ')'+ ".errorId") ) {
 				String newPrefix = prefix + "error" + '(' + i + ')' + '.';
 				this.error.add(new ErrorData(map, newPrefix));
 			}
+			else break;
+			i++;
 		}
 	}
 }

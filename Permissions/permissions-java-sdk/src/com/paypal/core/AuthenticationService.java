@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package com.paypal.core;
 
@@ -14,7 +14,7 @@ import com.paypal.sdk.util.OAuthSignature;
 
 /**
  * @author lvairamani
- * 
+ *
  */
 public class AuthenticationService {
 	private Map<String, String> headers = new HashMap<String, String>();

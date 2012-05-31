@@ -88,13 +88,16 @@ class ErrorData {
 			if($map != null && array_key_exists($mapKeyName, $map)) {
 				$this->exceptionId = $map[$mapKeyName];
 			}
-			for($i=0; $i<10;$i++) {
+			$i=0;
+			while(true) {
 				if( PPUtils::array_match_key($map, $prefix."parameter($i)") ) {
 					$newPrefix = $prefix."parameter($i).";
-				$this->parameter[$i] = new ErrorParameter();
-				$this->parameter[$i]->init($map, $newPrefix);
+					$this->parameter[$i] = new ErrorParameter();
+					$this->parameter[$i]->init($map, $newPrefix);
+				}
+				else break;
+				$i++;
 			}
-			 }
 		}
 	}
 }
@@ -107,24 +110,24 @@ class ErrorParameter {
 	 * @access public
 	 * @var string
 	 */
-	public $value;
+	public $name;
 
 	/**
 	 * @access public
 	 * @var string
 	 */
-	public $name;
+	public $value;
 
 
 	public function init($map = null, $prefix='') {
 		if($map != null) {
-			$mapKeyName =  $prefix . 'value';
-			if($map != null && array_key_exists($mapKeyName, $map)) {
-				$this->value = $map[$mapKeyName];
-			}
 			$mapKeyName =  $prefix . 'name';
 			if($map != null && array_key_exists($mapKeyName, $map)) {
 				$this->name = $map[$mapKeyName];
+			}
+			$mapKeyName =  $prefix . 'value';
+			if($map != null && array_key_exists($mapKeyName, $map)) {
+				$this->value = $map[$mapKeyName];
 			}
 		}
 	}
@@ -243,13 +246,16 @@ class FaultMessage {
 				$this->responseEnvelope = new ResponseEnvelope();
 				$this->responseEnvelope->init($map, $newPrefix);
 			}
-			for($i=0; $i<10;$i++) {
+			$i=0;
+			while(true) {
 				if( PPUtils::array_match_key($map, $prefix."error($i)") ) {
 					$newPrefix = $prefix."error($i).";
-				$this->error[$i] = new ErrorData();
-				$this->error[$i]->init($map, $newPrefix);
+					$this->error[$i] = new ErrorData();
+					$this->error[$i]->init($map, $newPrefix);
+				}
+				else break;
+				$i++;
 			}
-			 }
 		}
 	}
 }
@@ -357,13 +363,16 @@ class RequestPermissionsResponse {
 			if($map != null && array_key_exists($mapKeyName, $map)) {
 				$this->token = $map[$mapKeyName];
 			}
-			for($i=0; $i<10;$i++) {
+			$i=0;
+			while(true) {
 				if( PPUtils::array_match_key($map, $prefix."error($i)") ) {
 					$newPrefix = $prefix."error($i).";
-				$this->error[$i] = new ErrorData();
-				$this->error[$i]->init($map, $newPrefix);
+					$this->error[$i] = new ErrorData();
+					$this->error[$i]->init($map, $newPrefix);
+				}
+				else break;
+				$i++;
 			}
-			 }
 		}
 	}
 }
@@ -496,8 +505,15 @@ class GetAccessTokenResponse {
 				$this->responseEnvelope = new ResponseEnvelope();
 				$this->responseEnvelope->init($map, $newPrefix);
 			}
-			for($i=0; $i<10;$i++) {
-			 }
+			$i=0;
+			while(true) {
+				$mapKeyName = $prefix."scope($i)" ;
+				if (PPUtils :: array_match_key($map, $mapKeyName)) {
+					$this->scope[$i] = $map[$mapKeyName];
+					}
+				else break;
+				$i++;
+			}
 			$mapKeyName =  $prefix . 'token';
 			if($map != null && array_key_exists($mapKeyName, $map)) {
 				$this->token = $map[$mapKeyName];
@@ -506,13 +522,16 @@ class GetAccessTokenResponse {
 			if($map != null && array_key_exists($mapKeyName, $map)) {
 				$this->tokenSecret = $map[$mapKeyName];
 			}
-			for($i=0; $i<10;$i++) {
+			$i=0;
+			while(true) {
 				if( PPUtils::array_match_key($map, $prefix."error($i)") ) {
 					$newPrefix = $prefix."error($i).";
-				$this->error[$i] = new ErrorData();
-				$this->error[$i]->init($map, $newPrefix);
+					$this->error[$i] = new ErrorData();
+					$this->error[$i]->init($map, $newPrefix);
+				}
+				else break;
+				$i++;
 			}
-			 }
 		}
 	}
 }
@@ -597,15 +616,25 @@ class GetPermissionsResponse {
 				$this->responseEnvelope = new ResponseEnvelope();
 				$this->responseEnvelope->init($map, $newPrefix);
 			}
-			for($i=0; $i<10;$i++) {
-			 }
-			for($i=0; $i<10;$i++) {
+			$i=0;
+			while(true) {
+				$mapKeyName = $prefix."scope($i)" ;
+				if (PPUtils :: array_match_key($map, $mapKeyName)) {
+					$this->scope[$i] = $map[$mapKeyName];
+					}
+				else break;
+				$i++;
+			}
+			$i=0;
+			while(true) {
 				if( PPUtils::array_match_key($map, $prefix."error($i)") ) {
 					$newPrefix = $prefix."error($i).";
-				$this->error[$i] = new ErrorData();
-				$this->error[$i]->init($map, $newPrefix);
+					$this->error[$i] = new ErrorData();
+					$this->error[$i]->init($map, $newPrefix);
+				}
+				else break;
+				$i++;
 			}
-			 }
 		}
 	}
 }
@@ -676,15 +705,289 @@ class CancelPermissionsResponse {
 				$this->responseEnvelope = new ResponseEnvelope();
 				$this->responseEnvelope->init($map, $newPrefix);
 			}
-			for($i=0; $i<10;$i++) {
+			$i=0;
+			while(true) {
 				if( PPUtils::array_match_key($map, $prefix."error($i)") ) {
 					$newPrefix = $prefix."error($i).";
-				$this->error[$i] = new ErrorData();
-				$this->error[$i]->init($map, $newPrefix);
+					$this->error[$i] = new ErrorData();
+					$this->error[$i]->init($map, $newPrefix);
+				}
+				else break;
+				$i++;
 			}
-			 }
+		}
+	}
+}
+
+/**
+ * PersonalAttributeList
+ * List of Personal Attributes to be sent as a request. 
+ */
+class PersonalAttributeList {
+	/**
+	 * array
+	 * @access public
+	 * @var PersonalAttribute
+	 */
+	public $attribute;
+
+
+	public function toNVPString($prefix='') { 
+		$str = '';
+		$delim = '';
+		for($i=0; $i<count($this->attribute);$i++) {
+			$str .= $delim .  $prefix ."attribute($i)=" .  urlencode($this->attribute[$i]);
+		 }
+
+		return $str;
+	}
+
+}
+
+/**
+ * PersonalData
+ * A property of User Identity data , represented as a Name-value pair with Name being the PersonalAttribute requested and value being the data.
+ */
+class PersonalData {
+	/**
+	 * @access public
+	 * @var PersonalAttribute
+	 */
+	public $personalDataKey;
+
+	/**
+	 * @access public
+	 * @var string
+	 */
+	public $personalDataValue;
+
+
+	public function init($map = null, $prefix='') {
+		if($map != null) {
+			$mapKeyName =  $prefix . 'personalDataKey';
+			if($map != null && array_key_exists($mapKeyName, $map)) {
+				$this->personalDataKey = $map[$mapKeyName];
+			}
+			$mapKeyName =  $prefix . 'personalDataValue';
+			if($map != null && array_key_exists($mapKeyName, $map)) {
+				$this->personalDataValue = $map[$mapKeyName];
+			}
+		}
+	}
+}
+
+/**
+ * PersonalDataList
+ * Set of personal data which forms the response of GetPersonalData call.
+ */
+class PersonalDataList {
+	/**
+	 * array
+	 * @access public
+	 * @var PersonalData
+	 */
+	public $personalData;
+
+
+	public function init($map = null, $prefix='') {
+		if($map != null) {
+			$i=0;
+			while(true) {
+				if( PPUtils::array_match_key($map, $prefix."personalData($i)") ) {
+					$newPrefix = $prefix."personalData($i).";
+					$this->personalData[$i] = new PersonalData();
+					$this->personalData[$i]->init($map, $newPrefix);
+				}
+				else break;
+				$i++;
+			}
+		}
+	}
+}
+
+/**
+ * GetBasicPersonalDataRequest
+ * Request to retrieve basic personal data.Accepts PersonalAttributeList as request and responds with PersonalDataList.
+ * This call will accept only 'Basic' attributes and ignore others. 
+ */
+class GetBasicPersonalDataRequest {
+	/**
+	 * @access public
+	 * @var RequestEnvelope
+	 */
+	public $requestEnvelope;
+
+	/**
+	 * @access public
+	 * @var PersonalAttributeList
+	 */
+	public $attributeList;
+
+
+	public function __construct($attributeList = null) {
+		$this->attributeList  = $attributeList;
+	}
+
+	public function toNVPString($prefix='') { 
+		$str = '';
+		$delim = '';
+		if( $this->requestEnvelope != null ) {
+			$newPrefix = $prefix . 'requestEnvelope.';
+			$str .= $delim . call_user_func(array($this->requestEnvelope, 'toNVPString'), $newPrefix);
+			$delim = '&';
+		}
+		if( $this->attributeList != null ) {
+			$newPrefix = $prefix . 'attributeList.';
+			$str .= $delim . call_user_func(array($this->attributeList, 'toNVPString'), $newPrefix);
+			$delim = '&';
+		}
+
+		return $str;
+	}
+
+}
+
+/**
+ * GetAdvancedPersonalDataRequest
+ * Request to retrieve personal data.Accepts PersonalAttributeList as request and responds with PersonalDataList.
+ * This call will accept both 'Basic' and Advanced attributes. 
+ */
+class GetAdvancedPersonalDataRequest {
+	/**
+	 * @access public
+	 * @var RequestEnvelope
+	 */
+	public $requestEnvelope;
+
+	/**
+	 * @access public
+	 * @var PersonalAttributeList
+	 */
+	public $attributeList;
+
+
+	public function __construct($attributeList = null) {
+		$this->attributeList  = $attributeList;
+	}
+
+	public function toNVPString($prefix='') { 
+		$str = '';
+		$delim = '';
+		if( $this->requestEnvelope != null ) {
+			$newPrefix = $prefix . 'requestEnvelope.';
+			$str .= $delim . call_user_func(array($this->requestEnvelope, 'toNVPString'), $newPrefix);
+			$delim = '&';
+		}
+		if( $this->attributeList != null ) {
+			$newPrefix = $prefix . 'attributeList.';
+			$str .= $delim . call_user_func(array($this->attributeList, 'toNVPString'), $newPrefix);
+			$delim = '&';
+		}
+
+		return $str;
+	}
+
+}
+
+/**
+ * GetBasicPersonalDataResponse
+ */
+class GetBasicPersonalDataResponse {
+	/**
+	 * @access public
+	 * @var ResponseEnvelope
+	 */
+	public $responseEnvelope;
+
+	/**
+	 * @access public
+	 * @var PersonalDataList
+	 */
+	public $response;
+
+	/**
+	 * array
+	 * @access public
+	 * @var ErrorData
+	 */
+	public $error;
+
+
+	public function init($map = null, $prefix='') {
+		if($map != null) {
+			if( PPUtils::array_match_key($map, $prefix."responseEnvelope.") ) {
+				$newPrefix = $prefix ."responseEnvelope.";
+				$this->responseEnvelope = new ResponseEnvelope();
+				$this->responseEnvelope->init($map, $newPrefix);
+			}
+			if( PPUtils::array_match_key($map, $prefix."response.") ) {
+				$newPrefix = $prefix ."response.";
+				$this->response = new PersonalDataList();
+				$this->response->init($map, $newPrefix);
+			}
+			$i=0;
+			while(true) {
+				if( PPUtils::array_match_key($map, $prefix."error($i)") ) {
+					$newPrefix = $prefix."error($i).";
+					$this->error[$i] = new ErrorData();
+					$this->error[$i]->init($map, $newPrefix);
+				}
+				else break;
+				$i++;
+			}
+		}
+	}
+}
+
+/**
+ * GetAdvancedPersonalDataResponse
+ */
+class GetAdvancedPersonalDataResponse {
+	/**
+	 * @access public
+	 * @var ResponseEnvelope
+	 */
+	public $responseEnvelope;
+
+	/**
+	 * @access public
+	 * @var PersonalDataList
+	 */
+	public $response;
+
+	/**
+	 * array
+	 * @access public
+	 * @var ErrorData
+	 */
+	public $error;
+
+
+	public function init($map = null, $prefix='') {
+		if($map != null) {
+			if( PPUtils::array_match_key($map, $prefix."responseEnvelope.") ) {
+				$newPrefix = $prefix ."responseEnvelope.";
+				$this->responseEnvelope = new ResponseEnvelope();
+				$this->responseEnvelope->init($map, $newPrefix);
+			}
+			if( PPUtils::array_match_key($map, $prefix."response.") ) {
+				$newPrefix = $prefix ."response.";
+				$this->response = new PersonalDataList();
+				$this->response->init($map, $newPrefix);
+			}
+			$i=0;
+			while(true) {
+				if( PPUtils::array_match_key($map, $prefix."error($i)") ) {
+					$newPrefix = $prefix."error($i).";
+					$this->error[$i] = new ErrorData();
+					$this->error[$i]->init($map, $newPrefix);
+				}
+				else break;
+				$i++;
+			}
 		}
 	}
 }
 
 ?>
+

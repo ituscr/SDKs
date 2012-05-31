@@ -107,6 +107,7 @@ public class SearchInvoicesResponse {
 	public SearchInvoicesResponse() {
 	}
 	public SearchInvoicesResponse(Map<String, String> map, String prefix) {
+		int i=0; 
 		if( map.containsKey(prefix + "responseEnvelope" + ".timestamp") ) {
 			String newPrefix = prefix + "responseEnvelope" + '.';
 			this.responseEnvelope =  new ResponseEnvelope(map, newPrefix);
@@ -127,11 +128,14 @@ public class SearchInvoicesResponse {
 		if( map.containsKey(prefix + "hasPreviousPage") ) {
 			this.hasPreviousPage = Boolean.valueOf(map.get(prefix + "hasPreviousPage"));
 		}
-int i=0;		while(true) {
+		 i=0; 
+		 while(true) {
 			if( map.containsKey(prefix + "error" + '(' + i + ')'+ ".errorId") ) {
 				String newPrefix = prefix + "error" + '(' + i + ')' + '.';
 				this.error.add(new ErrorData(map, newPrefix));
 			}
-else break;i++;		}
+			else break;
+			i++;
+		}
 	}
 }

@@ -91,13 +91,16 @@ class ErrorData {
 			if($map != null && array_key_exists($mapKeyName, $map)) {
 				$this->exceptionId = $map[$mapKeyName];
 			}
-			for($i=0; $i<10;$i++) {
+			$i=0;
+			while(true) {
 				if( PPUtils::array_match_key($map, $prefix."parameter($i)") ) {
 					$newPrefix = $prefix."parameter($i).";
-				$this->parameter[$i] = new ErrorParameter();
-				$this->parameter[$i]->init($map, $newPrefix);
+					$this->parameter[$i] = new ErrorParameter();
+					$this->parameter[$i]->init($map, $newPrefix);
+				}
+				else break;
+				$i++;
 			}
-			 }
 		}
 	}
 }
@@ -110,11 +113,21 @@ class ErrorParameter {
 	 * @access public
 	 * @var string
 	 */
+	public $name;
+
+	/**
+	 * @access public
+	 * @var string
+	 */
 	public $value;
 
 
 	public function init($map = null, $prefix='') {
 		if($map != null) {
+			$mapKeyName =  $prefix . 'name';
+			if($map != null && array_key_exists($mapKeyName, $map)) {
+				$this->name = $map[$mapKeyName];
+			}
 			$mapKeyName =  $prefix . 'value';
 			if($map != null && array_key_exists($mapKeyName, $map)) {
 				$this->value = $map[$mapKeyName];
@@ -350,13 +363,16 @@ class FaultMessage {
 				$this->responseEnvelope = new ResponseEnvelope();
 				$this->responseEnvelope->init($map, $newPrefix);
 			}
-			for($i=0; $i<10;$i++) {
+			$i=0;
+			while(true) {
 				if( PPUtils::array_match_key($map, $prefix."error($i)") ) {
 					$newPrefix = $prefix."error($i).";
-				$this->error[$i] = new ErrorData();
-				$this->error[$i]->init($map, $newPrefix);
+					$this->error[$i] = new ErrorData();
+					$this->error[$i]->init($map, $newPrefix);
+				}
+				else break;
+				$i++;
 			}
-			 }
 		}
 	}
 }
@@ -499,6 +515,14 @@ class CreateAccountRequest {
 	public $performExtraVettingOnThisAccount;
 
 	/**
+	 * tax id, ssn, itin, pan, cpf, acn, abn, etc.
+	 *
+	 * @access public
+	 * @var string
+	 */
+	public $taxId;
+
+	/**
 	 * @access public
 	 * @var string
 	 */
@@ -624,6 +648,10 @@ class CreateAccountRequest {
 			$str .= $delim .  $prefix . 'performExtraVettingOnThisAccount=' . urlencode($this->performExtraVettingOnThisAccount);
 			$delim = '&';
 		}
+		if( $this->taxId != null ) {
+			$str .= $delim .  $prefix . 'taxId=' . urlencode($this->taxId);
+			$delim = '&';
+		}
 		if( $this->partnerField1 != null ) {
 			$str .= $delim .  $prefix . 'partnerField1=' . urlencode($this->partnerField1);
 			$delim = '&';
@@ -727,13 +755,16 @@ class CreateAccountResponse {
 			if($map != null && array_key_exists($mapKeyName, $map)) {
 				$this->accountId = $map[$mapKeyName];
 			}
-			for($i=0; $i<10;$i++) {
+			$i=0;
+			while(true) {
 				if( PPUtils::array_match_key($map, $prefix."error($i)") ) {
 					$newPrefix = $prefix."error($i).";
-				$this->error[$i] = new ErrorData();
-				$this->error[$i]->init($map, $newPrefix);
+					$this->error[$i] = new ErrorData();
+					$this->error[$i]->init($map, $newPrefix);
+				}
+				else break;
+				$i++;
 			}
-			 }
 		}
 	}
 }
@@ -832,13 +863,16 @@ class GetUserAgreementResponse {
 			if($map != null && array_key_exists($mapKeyName, $map)) {
 				$this->agreement = $map[$mapKeyName];
 			}
-			for($i=0; $i<10;$i++) {
+			$i=0;
+			while(true) {
 				if( PPUtils::array_match_key($map, $prefix."error($i)") ) {
 					$newPrefix = $prefix."error($i).";
-				$this->error[$i] = new ErrorData();
-				$this->error[$i]->init($map, $newPrefix);
+					$this->error[$i] = new ErrorData();
+					$this->error[$i]->init($map, $newPrefix);
+				}
+				else break;
+				$i++;
 			}
-			 }
 		}
 	}
 }
@@ -959,6 +993,15 @@ class GetVerifiedStatusResponse {
 	public $countryCode;
 
 	/**
+	 * Info about PayPal user such as emailAddress,
+	 * accountId, firstName, lastName etc. 
+	 *
+	 * @access public
+	 * @var UserInfoType
+	 */
+	public $userInfo;
+
+	/**
 	 * array
 	 * @access public
 	 * @var ErrorData
@@ -981,13 +1024,21 @@ class GetVerifiedStatusResponse {
 			if($map != null && array_key_exists($mapKeyName, $map)) {
 				$this->countryCode = $map[$mapKeyName];
 			}
-			for($i=0; $i<10;$i++) {
+			if( PPUtils::array_match_key($map, $prefix."userInfo.") ) {
+				$newPrefix = $prefix ."userInfo.";
+				$this->userInfo = new UserInfoType();
+				$this->userInfo->init($map, $newPrefix);
+			}
+			$i=0;
+			while(true) {
 				if( PPUtils::array_match_key($map, $prefix."error($i)") ) {
 					$newPrefix = $prefix."error($i).";
-				$this->error[$i] = new ErrorData();
-				$this->error[$i]->init($map, $newPrefix);
+					$this->error[$i] = new ErrorData();
+					$this->error[$i]->init($map, $newPrefix);
+				}
+				else break;
+				$i++;
 			}
-			 }
 		}
 	}
 }
@@ -1380,13 +1431,16 @@ class AddBankAccountResponse {
 			if($map != null && array_key_exists($mapKeyName, $map)) {
 				$this->fundingSourceKey = $map[$mapKeyName];
 			}
-			for($i=0; $i<10;$i++) {
+			$i=0;
+			while(true) {
 				if( PPUtils::array_match_key($map, $prefix."error($i)") ) {
 					$newPrefix = $prefix."error($i).";
-				$this->error[$i] = new ErrorData();
-				$this->error[$i]->init($map, $newPrefix);
+					$this->error[$i] = new ErrorData();
+					$this->error[$i]->init($map, $newPrefix);
+				}
+				else break;
+				$i++;
 			}
-			 }
 		}
 	}
 }
@@ -1643,13 +1697,16 @@ class AddPaymentCardResponse {
 			if($map != null && array_key_exists($mapKeyName, $map)) {
 				$this->fundingSourceKey = $map[$mapKeyName];
 			}
-			for($i=0; $i<10;$i++) {
+			$i=0;
+			while(true) {
 				if( PPUtils::array_match_key($map, $prefix."error($i)") ) {
 					$newPrefix = $prefix."error($i).";
-				$this->error[$i] = new ErrorData();
-				$this->error[$i]->init($map, $newPrefix);
+					$this->error[$i] = new ErrorData();
+					$this->error[$i]->init($map, $newPrefix);
+				}
+				else break;
+				$i++;
 			}
-			 }
 		}
 	}
 }
@@ -1747,13 +1804,16 @@ class SetFundingSourceConfirmedResponse {
 				$this->responseEnvelope = new ResponseEnvelope();
 				$this->responseEnvelope->init($map, $newPrefix);
 			}
-			for($i=0; $i<10;$i++) {
+			$i=0;
+			while(true) {
 				if( PPUtils::array_match_key($map, $prefix."error($i)") ) {
 					$newPrefix = $prefix."error($i).";
-				$this->error[$i] = new ErrorData();
-				$this->error[$i]->init($map, $newPrefix);
+					$this->error[$i] = new ErrorData();
+					$this->error[$i]->init($map, $newPrefix);
+				}
+				else break;
+				$i++;
 			}
-			 }
 		}
 	}
 }
@@ -1792,6 +1852,31 @@ class NameType {
 	 */
 	public $suffix;
 
+
+	public function init($map = null, $prefix='') {
+		if($map != null) {
+			$mapKeyName =  $prefix . 'salutation';
+			if($map != null && array_key_exists($mapKeyName, $map)) {
+				$this->salutation = $map[$mapKeyName];
+			}
+			$mapKeyName =  $prefix . 'firstName';
+			if($map != null && array_key_exists($mapKeyName, $map)) {
+				$this->firstName = $map[$mapKeyName];
+			}
+			$mapKeyName =  $prefix . 'middleName';
+			if($map != null && array_key_exists($mapKeyName, $map)) {
+				$this->middleName = $map[$mapKeyName];
+			}
+			$mapKeyName =  $prefix . 'lastName';
+			if($map != null && array_key_exists($mapKeyName, $map)) {
+				$this->lastName = $map[$mapKeyName];
+			}
+			$mapKeyName =  $prefix . 'suffix';
+			if($map != null && array_key_exists($mapKeyName, $map)) {
+				$this->suffix = $map[$mapKeyName];
+			}
+		}
+	}
 
 	public function __construct($firstName = null, $lastName = null) {
 		$this->firstName  = $firstName;
@@ -2440,6 +2525,82 @@ class BusinessStakeholderType {
 }
 
 /**
+ * UserInfoType
+ * Info about PayPal user such as emailAddress,
+ * accountId, firstName, lastName etc. 
+ */
+class UserInfoType {
+	/**
+	 * Returns emailAddress belonging to PayPal account.
+	 *
+	 * @access public
+	 * @var string
+	 */
+	public $emailAddress;
+
+	/**
+	 * Valid values are: Personal, Premier, and
+	 * Business (not case-sensitive).
+	 *
+	 * @access public
+	 * @var string
+	 */
+	public $accountType;
+
+	/**
+	 * Identifies a PayPal account. Only premier and business 
+	 * accounts have an accountId
+	 *
+	 * @access public
+	 * @var string
+	 */
+	public $accountId;
+
+	/**
+	 * Identifies a PayPal user, like firstName, lastName.
+	 *
+	 * @access public
+	 * @var NameType
+	 */
+	public $name;
+
+	/**
+	 * Business Name of the PayPal account holder.
+	 *
+	 * @access public
+	 * @var string
+	 */
+	public $businessName;
+
+
+	public function init($map = null, $prefix='') {
+		if($map != null) {
+			$mapKeyName =  $prefix . 'emailAddress';
+			if($map != null && array_key_exists($mapKeyName, $map)) {
+				$this->emailAddress = $map[$mapKeyName];
+			}
+			$mapKeyName =  $prefix . 'accountType';
+			if($map != null && array_key_exists($mapKeyName, $map)) {
+				$this->accountType = $map[$mapKeyName];
+			}
+			$mapKeyName =  $prefix . 'accountId';
+			if($map != null && array_key_exists($mapKeyName, $map)) {
+				$this->accountId = $map[$mapKeyName];
+			}
+			if( PPUtils::array_match_key($map, $prefix."name.") ) {
+				$newPrefix = $prefix ."name.";
+				$this->name = new NameType();
+				$this->name->init($map, $newPrefix);
+			}
+			$mapKeyName =  $prefix . 'businessName';
+			if($map != null && array_key_exists($mapKeyName, $map)) {
+				$this->businessName = $map[$mapKeyName];
+			}
+		}
+	}
+}
+
+/**
  * WebOptionsType
  */
 class WebOptionsType {
@@ -2538,3 +2699,4 @@ class CardDateType {
 }
 
 ?>
+

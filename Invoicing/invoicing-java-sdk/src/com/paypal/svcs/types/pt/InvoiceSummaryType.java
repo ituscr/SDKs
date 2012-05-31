@@ -211,10 +211,22 @@ public class InvoiceSummaryType {
 		this.origin = value;
 	}
 
+	/**
+	 * BN code for tracking transactions with a particular partner. 
+	 */
+	private String referrerCode;
+	public String getReferrerCode() {
+		return referrerCode;
+	}
+	public void setReferrerCode(String value) {
+		this.referrerCode = value;
+	}
+
 
 	public InvoiceSummaryType() {
 	}
 	public InvoiceSummaryType(Map<String, String> map, String prefix) {
+		int i=0; 
 		if( map.containsKey(prefix + "invoiceID") ) {
 			this.invoiceID = map.get(prefix + "invoiceID");
 		}
@@ -262,6 +274,9 @@ public class InvoiceSummaryType {
 		}
 		if( map.containsKey(prefix + "origin") ) {
 			this.origin = OriginType.fromValue( map.get(prefix + "origin") );
+		}
+		if( map.containsKey(prefix + "referrerCode") ) {
+			this.referrerCode = map.get(prefix + "referrerCode");
 		}
 	}
 }

@@ -69,6 +69,19 @@ public class UpdateInvoiceResponse {
 	}
 
 	/**
+	 * The total amount of the invoice (cost of items, shipping and tax, less any discount).
+	 *
+	 * @Required
+	 */
+	private Integer totalAmount;
+	public Integer getTotalAmount() {
+		return totalAmount;
+	}
+	public void setTotalAmount(Integer value) {
+		this.totalAmount = value;
+	}
+
+	/**
 	 */
 	private List<ErrorData> error = new ArrayList<ErrorData>();
 	public List<ErrorData> getError() {
@@ -82,6 +95,7 @@ public class UpdateInvoiceResponse {
 	public UpdateInvoiceResponse() {
 	}
 	public UpdateInvoiceResponse(Map<String, String> map, String prefix) {
+		int i=0; 
 		if( map.containsKey(prefix + "responseEnvelope" + ".timestamp") ) {
 			String newPrefix = prefix + "responseEnvelope" + '.';
 			this.responseEnvelope =  new ResponseEnvelope(map, newPrefix);
@@ -95,11 +109,17 @@ public class UpdateInvoiceResponse {
 		if( map.containsKey(prefix + "invoiceURL") ) {
 			this.invoiceURL = map.get(prefix + "invoiceURL");
 		}
-int i=0;		while(true) {
+		if( map.containsKey(prefix + "totalAmount") ) {
+			this.totalAmount = Integer.valueOf(map.get(prefix + "totalAmount"));
+		}
+		 i=0; 
+		 while(true) {
 			if( map.containsKey(prefix + "error" + '(' + i + ')'+ ".errorId") ) {
 				String newPrefix = prefix + "error" + '(' + i + ')' + '.';
 				this.error.add(new ErrorData(map, newPrefix));
 			}
-else break;i++;		}
+			else break;
+			i++;
+		}
 	}
 }

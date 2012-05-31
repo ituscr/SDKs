@@ -20,6 +20,37 @@ class AccountIdentifier {
 	 */
 	public $phone;
 
+
+	public function init($map = null, $prefix='') {
+		if($map != null) {
+			$mapKeyName =  $prefix . 'email';
+			if($map != null && array_key_exists($mapKeyName, $map)) {
+				$this->email = $map[$mapKeyName];
+			}
+			if( PPUtils::array_match_key($map, $prefix."phone.") ) {
+				$newPrefix = $prefix ."phone.";
+				$this->phone = new PhoneNumberType();
+				$this->phone->init($map, $newPrefix);
+			}
+		}
+	}
+
+	public function toNVPString($prefix='') { 
+		$str = '';
+		$delim = '';
+		if( $this->email != null ) {
+			$str .= $delim .  $prefix . 'email=' . urlencode($this->email);
+			$delim = '&';
+		}
+		if( $this->phone != null ) {
+			$newPrefix = $prefix . 'phone.';
+			$str .= $delim . call_user_func(array($this->phone, 'toNVPString'), $newPrefix);
+			$delim = '&';
+		}
+
+		return $str;
+	}
+
 }
 
 /**
@@ -338,13 +369,16 @@ class ErrorData {
 			if($map != null && array_key_exists($mapKeyName, $map)) {
 				$this->exceptionId = $map[$mapKeyName];
 			}
-			for($i=0; $i<10;$i++) {
+			$i=0;
+			while(true) {
 				if( PPUtils::array_match_key($map, $prefix."parameter($i)") ) {
 					$newPrefix = $prefix."parameter($i).";
-				$this->parameter[$i] = new ErrorParameter();
-				$this->parameter[$i]->init($map, $newPrefix);
+					$this->parameter[$i] = new ErrorParameter();
+					$this->parameter[$i]->init($map, $newPrefix);
+				}
+				else break;
+				$i++;
 			}
-			 }
 		}
 	}
 }
@@ -357,24 +391,24 @@ class ErrorParameter {
 	 * @access public
 	 * @var string
 	 */
-	public $value;
+	public $name;
 
 	/**
 	 * @access public
 	 * @var string
 	 */
-	public $name;
+	public $value;
 
 
 	public function init($map = null, $prefix='') {
 		if($map != null) {
-			$mapKeyName =  $prefix . 'value';
-			if($map != null && array_key_exists($mapKeyName, $map)) {
-				$this->value = $map[$mapKeyName];
-			}
 			$mapKeyName =  $prefix . 'name';
 			if($map != null && array_key_exists($mapKeyName, $map)) {
 				$this->name = $map[$mapKeyName];
+			}
+			$mapKeyName =  $prefix . 'value';
+			if($map != null && array_key_exists($mapKeyName, $map)) {
+				$this->value = $map[$mapKeyName];
 			}
 		}
 	}
@@ -407,13 +441,16 @@ class FaultMessage {
 				$this->responseEnvelope = new ResponseEnvelope();
 				$this->responseEnvelope->init($map, $newPrefix);
 			}
-			for($i=0; $i<10;$i++) {
+			$i=0;
+			while(true) {
 				if( PPUtils::array_match_key($map, $prefix."error($i)") ) {
 					$newPrefix = $prefix."error($i).";
-				$this->error[$i] = new ErrorData();
-				$this->error[$i]->init($map, $newPrefix);
+					$this->error[$i] = new ErrorData();
+					$this->error[$i]->init($map, $newPrefix);
+				}
+				else break;
+				$i++;
 			}
-			 }
 		}
 	}
 }
@@ -648,13 +685,16 @@ class AddressList {
 
 	public function init($map = null, $prefix='') {
 		if($map != null) {
-			for($i=0; $i<10;$i++) {
+			$i=0;
+			while(true) {
 				if( PPUtils::array_match_key($map, $prefix."address($i)") ) {
 					$newPrefix = $prefix."address($i).";
-				$this->address[$i] = new Address();
-				$this->address[$i]->init($map, $newPrefix);
+					$this->address[$i] = new Address();
+					$this->address[$i]->init($map, $newPrefix);
+				}
+				else break;
+				$i++;
 			}
-			 }
 		}
 	}
 }
@@ -740,13 +780,16 @@ class CurrencyConversionTable {
 
 	public function init($map = null, $prefix='') {
 		if($map != null) {
-			for($i=0; $i<10;$i++) {
+			$i=0;
+			while(true) {
 				if( PPUtils::array_match_key($map, $prefix."currencyConversionList($i)") ) {
 					$newPrefix = $prefix."currencyConversionList($i).";
-				$this->currencyConversionList[$i] = new CurrencyConversionList();
-				$this->currencyConversionList[$i]->init($map, $newPrefix);
+					$this->currencyConversionList[$i] = new CurrencyConversionList();
+					$this->currencyConversionList[$i]->init($map, $newPrefix);
+				}
+				else break;
+				$i++;
 			}
-			 }
 		}
 	}
 }
@@ -766,13 +809,16 @@ class CurrencyList {
 
 	public function init($map = null, $prefix='') {
 		if($map != null) {
-			for($i=0; $i<10;$i++) {
+			$i=0;
+			while(true) {
 				if( PPUtils::array_match_key($map, $prefix."currency($i)") ) {
 					$newPrefix = $prefix."currency($i).";
-				$this->currency[$i] = new CurrencyType();
-				$this->currency[$i]->init($map, $newPrefix);
+					$this->currency[$i] = new CurrencyType();
+					$this->currency[$i]->init($map, $newPrefix);
+				}
+				else break;
+				$i++;
 			}
-			 }
 		}
 	}
 
@@ -884,13 +930,16 @@ class ErrorList {
 
 	public function init($map = null, $prefix='') {
 		if($map != null) {
-			for($i=0; $i<10;$i++) {
+			$i=0;
+			while(true) {
 				if( PPUtils::array_match_key($map, $prefix."error($i)") ) {
 					$newPrefix = $prefix."error($i).";
-				$this->error[$i] = new ErrorData();
-				$this->error[$i]->init($map, $newPrefix);
+					$this->error[$i] = new ErrorData();
+					$this->error[$i]->init($map, $newPrefix);
+				}
+				else break;
+				$i++;
 			}
-			 }
 		}
 	}
 }
@@ -983,13 +1032,16 @@ class FundingTypeList {
 
 	public function init($map = null, $prefix='') {
 		if($map != null) {
-			for($i=0; $i<10;$i++) {
+			$i=0;
+			while(true) {
 				if( PPUtils::array_match_key($map, $prefix."fundingTypeInfo($i)") ) {
 					$newPrefix = $prefix."fundingTypeInfo($i).";
-				$this->fundingTypeInfo[$i] = new FundingTypeInfo();
-				$this->fundingTypeInfo[$i]->init($map, $newPrefix);
+					$this->fundingTypeInfo[$i] = new FundingTypeInfo();
+					$this->fundingTypeInfo[$i]->init($map, $newPrefix);
+				}
+				else break;
+				$i++;
 			}
-			 }
 		}
 	}
 
@@ -1221,13 +1273,16 @@ class FundingPlan {
 				$this->currencyConversion = new CurrencyConversion();
 				$this->currencyConversion->init($map, $newPrefix);
 			}
-			for($i=0; $i<10;$i++) {
+			$i=0;
+			while(true) {
 				if( PPUtils::array_match_key($map, $prefix."charge($i)") ) {
 					$newPrefix = $prefix."charge($i).";
-				$this->charge[$i] = new FundingPlanCharge();
-				$this->charge[$i]->init($map, $newPrefix);
+					$this->charge[$i] = new FundingPlanCharge();
+					$this->charge[$i]->init($map, $newPrefix);
+				}
+				else break;
+				$i++;
 			}
-			 }
 		}
 	}
 }
@@ -1536,13 +1591,16 @@ class InvoiceData {
 
 	public function init($map = null, $prefix='') {
 		if($map != null) {
-			for($i=0; $i<10;$i++) {
+			$i=0;
+			while(true) {
 				if( PPUtils::array_match_key($map, $prefix."item($i)") ) {
 					$newPrefix = $prefix."item($i).";
-				$this->item[$i] = new InvoiceItem();
-				$this->item[$i]->init($map, $newPrefix);
+					$this->item[$i] = new InvoiceItem();
+					$this->item[$i]->init($map, $newPrefix);
+				}
+				else break;
+				$i++;
 			}
-			 }
 			$mapKeyName =  $prefix . 'totalTax';
 			if($map != null && array_key_exists($mapKeyName, $map)) {
 				$this->totalTax = $map[$mapKeyName];
@@ -1624,13 +1682,16 @@ class PayErrorList {
 
 	public function init($map = null, $prefix='') {
 		if($map != null) {
-			for($i=0; $i<10;$i++) {
+			$i=0;
+			while(true) {
 				if( PPUtils::array_match_key($map, $prefix."payError($i)") ) {
 					$newPrefix = $prefix."payError($i).";
-				$this->payError[$i] = new PayError();
-				$this->payError[$i]->init($map, $newPrefix);
+					$this->payError[$i] = new PayError();
+					$this->payError[$i]->init($map, $newPrefix);
+				}
+				else break;
+				$i++;
 			}
-			 }
 		}
 	}
 }
@@ -1745,13 +1806,16 @@ class PaymentInfoList {
 
 	public function init($map = null, $prefix='') {
 		if($map != null) {
-			for($i=0; $i<10;$i++) {
+			$i=0;
+			while(true) {
 				if( PPUtils::array_match_key($map, $prefix."paymentInfo($i)") ) {
 					$newPrefix = $prefix."paymentInfo($i).";
-				$this->paymentInfo[$i] = new PaymentInfo();
-				$this->paymentInfo[$i]->init($map, $newPrefix);
+					$this->paymentInfo[$i] = new PaymentInfo();
+					$this->paymentInfo[$i]->init($map, $newPrefix);
+				}
+				else break;
+				$i++;
 			}
-			 }
 		}
 	}
 }
@@ -1919,7 +1983,7 @@ class ReceiverList {
  * The sender identifier type contains information
  * to identify a PayPal account.
  */
-class ReceiverIdentifier {
+class ReceiverIdentifier extends AccountIdentifier {
 
 	public function init($map = null, $prefix='') {
 		if($map != null) {
@@ -1929,7 +1993,7 @@ class ReceiverIdentifier {
 	public function toNVPString($prefix='') { 
 		$str = '';
 		$delim = '';
-
+parent::toNVPString($prefix='');
 		return $str;
 	}
 
@@ -2164,13 +2228,16 @@ class RefundInfoList {
 
 	public function init($map = null, $prefix='') {
 		if($map != null) {
-			for($i=0; $i<10;$i++) {
+			$i=0;
+			while(true) {
 				if( PPUtils::array_match_key($map, $prefix."refundInfo($i)") ) {
 					$newPrefix = $prefix."refundInfo($i).";
-				$this->refundInfo[$i] = new RefundInfo();
-				$this->refundInfo[$i]->init($map, $newPrefix);
+					$this->refundInfo[$i] = new RefundInfo();
+					$this->refundInfo[$i]->init($map, $newPrefix);
+				}
+				else break;
+				$i++;
 			}
-			 }
 		}
 	}
 }
@@ -2189,12 +2256,22 @@ class SenderOptions {
 	 */
 	public $requireShippingAddressSelection;
 
+	/**
+	 * @access public
+	 * @var string
+	 */
+	public $referrerCode;
+
 
 	public function init($map = null, $prefix='') {
 		if($map != null) {
 			$mapKeyName =  $prefix . 'requireShippingAddressSelection';
 			if($map != null && array_key_exists($mapKeyName, $map)) {
 				$this->requireShippingAddressSelection = $map[$mapKeyName];
+			}
+			$mapKeyName =  $prefix . 'referrerCode';
+			if($map != null && array_key_exists($mapKeyName, $map)) {
+				$this->referrerCode = $map[$mapKeyName];
 			}
 		}
 	}
@@ -2204,6 +2281,10 @@ class SenderOptions {
 		$delim = '';
 		if( $this->requireShippingAddressSelection != null ) {
 			$str .= $delim .  $prefix . 'requireShippingAddressSelection=' . urlencode($this->requireShippingAddressSelection);
+			$delim = '&';
+		}
+		if( $this->referrerCode != null ) {
+			$str .= $delim .  $prefix . 'referrerCode=' . urlencode($this->referrerCode);
 			$delim = '&';
 		}
 
@@ -2217,7 +2298,7 @@ class SenderOptions {
  * The sender identifier type contains information
  * to identify a PayPal account.
  */
-class SenderIdentifier {
+class SenderIdentifier extends AccountIdentifier {
 	/**
 	 * @access public
 	 * @var boolean
@@ -2237,7 +2318,7 @@ class SenderIdentifier {
 	public function toNVPString($prefix='') { 
 		$str = '';
 		$delim = '';
-		if( $this->useCredentials != null ) {
+parent::toNVPString($prefix='');		if( $this->useCredentials != null ) {
 			$str .= $delim .  $prefix . 'useCredentials=' . urlencode($this->useCredentials);
 			$delim = '&';
 		}
@@ -2245,6 +2326,100 @@ class SenderIdentifier {
 		return $str;
 	}
 
+}
+
+/**
+ * UserLimit
+ */
+class UserLimit {
+	/**
+	 * @access public
+	 * @var string
+	 */
+	public $limitType;
+
+	/**
+	 * @access public
+	 * @var CurrencyType
+	 */
+	public $limitAmount;
+
+
+	public function init($map = null, $prefix='') {
+		if($map != null) {
+			$mapKeyName =  $prefix . 'limitType';
+			if($map != null && array_key_exists($mapKeyName, $map)) {
+				$this->limitType = $map[$mapKeyName];
+			}
+			if( PPUtils::array_match_key($map, $prefix."limitAmount.") ) {
+				$newPrefix = $prefix ."limitAmount.";
+				$this->limitAmount = new CurrencyType();
+				$this->limitAmount->init($map, $newPrefix);
+			}
+		}
+	}
+}
+
+/**
+ * WarningData
+ * This type contains the detailed warning
+ * information resulting from the service
+ * operation.
+ */
+class WarningData {
+	/**
+	 * @access public
+	 * @var long
+	 */
+	public $warningId;
+
+	/**
+	 * @access public
+	 * @var string
+	 */
+	public $message;
+
+
+	public function init($map = null, $prefix='') {
+		if($map != null) {
+			$mapKeyName =  $prefix . 'warningId';
+			if($map != null && array_key_exists($mapKeyName, $map)) {
+				$this->warningId = $map[$mapKeyName];
+			}
+			$mapKeyName =  $prefix . 'message';
+			if($map != null && array_key_exists($mapKeyName, $map)) {
+				$this->message = $map[$mapKeyName];
+			}
+		}
+	}
+}
+
+/**
+ * WarningDataList
+ */
+class WarningDataList {
+	/**
+	 * array
+	 * @access public
+	 * @var WarningData
+	 */
+	public $warningData;
+
+
+	public function init($map = null, $prefix='') {
+		if($map != null) {
+			$i=0;
+			while(true) {
+				if( PPUtils::array_match_key($map, $prefix."warningData($i)") ) {
+					$newPrefix = $prefix."warningData($i).";
+					$this->warningData[$i] = new WarningData();
+					$this->warningData[$i]->init($map, $newPrefix);
+				}
+				else break;
+				$i++;
+			}
+		}
+	}
 }
 
 /**
@@ -2314,13 +2489,16 @@ class CancelPreapprovalResponse {
 				$this->responseEnvelope = new ResponseEnvelope();
 				$this->responseEnvelope->init($map, $newPrefix);
 			}
-			for($i=0; $i<10;$i++) {
+			$i=0;
+			while(true) {
 				if( PPUtils::array_match_key($map, $prefix."error($i)") ) {
 					$newPrefix = $prefix."error($i).";
-				$this->error[$i] = new ErrorData();
-				$this->error[$i]->init($map, $newPrefix);
+					$this->error[$i] = new ErrorData();
+					$this->error[$i]->init($map, $newPrefix);
+				}
+				else break;
+				$i++;
 			}
-			 }
 		}
 	}
 }
@@ -2412,13 +2590,16 @@ class ConfirmPreapprovalResponse {
 				$this->responseEnvelope = new ResponseEnvelope();
 				$this->responseEnvelope->init($map, $newPrefix);
 			}
-			for($i=0; $i<10;$i++) {
+			$i=0;
+			while(true) {
 				if( PPUtils::array_match_key($map, $prefix."error($i)") ) {
 					$newPrefix = $prefix."error($i).";
-				$this->error[$i] = new ErrorData();
-				$this->error[$i]->init($map, $newPrefix);
+					$this->error[$i] = new ErrorData();
+					$this->error[$i]->init($map, $newPrefix);
+				}
+				else break;
+				$i++;
 			}
-			 }
 		}
 	}
 }
@@ -2447,6 +2628,21 @@ class ConvertCurrencyRequest {
 	 */
 	public $convertToCurrencyList;
 
+	/**
+	 * The two-character ISO country code where
+	 * fx suppposed to happen
+	 *
+	 * @access public
+	 * @var string
+	 */
+	public $countryCode;
+
+	/**
+	 * @access public
+	 * @var string
+	 */
+	public $conversionType;
+
 
 	public function __construct($requestEnvelope = null, $baseAmountList = null, $convertToCurrencyList = null) {
 		$this->requestEnvelope  = $requestEnvelope;
@@ -2470,6 +2666,14 @@ class ConvertCurrencyRequest {
 		if( $this->convertToCurrencyList != null ) {
 			$newPrefix = $prefix . 'convertToCurrencyList.';
 			$str .= $delim . call_user_func(array($this->convertToCurrencyList, 'toNVPString'), $newPrefix);
+			$delim = '&';
+		}
+		if( $this->countryCode != null ) {
+			$str .= $delim .  $prefix . 'countryCode=' . urlencode($this->countryCode);
+			$delim = '&';
+		}
+		if( $this->conversionType != null ) {
+			$str .= $delim .  $prefix . 'conversionType=' . urlencode($this->conversionType);
 			$delim = '&';
 		}
 
@@ -2517,13 +2721,16 @@ class ConvertCurrencyResponse {
 				$this->estimatedAmountTable = new CurrencyConversionTable();
 				$this->estimatedAmountTable->init($map, $newPrefix);
 			}
-			for($i=0; $i<10;$i++) {
+			$i=0;
+			while(true) {
 				if( PPUtils::array_match_key($map, $prefix."error($i)") ) {
 					$newPrefix = $prefix."error($i).";
-				$this->error[$i] = new ErrorData();
-				$this->error[$i]->init($map, $newPrefix);
+					$this->error[$i] = new ErrorData();
+					$this->error[$i]->init($map, $newPrefix);
+				}
+				else break;
+				$i++;
 			}
-			 }
 		}
 	}
 }
@@ -2639,13 +2846,16 @@ class ExecutePaymentResponse {
 				$this->payErrorList = new PayErrorList();
 				$this->payErrorList->init($map, $newPrefix);
 			}
-			for($i=0; $i<10;$i++) {
+			$i=0;
+			while(true) {
 				if( PPUtils::array_match_key($map, $prefix."error($i)") ) {
 					$newPrefix = $prefix."error($i).";
-				$this->error[$i] = new ErrorData();
-				$this->error[$i]->init($map, $newPrefix);
+					$this->error[$i] = new ErrorData();
+					$this->error[$i]->init($map, $newPrefix);
+				}
+				else break;
+				$i++;
 			}
-			 }
 		}
 	}
 }
@@ -2726,20 +2936,26 @@ class GetAllowedFundingSourcesResponse {
 				$this->responseEnvelope = new ResponseEnvelope();
 				$this->responseEnvelope->init($map, $newPrefix);
 			}
-			for($i=0; $i<10;$i++) {
+			$i=0;
+			while(true) {
 				if( PPUtils::array_match_key($map, $prefix."fundingSource($i)") ) {
 					$newPrefix = $prefix."fundingSource($i).";
-				$this->fundingSource[$i] = new FundingSource();
-				$this->fundingSource[$i]->init($map, $newPrefix);
+					$this->fundingSource[$i] = new FundingSource();
+					$this->fundingSource[$i]->init($map, $newPrefix);
+				}
+				else break;
+				$i++;
 			}
-			 }
-			for($i=0; $i<10;$i++) {
+			$i=0;
+			while(true) {
 				if( PPUtils::array_match_key($map, $prefix."error($i)") ) {
 					$newPrefix = $prefix."error($i).";
-				$this->error[$i] = new ErrorData();
-				$this->error[$i]->init($map, $newPrefix);
+					$this->error[$i] = new ErrorData();
+					$this->error[$i]->init($map, $newPrefix);
+				}
+				else break;
+				$i++;
 			}
-			 }
 		}
 	}
 }
@@ -2863,20 +3079,26 @@ class GetPaymentOptionsResponse {
 				$this->senderOptions = new SenderOptions();
 				$this->senderOptions->init($map, $newPrefix);
 			}
-			for($i=0; $i<10;$i++) {
+			$i=0;
+			while(true) {
 				if( PPUtils::array_match_key($map, $prefix."receiverOptions($i)") ) {
 					$newPrefix = $prefix."receiverOptions($i).";
-				$this->receiverOptions[$i] = new ReceiverOptions();
-				$this->receiverOptions[$i]->init($map, $newPrefix);
+					$this->receiverOptions[$i] = new ReceiverOptions();
+					$this->receiverOptions[$i]->init($map, $newPrefix);
+				}
+				else break;
+				$i++;
 			}
-			 }
-			for($i=0; $i<10;$i++) {
+			$i=0;
+			while(true) {
 				if( PPUtils::array_match_key($map, $prefix."error($i)") ) {
 					$newPrefix = $prefix."error($i).";
-				$this->error[$i] = new ErrorData();
-				$this->error[$i]->init($map, $newPrefix);
+					$this->error[$i] = new ErrorData();
+					$this->error[$i]->init($map, $newPrefix);
+				}
+				else break;
+				$i++;
 			}
-			 }
 		}
 	}
 }
@@ -3134,13 +3356,16 @@ class PaymentDetailsResponse {
 				$this->sender = new SenderIdentifier();
 				$this->sender->init($map, $newPrefix);
 			}
-			for($i=0; $i<10;$i++) {
+			$i=0;
+			while(true) {
 				if( PPUtils::array_match_key($map, $prefix."error($i)") ) {
 					$newPrefix = $prefix."error($i).";
-				$this->error[$i] = new ErrorData();
-				$this->error[$i]->init($map, $newPrefix);
+					$this->error[$i] = new ErrorData();
+					$this->error[$i]->init($map, $newPrefix);
+				}
+				else break;
+				$i++;
 			}
-			 }
 		}
 	}
 }
@@ -3415,13 +3640,16 @@ class PayResponse {
 				$this->defaultFundingPlan = new FundingPlan();
 				$this->defaultFundingPlan->init($map, $newPrefix);
 			}
-			for($i=0; $i<10;$i++) {
+			$i=0;
+			while(true) {
 				if( PPUtils::array_match_key($map, $prefix."error($i)") ) {
 					$newPrefix = $prefix."error($i).";
-				$this->error[$i] = new ErrorData();
-				$this->error[$i]->init($map, $newPrefix);
+					$this->error[$i] = new ErrorData();
+					$this->error[$i]->init($map, $newPrefix);
+				}
+				else break;
+				$i++;
 			}
-			 }
 		}
 	}
 }
@@ -3756,13 +3984,16 @@ class PreapprovalDetailsResponse {
 			if($map != null && array_key_exists($mapKeyName, $map)) {
 				$this->displayMaxTotalAmount = $map[$mapKeyName];
 			}
-			for($i=0; $i<10;$i++) {
+			$i=0;
+			while(true) {
 				if( PPUtils::array_match_key($map, $prefix."error($i)") ) {
 					$newPrefix = $prefix."error($i).";
-				$this->error[$i] = new ErrorData();
-				$this->error[$i]->init($map, $newPrefix);
+					$this->error[$i] = new ErrorData();
+					$this->error[$i]->init($map, $newPrefix);
+				}
+				else break;
+				$i++;
 			}
-			 }
 		}
 	}
 }
@@ -4033,13 +4264,16 @@ class PreapprovalResponse {
 			if($map != null && array_key_exists($mapKeyName, $map)) {
 				$this->preapprovalKey = $map[$mapKeyName];
 			}
-			for($i=0; $i<10;$i++) {
+			$i=0;
+			while(true) {
 				if( PPUtils::array_match_key($map, $prefix."error($i)") ) {
 					$newPrefix = $prefix."error($i).";
-				$this->error[$i] = new ErrorData();
-				$this->error[$i]->init($map, $newPrefix);
+					$this->error[$i] = new ErrorData();
+					$this->error[$i]->init($map, $newPrefix);
+				}
+				else break;
+				$i++;
 			}
-			 }
 		}
 	}
 }
@@ -4176,13 +4410,16 @@ class RefundResponse {
 				$this->refundInfoList = new RefundInfoList();
 				$this->refundInfoList->init($map, $newPrefix);
 			}
-			for($i=0; $i<10;$i++) {
+			$i=0;
+			while(true) {
 				if( PPUtils::array_match_key($map, $prefix."error($i)") ) {
 					$newPrefix = $prefix."error($i).";
-				$this->error[$i] = new ErrorData();
-				$this->error[$i]->init($map, $newPrefix);
+					$this->error[$i] = new ErrorData();
+					$this->error[$i]->init($map, $newPrefix);
+				}
+				else break;
+				$i++;
 			}
-			 }
 		}
 	}
 }
@@ -4310,13 +4547,16 @@ class SetPaymentOptionsResponse {
 				$this->responseEnvelope = new ResponseEnvelope();
 				$this->responseEnvelope->init($map, $newPrefix);
 			}
-			for($i=0; $i<10;$i++) {
+			$i=0;
+			while(true) {
 				if( PPUtils::array_match_key($map, $prefix."error($i)") ) {
 					$newPrefix = $prefix."error($i).";
-				$this->error[$i] = new ErrorData();
-				$this->error[$i]->init($map, $newPrefix);
+					$this->error[$i] = new ErrorData();
+					$this->error[$i]->init($map, $newPrefix);
+				}
+				else break;
+				$i++;
 			}
-			 }
 		}
 	}
 }
@@ -4397,20 +4637,26 @@ class GetFundingPlansResponse {
 				$this->responseEnvelope = new ResponseEnvelope();
 				$this->responseEnvelope->init($map, $newPrefix);
 			}
-			for($i=0; $i<10;$i++) {
+			$i=0;
+			while(true) {
 				if( PPUtils::array_match_key($map, $prefix."fundingPlan($i)") ) {
 					$newPrefix = $prefix."fundingPlan($i).";
-				$this->fundingPlan[$i] = new FundingPlan();
-				$this->fundingPlan[$i]->init($map, $newPrefix);
+					$this->fundingPlan[$i] = new FundingPlan();
+					$this->fundingPlan[$i]->init($map, $newPrefix);
+				}
+				else break;
+				$i++;
 			}
-			 }
-			for($i=0; $i<10;$i++) {
+			$i=0;
+			while(true) {
 				if( PPUtils::array_match_key($map, $prefix."error($i)") ) {
 					$newPrefix = $prefix."error($i).";
-				$this->error[$i] = new ErrorData();
-				$this->error[$i]->init($map, $newPrefix);
+					$this->error[$i] = new ErrorData();
+					$this->error[$i]->init($map, $newPrefix);
+				}
+				else break;
+				$i++;
 			}
-			 }
 		}
 	}
 }
@@ -4496,20 +4742,26 @@ class GetAvailableShippingAddressesResponse {
 				$this->responseEnvelope = new ResponseEnvelope();
 				$this->responseEnvelope->init($map, $newPrefix);
 			}
-			for($i=0; $i<10;$i++) {
+			$i=0;
+			while(true) {
 				if( PPUtils::array_match_key($map, $prefix."availableAddress($i)") ) {
 					$newPrefix = $prefix."availableAddress($i).";
-				$this->availableAddress[$i] = new Address();
-				$this->availableAddress[$i]->init($map, $newPrefix);
+					$this->availableAddress[$i] = new Address();
+					$this->availableAddress[$i]->init($map, $newPrefix);
+				}
+				else break;
+				$i++;
 			}
-			 }
-			for($i=0; $i<10;$i++) {
+			$i=0;
+			while(true) {
 				if( PPUtils::array_match_key($map, $prefix."error($i)") ) {
 					$newPrefix = $prefix."error($i).";
-				$this->error[$i] = new ErrorData();
-				$this->error[$i]->init($map, $newPrefix);
+					$this->error[$i] = new ErrorData();
+					$this->error[$i]->init($map, $newPrefix);
+				}
+				else break;
+				$i++;
 			}
-			 }
 		}
 	}
 }
@@ -4599,15 +4851,168 @@ class GetShippingAddressesResponse {
 				$this->selectedAddress = new Address();
 				$this->selectedAddress->init($map, $newPrefix);
 			}
-			for($i=0; $i<10;$i++) {
+			$i=0;
+			while(true) {
 				if( PPUtils::array_match_key($map, $prefix."error($i)") ) {
 					$newPrefix = $prefix."error($i).";
-				$this->error[$i] = new ErrorData();
-				$this->error[$i]->init($map, $newPrefix);
+					$this->error[$i] = new ErrorData();
+					$this->error[$i]->init($map, $newPrefix);
+				}
+				else break;
+				$i++;
 			}
-			 }
+		}
+	}
+}
+
+/**
+ * GetUserLimitsRequest
+ * The request to get the remaining limits for a
+ * user
+ */
+class GetUserLimitsRequest {
+	/**
+	 * @access public
+	 * @var RequestEnvelope
+	 */
+	public $requestEnvelope;
+
+	/**
+	 * The account identifier for the user
+	 *
+	 * @access public
+	 * @var AccountIdentifier
+	 */
+	public $user;
+
+	/**
+	 * @access public
+	 * @var string
+	 */
+	public $country;
+
+	/**
+	 * @access public
+	 * @var string
+	 */
+	public $currencyCode;
+
+	/**
+	 * List of limit types
+	 *
+	 * array
+	 * @access public
+	 * @var string
+	 */
+	public $limitType;
+
+
+	public function __construct($requestEnvelope = null, $user = null, $country = null, $currencyCode = null, $limitType = null) {
+		$this->requestEnvelope  = $requestEnvelope;
+		$this->user  = $user;
+		$this->country  = $country;
+		$this->currencyCode  = $currencyCode;
+		$this->limitType  = $limitType;
+	}
+
+	public function toNVPString($prefix='') { 
+		$str = '';
+		$delim = '';
+		if( $this->requestEnvelope != null ) {
+			$newPrefix = $prefix . 'requestEnvelope.';
+			$str .= $delim . call_user_func(array($this->requestEnvelope, 'toNVPString'), $newPrefix);
+			$delim = '&';
+		}
+		if( $this->user != null ) {
+			$newPrefix = $prefix . 'user.';
+			$str .= $delim . call_user_func(array($this->user, 'toNVPString'), $newPrefix);
+			$delim = '&';
+		}
+		if( $this->country != null ) {
+			$str .= $delim .  $prefix . 'country=' . urlencode($this->country);
+			$delim = '&';
+		}
+		if( $this->currencyCode != null ) {
+			$str .= $delim .  $prefix . 'currencyCode=' . urlencode($this->currencyCode);
+			$delim = '&';
+		}
+		for($i=0; $i<count($this->limitType);$i++) {
+			$str .= $delim .  $prefix ."limitType($i)=" .  urlencode($this->limitType[$i]);
+		 }
+
+		return $str;
+	}
+
+}
+
+/**
+ * GetUserLimitsResponse
+ * A response that contains a list of remaining
+ * limits
+ */
+class GetUserLimitsResponse {
+	/**
+	 * @access public
+	 * @var ResponseEnvelope
+	 */
+	public $responseEnvelope;
+
+	/**
+	 * array
+	 * @access public
+	 * @var UserLimit
+	 */
+	public $userLimit;
+
+	/**
+	 * @access public
+	 * @var WarningDataList
+	 */
+	public $warningDataList;
+
+	/**
+	 * array
+	 * @access public
+	 * @var ErrorData
+	 */
+	public $error;
+
+
+	public function init($map = null, $prefix='') {
+		if($map != null) {
+			if( PPUtils::array_match_key($map, $prefix."responseEnvelope.") ) {
+				$newPrefix = $prefix ."responseEnvelope.";
+				$this->responseEnvelope = new ResponseEnvelope();
+				$this->responseEnvelope->init($map, $newPrefix);
+			}
+			$i=0;
+			while(true) {
+				if( PPUtils::array_match_key($map, $prefix."userLimit($i)") ) {
+					$newPrefix = $prefix."userLimit($i).";
+					$this->userLimit[$i] = new UserLimit();
+					$this->userLimit[$i]->init($map, $newPrefix);
+				}
+				else break;
+				$i++;
+			}
+			if( PPUtils::array_match_key($map, $prefix."warningDataList.") ) {
+				$newPrefix = $prefix ."warningDataList.";
+				$this->warningDataList = new WarningDataList();
+				$this->warningDataList->init($map, $newPrefix);
+			}
+			$i=0;
+			while(true) {
+				if( PPUtils::array_match_key($map, $prefix."error($i)") ) {
+					$newPrefix = $prefix."error($i).";
+					$this->error[$i] = new ErrorData();
+					$this->error[$i]->init($map, $newPrefix);
+				}
+				else break;
+				$i++;
+			}
 		}
 	}
 }
 
 ?>
+

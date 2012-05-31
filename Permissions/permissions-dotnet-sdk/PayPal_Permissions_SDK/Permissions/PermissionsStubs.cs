@@ -8,27 +8,28 @@ namespace PayPal.Permissions.Model {
 	using System.Collections.Generic;
 	using PayPal.Util;
 
-public class EnumUtils{
-public static string getDescription(Enum value){
-string description="";DescriptionAttribute[] attributes = (DescriptionAttribute[])value.GetType().GetField(value.ToString()).GetCustomAttributes(typeof(DescriptionAttribute), false);
-            if (attributes.Length > 0)
-            {
-                description= attributes[0].Description;
-            }
-return description;
-}
-public static object getValue(String value,Type enumType){
-string[] names = Enum.GetNames(enumType);
-            foreach (string name in names)
-            {
-                if (getDescription((Enum)Enum.Parse(enumType, name)).Equals(value))
-                {
-                    return Enum.Parse(enumType, name);
-                }
-            }
-return null;
+	public class EnumUtils{
+		public static string getDescription(Enum value){
+			string description="";
+			DescriptionAttribute[] attributes = (DescriptionAttribute[])value.GetType().GetField(value.ToString()).GetCustomAttributes(typeof(DescriptionAttribute), false);
+			if (attributes.Length > 0)
+			{
+				description= attributes[0].Description;
+			}
+			return description;
 		}
-}
+		public static object getValue(String value,Type enumType){
+			string[] names = Enum.GetNames(enumType);
+			foreach (string name in names)
+			{
+				if (getDescription((Enum)Enum.Parse(enumType, name)).Equals(value))
+				{
+					return Enum.Parse(enumType, name);
+				}
+			}
+			return null;
+		}
+	}
 	public enum AckCode {
 [Description("Success")]SUCCESS,
 [Description("Failure")]FAILURE,
@@ -109,15 +110,19 @@ return null;
 
 	 public CancelPermissionsResponse(Dictionary<string, string> map, string prefix) {
 			string key = "";
+			int i;
 			key = prefix + "responseEnvelope";
 			if (map.ContainsKey(key + ".timestamp")) {
 				this.responseEnvelope = new ResponseEnvelope(map, key + '.');
 			}
-			for (int i = 0; i < 10; i++) {
+			i = 0;
+			while(true) {
 				key = prefix + "error" + '(' + i + ")";
 				if (map.ContainsKey(key + ".errorId")) {
 					this.error.Add( new ErrorData(map, key + '.')); 
 				}
+				else break;
+				i++;
 			}
 		}
 	}
@@ -214,6 +219,7 @@ return null;
 
 	 public ErrorData(Dictionary<string, string> map, string prefix) {
 			string key = "";
+			int i;
 			key = prefix + "errorId";
 			if (map.ContainsKey(key)) {
 				this.errorId = System.Convert.ToInt32( map[key] );
@@ -242,11 +248,14 @@ return null;
 			if (map.ContainsKey(key)) {
 				this.exceptionId = map[key];
 			}
-			for (int i = 0; i < 10; i++) {
+			i = 0;
+			while(true) {
 				key = prefix + "parameter" + '(' + i + ")";
 				if (map.ContainsKey(key + ".name")) {
 					this.parameter.Add( new ErrorParameter(map, key + '.')); 
 				}
+				else break;
+				i++;
 			}
 		}
 	}
@@ -278,6 +287,7 @@ return null;
 
 	 public ErrorParameter(Dictionary<string, string> map, string prefix) {
 			string key = "";
+			int i;
 			key = prefix + "name";
 			if (map.ContainsKey(key)) {
 				this.name = map[key];
@@ -320,15 +330,19 @@ return null;
 
 	 public FaultMessage(Dictionary<string, string> map, string prefix) {
 			string key = "";
+			int i;
 			key = prefix + "responseEnvelope";
 			if (map.ContainsKey(key + ".timestamp")) {
 				this.responseEnvelope = new ResponseEnvelope(map, key + '.');
 			}
-			for (int i = 0; i < 10; i++) {
+			i = 0;
+			while(true) {
 				key = prefix + "error" + '(' + i + ")";
 				if (map.ContainsKey(key + ".errorId")) {
 					this.error.Add( new ErrorData(map, key + '.')); 
 				}
+				else break;
+				i++;
 			}
 		}
 	}
@@ -490,15 +504,19 @@ return null;
 
 	 public GetAccessTokenResponse(Dictionary<string, string> map, string prefix) {
 			string key = "";
+			int i;
 			key = prefix + "responseEnvelope";
 			if (map.ContainsKey(key + ".timestamp")) {
 				this.responseEnvelope = new ResponseEnvelope(map, key + '.');
 			}
-			for (int i = 0; i < 10; i++) {
+			i = 0;
+			while(true) {
 			key = prefix + "scope" + '(' + i + ')';
 					if (map.ContainsKey(key)) {
 						this.scope.Add( map[key]);
 					}
+				else break;
+				i++;
 			}
 			key = prefix + "token";
 			if (map.ContainsKey(key)) {
@@ -508,11 +526,224 @@ return null;
 			if (map.ContainsKey(key)) {
 				this.tokenSecret = map[key];
 			}
-			for (int i = 0; i < 10; i++) {
+			i = 0;
+			while(true) {
 				key = prefix + "error" + '(' + i + ")";
 				if (map.ContainsKey(key + ".errorId")) {
 					this.error.Add( new ErrorData(map, key + '.')); 
 				}
+				else break;
+				i++;
+			}
+		}
+	}
+
+
+	/**
+	 * Request to retrieve personal data.Accepts PersonalAttributeList as request and responds with PersonalDataList.
+	 * This call will accept both 'Basic' and Advanced attributes. 
+	 */
+	public partial class GetAdvancedPersonalDataRequest {
+
+		private RequestEnvelope requestEnvelopeField;
+		public RequestEnvelope requestEnvelope {
+			get {
+				return this.requestEnvelopeField;
+			}
+			set {
+				this.requestEnvelopeField = value;
+			}
+		}
+
+		private PersonalAttributeList attributeListField;
+		public PersonalAttributeList attributeList {
+			get {
+				return this.attributeListField;
+			}
+			set {
+				this.attributeListField = value;
+			}
+		}
+
+		public GetAdvancedPersonalDataRequest(PersonalAttributeList attributeList) {
+			this.attributeList = attributeList;
+		}
+		public GetAdvancedPersonalDataRequest() {
+		}
+		public string toNVPString(string prefix) {
+			StringBuilder sb = new StringBuilder();
+			if (this.requestEnvelope != null) {
+				string newPrefix = prefix + "requestEnvelope" + '.';
+				sb.Append(this.requestEnvelopeField.toNVPString(newPrefix));
+			}
+			if (this.attributeList != null) {
+				string newPrefix = prefix + "attributeList" + '.';
+				sb.Append(this.attributeListField.toNVPString(newPrefix));
+			}
+			return sb.ToString();
+		}
+
+	}
+
+
+	/**
+	 */
+	public partial class GetAdvancedPersonalDataResponse {
+
+		private ResponseEnvelope responseEnvelopeField;
+		public ResponseEnvelope responseEnvelope {
+			get {
+				return this.responseEnvelopeField;
+			}
+			set {
+				this.responseEnvelopeField = value;
+			}
+		}
+
+		private PersonalDataList responseField;
+		public PersonalDataList response {
+			get {
+				return this.responseField;
+			}
+			set {
+				this.responseField = value;
+			}
+		}
+
+		private List<ErrorData> errorField = new List<ErrorData>();
+		public List<ErrorData> error {
+			get {
+				return this.errorField;
+			}
+			set {
+				this.errorField = value;
+			}
+		}
+
+	 public GetAdvancedPersonalDataResponse(Dictionary<string, string> map, string prefix) {
+			string key = "";
+			int i;
+			key = prefix + "responseEnvelope";
+			if (map.ContainsKey(key + ".timestamp")) {
+				this.responseEnvelope = new ResponseEnvelope(map, key + '.');
+			}
+			key = prefix + "response";
+			if (map.ContainsKey(key + ".personalData(0).personalDataValue")) {
+				this.response = new PersonalDataList(map, key + '.');
+			}
+			i = 0;
+			while(true) {
+				key = prefix + "error" + '(' + i + ")";
+				if (map.ContainsKey(key + ".errorId")) {
+					this.error.Add( new ErrorData(map, key + '.')); 
+				}
+				else break;
+				i++;
+			}
+		}
+	}
+
+
+	/**
+	 * Request to retrieve basic personal data.Accepts PersonalAttributeList as request and responds with PersonalDataList.
+	 * This call will accept only 'Basic' attributes and ignore others. 
+	 */
+	public partial class GetBasicPersonalDataRequest {
+
+		private RequestEnvelope requestEnvelopeField;
+		public RequestEnvelope requestEnvelope {
+			get {
+				return this.requestEnvelopeField;
+			}
+			set {
+				this.requestEnvelopeField = value;
+			}
+		}
+
+		private PersonalAttributeList attributeListField;
+		public PersonalAttributeList attributeList {
+			get {
+				return this.attributeListField;
+			}
+			set {
+				this.attributeListField = value;
+			}
+		}
+
+		public GetBasicPersonalDataRequest(PersonalAttributeList attributeList) {
+			this.attributeList = attributeList;
+		}
+		public GetBasicPersonalDataRequest() {
+		}
+		public string toNVPString(string prefix) {
+			StringBuilder sb = new StringBuilder();
+			if (this.requestEnvelope != null) {
+				string newPrefix = prefix + "requestEnvelope" + '.';
+				sb.Append(this.requestEnvelopeField.toNVPString(newPrefix));
+			}
+			if (this.attributeList != null) {
+				string newPrefix = prefix + "attributeList" + '.';
+				sb.Append(this.attributeListField.toNVPString(newPrefix));
+			}
+			return sb.ToString();
+		}
+
+	}
+
+
+	/**
+	 */
+	public partial class GetBasicPersonalDataResponse {
+
+		private ResponseEnvelope responseEnvelopeField;
+		public ResponseEnvelope responseEnvelope {
+			get {
+				return this.responseEnvelopeField;
+			}
+			set {
+				this.responseEnvelopeField = value;
+			}
+		}
+
+		private PersonalDataList responseField;
+		public PersonalDataList response {
+			get {
+				return this.responseField;
+			}
+			set {
+				this.responseField = value;
+			}
+		}
+
+		private List<ErrorData> errorField = new List<ErrorData>();
+		public List<ErrorData> error {
+			get {
+				return this.errorField;
+			}
+			set {
+				this.errorField = value;
+			}
+		}
+
+	 public GetBasicPersonalDataResponse(Dictionary<string, string> map, string prefix) {
+			string key = "";
+			int i;
+			key = prefix + "responseEnvelope";
+			if (map.ContainsKey(key + ".timestamp")) {
+				this.responseEnvelope = new ResponseEnvelope(map, key + '.');
+			}
+			key = prefix + "response";
+			if (map.ContainsKey(key + ".personalData(0).personalDataValue")) {
+				this.response = new PersonalDataList(map, key + '.');
+			}
+			i = 0;
+			while(true) {
+				key = prefix + "error" + '(' + i + ")";
+				if (map.ContainsKey(key + ".errorId")) {
+					this.error.Add( new ErrorData(map, key + '.')); 
+				}
+				else break;
+				i++;
 			}
 		}
 	}
@@ -609,21 +840,144 @@ return null;
 
 	 public GetPermissionsResponse(Dictionary<string, string> map, string prefix) {
 			string key = "";
+			int i;
 			key = prefix + "responseEnvelope";
 			if (map.ContainsKey(key + ".timestamp")) {
 				this.responseEnvelope = new ResponseEnvelope(map, key + '.');
 			}
-			for (int i = 0; i < 10; i++) {
+			i = 0;
+			while(true) {
 			key = prefix + "scope" + '(' + i + ')';
 					if (map.ContainsKey(key)) {
 						this.scope.Add( map[key]);
 					}
+				else break;
+				i++;
 			}
-			for (int i = 0; i < 10; i++) {
+			i = 0;
+			while(true) {
 				key = prefix + "error" + '(' + i + ")";
 				if (map.ContainsKey(key + ".errorId")) {
 					this.error.Add( new ErrorData(map, key + '.')); 
 				}
+				else break;
+				i++;
+			}
+		}
+	}
+
+
+	public enum PersonalAttribute {
+[Description("http://axschema.org/namePerson/first")]HTTPAXSCHEMAORGNAMEPERSONFIRST,
+[Description("http://axschema.org/namePerson/last")]HTTPAXSCHEMAORGNAMEPERSONLAST,
+[Description("http://axschema.org/contact/email")]HTTPAXSCHEMAORGCONTACTEMAIL,
+[Description("http://schema.openid.net/contact/fullname")]HTTPSCHEMAOPENIDNETCONTACTFULLNAME,
+[Description("http://axschema.org/company/name")]HTTPAXSCHEMAORGCOMPANYNAME,
+[Description("http://axschema.org/contact/country/home")]HTTPAXSCHEMAORGCONTACTCOUNTRYHOME,
+[Description("http://axschema.org/birthDate")]HTTPAXSCHEMAORGBIRTHDATE,
+[Description("http://axschema.org/contact/postalCode/home")]HTTPAXSCHEMAORGCONTACTPOSTALCODEHOME,
+[Description("http://schema.openid.net/contact/street1")]HTTPSCHEMAOPENIDNETCONTACTSTREET1,
+[Description("http://schema.openid.net/contact/street2")]HTTPSCHEMAOPENIDNETCONTACTSTREET,
+[Description("http://axschema.org/contact/city/home")]HTTPAXSCHEMAORGCONTACTCITYHOME,
+[Description("http://axschema.org/contact/state/home")]HTTPAXSCHEMAORGCONTACTSTATEHOME,
+[Description("http://axschema.org/contact/phone/default")]HTTPAXSCHEMAORGCONTACTPHONEDEFAULT,
+[Description("https://www.paypal.com/webapps/auth/schema/payerID")]HTTPSWWWPAYPALCOMWEBAPPSAUTHSCHEMAPAYERID2,
+	}
+	/**
+	 * List of Personal Attributes to be sent as a request. 
+	 */
+	public partial class PersonalAttributeList {
+
+		private List<PersonalAttribute?> attributeField = new List<PersonalAttribute?>();
+		public List<PersonalAttribute?> attribute {
+			get {
+				return this.attributeField;
+			}
+			set {
+				this.attributeField = value;
+			}
+		}
+
+		public string toNVPString(string prefix) {
+			StringBuilder sb = new StringBuilder();
+			for (int i = 0; i < this.attribute.Count; i++) {
+				if (this.attribute[i] != null) {
+				sb.Append(prefix).Append("attribute").Append(i).Append(")=").Append(EnumUtils.getDescription(attribute[i]));
+				sb.Append('&');
+				}
+			}
+			return sb.ToString();
+		}
+
+	}
+
+
+	/**
+	 * A property of User Identity data , represented as a Name-value pair with Name being the PersonalAttribute requested and value being the data.
+	 */
+	public partial class PersonalData {
+
+		private PersonalAttribute? personalDataKeyField;
+		public PersonalAttribute? personalDataKey {
+			get {
+				return this.personalDataKeyField;
+			}
+			set {
+				this.personalDataKeyField = value;
+			}
+		}
+
+		private string personalDataValueField;
+		public string personalDataValue {
+			get {
+				return this.personalDataValueField;
+			}
+			set {
+				this.personalDataValueField = value;
+			}
+		}
+
+	 public PersonalData(Dictionary<string, string> map, string prefix) {
+			string key = "";
+			int i;
+			key = prefix + "personalDataKey";
+			if (map.ContainsKey(key)) {
+				this.personalDataKey = (PersonalAttribute)EnumUtils.getValue(map[key],typeof(PersonalAttribute));;
+			}
+			key = prefix + "personalDataValue";
+			if (map.ContainsKey(key)) {
+				this.personalDataValue = map[key];
+			}
+		}
+	}
+
+
+	/**
+	 * Set of personal data which forms the response of GetPersonalData call.
+	 */
+	public partial class PersonalDataList {
+
+		private List<PersonalData> personalDataField = new List<PersonalData>();
+		public List<PersonalData> personalData {
+			get {
+				return this.personalDataField;
+			}
+			set {
+				this.personalDataField = value;
+			}
+		}
+
+	 public PersonalDataList(Dictionary<string, string> map, string prefix) {
+			string key = "";
+			int i;
+			i = 0;
+			while(true) {
+				key = prefix + "personalData" + '(' + i + ")";
+				if (map.ContainsKey(key + ".personalDataValue")) {
+					this.personalData.Add( new PersonalData(map, key + '.')); 
+				}
+				else break;
+				i++;
 			}
 		}
 	}
@@ -783,6 +1137,7 @@ return null;
 
 	 public RequestPermissionsResponse(Dictionary<string, string> map, string prefix) {
 			string key = "";
+			int i;
 			key = prefix + "responseEnvelope";
 			if (map.ContainsKey(key + ".timestamp")) {
 				this.responseEnvelope = new ResponseEnvelope(map, key + '.');
@@ -791,11 +1146,14 @@ return null;
 			if (map.ContainsKey(key)) {
 				this.token = map[key];
 			}
-			for (int i = 0; i < 10; i++) {
+			i = 0;
+			while(true) {
 				key = prefix + "error" + '(' + i + ")";
 				if (map.ContainsKey(key + ".errorId")) {
 					this.error.Add( new ErrorData(map, key + '.')); 
 				}
+				else break;
+				i++;
 			}
 		}
 	}
@@ -851,6 +1209,7 @@ return null;
 
 	 public ResponseEnvelope(Dictionary<string, string> map, string prefix) {
 			string key = "";
+			int i;
 			key = prefix + "timestamp";
 			if (map.ContainsKey(key)) {
 				this.timestamp = map[key];

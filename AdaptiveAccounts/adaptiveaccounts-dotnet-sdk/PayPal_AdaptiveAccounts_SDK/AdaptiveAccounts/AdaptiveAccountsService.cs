@@ -13,7 +13,10 @@ namespace PayPal.AdaptiveAccounts {
 
 	public partial class AdaptiveAccountsService : BasePayPalService{
 
-		 public AdaptiveAccountsService() : base("AdaptiveAccounts", "1.0.3"){}
+		private static string serviceName = "AdaptiveAccounts";
+		private static string serviceVersion = "1.0.3";
+
+		public AdaptiveAccountsService() : base(serviceName, serviceVersion) {}
 		/**
 		 *		 * Coutries Supported:
 		 * AU - Australia

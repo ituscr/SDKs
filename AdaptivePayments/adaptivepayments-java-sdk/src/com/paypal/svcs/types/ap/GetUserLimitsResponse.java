@@ -68,25 +68,32 @@ public class GetUserLimitsResponse {
 	public GetUserLimitsResponse() {
 	}
 	public GetUserLimitsResponse(Map<String, String> map, String prefix) {
+		int i=0; 
 		if( map.containsKey(prefix + "responseEnvelope" + ".timestamp") ) {
 			String newPrefix = prefix + "responseEnvelope" + '.';
 			this.responseEnvelope =  new ResponseEnvelope(map, newPrefix);
 		}
-		for(int i=0; i<10; i++) {
+		 i=0; 
+		 while(true) {
 			if( map.containsKey(prefix + "userLimit" + '(' + i + ')'+ ".limitType") ) {
 				String newPrefix = prefix + "userLimit" + '(' + i + ')' + '.';
 				this.userLimit.add(new UserLimit(map, newPrefix));
 			}
+			else break;
+			i++;
 		}
 		if( map.containsKey(prefix + "warningDataList" + ".warningData(0).warningId") ) {
 			String newPrefix = prefix + "warningDataList" + '.';
 			this.warningDataList =  new WarningDataList(map, newPrefix);
 		}
-		for(int i=0; i<10; i++) {
+		 i=0; 
+		 while(true) {
 			if( map.containsKey(prefix + "error" + '(' + i + ')'+ ".errorId") ) {
 				String newPrefix = prefix + "error" + '(' + i + ')' + '.';
 				this.error.add(new ErrorData(map, newPrefix));
 			}
+			else break;
+			i++;
 		}
 	}
 }

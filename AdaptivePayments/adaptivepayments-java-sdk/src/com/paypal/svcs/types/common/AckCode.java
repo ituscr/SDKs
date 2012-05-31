@@ -11,22 +11,22 @@ package com.paypal.svcs.types.common;
 
 public enum AckCode {
 
-SUCCESS("Success"),
-FAILURE("Failure"),
-WARNING("Warning"),
-SUCCESSWITHWARNING("SuccessWithWarning"),
-FAILUREWITHWARNING("FailureWithWarning"),
-	;
-private String value;
-AckCode(String val){
-value=val;
-}public String getValue(){
-return value;
-}
-public static AckCode fromValue(String v) {
-		for (AckCode c : values())
-			if (c.value.equals(v))
-				return c;
-throw new IllegalArgumentException(v);
-}
+ 		SUCCESS("Success"),
+ 		FAILURE("Failure"),
+ 		WARNING("Warning"),
+ 		SUCCESSWITHWARNING("SuccessWithWarning"),
+ 		FAILUREWITHWARNING("FailureWithWarning"),
+		;
+		private String value;
+		AckCode(String val){
+			value=val;
+		}		public String getValue(){
+			return value;
+		}
+		public static AckCode fromValue(String v) {
+			for (AckCode c : values())
+				if (c.value.equals(v))
+					return c;
+			throw new IllegalArgumentException(v);
+		}
 }

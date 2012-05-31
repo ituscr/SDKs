@@ -90,6 +90,7 @@ public class FundingPlan {
 	public FundingPlan() {
 	}
 	public FundingPlan(Map<String, String> map, String prefix) {
+		int i=0; 
 		if( map.containsKey(prefix + "fundingPlanId") ) {
 			this.fundingPlanId = map.get(prefix + "fundingPlanId");
 		}
@@ -109,11 +110,14 @@ public class FundingPlan {
 			String newPrefix = prefix + "currencyConversion" + '.';
 			this.currencyConversion =  new CurrencyConversion(map, newPrefix);
 		}
-		for(int i=0; i<10; i++) {
-			if( map.containsKey(prefix + "charge" + '(' + i + ')'+ ".fundingSource(0).lastFourOfAccountNumber") ) {
+		 i=0; 
+		 while(true) {
+			if( map.containsKey(prefix + "charge" + '(' + i + ')'+ ".fundingSource.lastFourOfAccountNumber") ) {
 				String newPrefix = prefix + "charge" + '(' + i + ')' + '.';
 				this.charge.add(new FundingPlanCharge(map, newPrefix));
 			}
+			else break;
+			i++;
 		}
 	}
 }

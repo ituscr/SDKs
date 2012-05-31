@@ -8,27 +8,28 @@ namespace PayPal.AdaptivePayments.Model {
 	using System.Collections.Generic;
 	using PayPal.Util;
 
-public class EnumUtils{
-public static string getDescription(Enum value){
-string description="";DescriptionAttribute[] attributes = (DescriptionAttribute[])value.GetType().GetField(value.ToString()).GetCustomAttributes(typeof(DescriptionAttribute), false);
-            if (attributes.Length > 0)
-            {
-                description= attributes[0].Description;
-            }
-return description;
-}
-public static object getValue(String value,Type enumType){
-string[] names = Enum.GetNames(enumType);
-            foreach (string name in names)
-            {
-                if (getDescription((Enum)Enum.Parse(enumType, name)).Equals(value))
-                {
-                    return Enum.Parse(enumType, name);
-                }
-            }
-return null;
+	public class EnumUtils{
+		public static string getDescription(Enum value){
+			string description="";
+			DescriptionAttribute[] attributes = (DescriptionAttribute[])value.GetType().GetField(value.ToString()).GetCustomAttributes(typeof(DescriptionAttribute), false);
+			if (attributes.Length > 0)
+			{
+				description= attributes[0].Description;
+			}
+			return description;
 		}
-}
+		public static object getValue(String value,Type enumType){
+			string[] names = Enum.GetNames(enumType);
+			foreach (string name in names)
+			{
+				if (getDescription((Enum)Enum.Parse(enumType, name)).Equals(value))
+				{
+					return Enum.Parse(enumType, name);
+				}
+			}
+			return null;
+		}
+	}
 	/**
 	 */
 	public partial class AccountIdentifier {
@@ -69,6 +70,7 @@ return null;
 
 	 public AccountIdentifier(Dictionary<string, string> map, string prefix) {
 			string key = "";
+			int i;
 			key = prefix + "email";
 			if (map.ContainsKey(key)) {
 				this.email = map[key];
@@ -124,6 +126,7 @@ return null;
 
 	 public Address(Dictionary<string, string> map, string prefix) {
 			string key = "";
+			int i;
 			key = prefix + "addresseeName";
 			if (map.ContainsKey(key)) {
 				this.addresseeName = map[key];
@@ -156,11 +159,15 @@ return null;
 
 	 public AddressList(Dictionary<string, string> map, string prefix) {
 			string key = "";
-			for (int i = 0; i < 10; i++) {
+			int i;
+			i = 0;
+			while(true) {
 				key = prefix + "address" + '(' + i + ")";
 				if (map.ContainsKey(key + ".addresseeName")) {
 					this.address.Add( new Address(map, key + '.')); 
 				}
+				else break;
+				i++;
 			}
 		}
 	}
@@ -242,6 +249,7 @@ return null;
 
 	 public BaseAddress(Dictionary<string, string> map, string prefix) {
 			string key = "";
+			int i;
 			key = prefix + "line1";
 			if (map.ContainsKey(key)) {
 				this.line1 = map[key];
@@ -347,15 +355,19 @@ return null;
 
 	 public CancelPreapprovalResponse(Dictionary<string, string> map, string prefix) {
 			string key = "";
+			int i;
 			key = prefix + "responseEnvelope";
 			if (map.ContainsKey(key + ".timestamp")) {
 				this.responseEnvelope = new ResponseEnvelope(map, key + '.');
 			}
-			for (int i = 0; i < 10; i++) {
+			i = 0;
+			while(true) {
 				key = prefix + "error" + '(' + i + ")";
 				if (map.ContainsKey(key + ".errorId")) {
 					this.error.Add( new ErrorData(map, key + '.')); 
 				}
+				else break;
+				i++;
 			}
 		}
 	}
@@ -578,15 +590,19 @@ return null;
 
 	 public ConfirmPreapprovalResponse(Dictionary<string, string> map, string prefix) {
 			string key = "";
+			int i;
 			key = prefix + "responseEnvelope";
 			if (map.ContainsKey(key + ".timestamp")) {
 				this.responseEnvelope = new ResponseEnvelope(map, key + '.');
 			}
-			for (int i = 0; i < 10; i++) {
+			i = 0;
+			while(true) {
 				key = prefix + "error" + '(' + i + ")";
 				if (map.ContainsKey(key + ".errorId")) {
 					this.error.Add( new ErrorData(map, key + '.')); 
 				}
+				else break;
+				i++;
 			}
 		}
 	}
@@ -724,19 +740,24 @@ return null;
 
 	 public ConvertCurrencyResponse(Dictionary<string, string> map, string prefix) {
 			string key = "";
+			int i;
 			key = prefix + "responseEnvelope";
 			if (map.ContainsKey(key + ".timestamp")) {
 				this.responseEnvelope = new ResponseEnvelope(map, key + '.');
 			}
-            key = prefix + "estimatedAmountTable.currencyConversionList(0).baseAmount.code";
+			//TODO: Manual Fix
+			key = prefix + "estimatedAmountTable.currencyConversionList(0).baseAmount.code";
 			if (map.ContainsKey(key)) {
 				this.estimatedAmountTable = new CurrencyConversionTable(map, prefix + "estimatedAmountTable" + '.');
 			}
-			for (int i = 0; i < 10; i++) {
+			i = 0;
+			while(true) {
 				key = prefix + "error" + '(' + i + ")";
 				if (map.ContainsKey(key + ".errorId")) {
 					this.error.Add( new ErrorData(map, key + '.')); 
 				}
+				else break;
+				i++;
 			}
 		}
 	}
@@ -812,6 +833,7 @@ return null;
 
 	 public CurrencyConversion(Dictionary<string, string> map, string prefix) {
 			string key = "";
+			int i;
 			key = prefix + "from";
 			if (map.ContainsKey(key + ".code")) {
 				this.from = new CurrencyType(map, key + '.');
@@ -856,6 +878,7 @@ return null;
 
 	 public CurrencyConversionList(Dictionary<string, string> map, string prefix) {
 			string key = "";
+			int i;
 			key = prefix + "baseAmount";
 			if (map.ContainsKey(key + ".code")) {
 				this.baseAmount = new CurrencyType(map, key + '.');
@@ -887,11 +910,15 @@ return null;
 
 	 public CurrencyConversionTable(Dictionary<string, string> map, string prefix) {
 			string key = "";
-			for (int i = 0; i < 10; i++) {
+			int i;
+			i = 0;
+			while(true) {
 				key = prefix + "currencyConversionList" + '(' + i + ")";
 				if (map.ContainsKey(key + ".baseAmount.code")) {
 					this.currencyConversionList.Add( new CurrencyConversionList(map, key + '.')); 
 				}
+				else break;
+				i++;
 			}
 		}
 	}
@@ -930,11 +957,15 @@ return null;
 
 	 public CurrencyList(Dictionary<string, string> map, string prefix) {
 			string key = "";
-			for (int i = 0; i < 10; i++) {
+			int i;
+			i = 0;
+			while(true) {
 				key = prefix + "currency" + '(' + i + ")";
 				if (map.ContainsKey(key + ".code")) {
 					this.currency.Add( new CurrencyType(map, key + '.')); 
 				}
+				else break;
+				i++;
 			}
 		}
 	}
@@ -983,6 +1014,7 @@ return null;
 
 	 public CurrencyType(Dictionary<string, string> map, string prefix) {
 			string key = "";
+			int i;
 			key = prefix + "code";
 			if (map.ContainsKey(key)) {
 				this.code = map[key];
@@ -1075,6 +1107,7 @@ return null;
 
 	 public DisplayOptions(Dictionary<string, string> map, string prefix) {
 			string key = "";
+			int i;
 			key = prefix + "emailHeaderImageUrl";
 			if (map.ContainsKey(key)) {
 				this.emailHeaderImageUrl = map[key];
@@ -1189,6 +1222,7 @@ return null;
 
 	 public ErrorData(Dictionary<string, string> map, string prefix) {
 			string key = "";
+			int i;
 			key = prefix + "errorId";
 			if (map.ContainsKey(key)) {
 				this.errorId = System.Convert.ToInt32( map[key] );
@@ -1217,11 +1251,14 @@ return null;
 			if (map.ContainsKey(key)) {
 				this.exceptionId = map[key];
 			}
-			for (int i = 0; i < 10; i++) {
+			i = 0;
+			while(true) {
 				key = prefix + "parameter" + '(' + i + ")";
 				if (map.ContainsKey(key + ".name")) {
 					this.parameter.Add( new ErrorParameter(map, key + '.')); 
 				}
+				else break;
+				i++;
 			}
 		}
 	}
@@ -1243,11 +1280,15 @@ return null;
 
 	 public ErrorList(Dictionary<string, string> map, string prefix) {
 			string key = "";
-			for (int i = 0; i < 10; i++) {
+			int i;
+			i = 0;
+			while(true) {
 				key = prefix + "error" + '(' + i + ")";
 				if (map.ContainsKey(key + ".errorId")) {
 					this.error.Add( new ErrorData(map, key + '.')); 
 				}
+				else break;
+				i++;
 			}
 		}
 	}
@@ -1279,6 +1320,7 @@ return null;
 
 	 public ErrorParameter(Dictionary<string, string> map, string prefix) {
 			string key = "";
+			int i;
 			key = prefix + "name";
 			if (map.ContainsKey(key)) {
 				this.name = map[key];
@@ -1418,6 +1460,7 @@ return null;
 
 	 public ExecutePaymentResponse(Dictionary<string, string> map, string prefix) {
 			string key = "";
+			int i;
 			key = prefix + "responseEnvelope";
 			if (map.ContainsKey(key + ".timestamp")) {
 				this.responseEnvelope = new ResponseEnvelope(map, key + '.');
@@ -1430,11 +1473,14 @@ return null;
 			if (map.ContainsKey(key)) {
 				this.payErrorList = new PayErrorList(map, key + '.');
 			}
-			for (int i = 0; i < 10; i++) {
+			i = 0;
+			while(true) {
 				key = prefix + "error" + '(' + i + ")";
 				if (map.ContainsKey(key + ".errorId")) {
 					this.error.Add( new ErrorData(map, key + '.')); 
 				}
+				else break;
+				i++;
 			}
 		}
 	}
@@ -1468,15 +1514,19 @@ return null;
 
 	 public FaultMessage(Dictionary<string, string> map, string prefix) {
 			string key = "";
+			int i;
 			key = prefix + "responseEnvelope";
 			if (map.ContainsKey(key + ".timestamp")) {
 				this.responseEnvelope = new ResponseEnvelope(map, key + '.');
 			}
-			for (int i = 0; i < 10; i++) {
+			i = 0;
+			while(true) {
 				key = prefix + "error" + '(' + i + ")";
 				if (map.ContainsKey(key + ".errorId")) {
 					this.error.Add( new ErrorData(map, key + '.')); 
 				}
+				else break;
+				i++;
 			}
 		}
 	}
@@ -1509,6 +1559,7 @@ return null;
 
 	 public FundingConstraint(Dictionary<string, string> map, string prefix) {
 			string key = "";
+			int i;
 			key = prefix + "allowedFundingType";
 			if (map.ContainsKey(key)) {
 				this.allowedFundingType = new FundingTypeList(map, key + '.');
@@ -1585,6 +1636,7 @@ return null;
 
 	 public FundingPlan(Dictionary<string, string> map, string prefix) {
 			string key = "";
+			int i;
 			key = prefix + "fundingPlanId";
 			if (map.ContainsKey(key)) {
 				this.fundingPlanId = map[key];
@@ -1602,14 +1654,17 @@ return null;
 				this.senderFees = new CurrencyType(map, key + '.');
 			}
 			key = prefix + "currencyConversion";
-			if (map.ContainsKey(key + ".from(0).code")) {
+			if (map.ContainsKey(key + ".from.code")) {
 				this.currencyConversion = new CurrencyConversion(map, key + '.');
 			}
-			for (int i = 0; i < 10; i++) {
+			i = 0;
+			while(true) {
 				key = prefix + "charge" + '(' + i + ")";
-				if (map.ContainsKey(key + ".charge(0).code")) {
+				if (map.ContainsKey(key + ".charge.code")) {
 					this.charge.Add( new FundingPlanCharge(map, key + '.')); 
 				}
+				else break;
+				i++;
 			}
 		}
 	}
@@ -1643,6 +1698,7 @@ return null;
 
 	 public FundingPlanCharge(Dictionary<string, string> map, string prefix) {
 			string key = "";
+			int i;
 			key = prefix + "charge";
 			if (map.ContainsKey(key + ".code")) {
 				this.charge = new CurrencyType(map, key + '.');
@@ -1712,6 +1768,7 @@ return null;
 
 	 public FundingSource(Dictionary<string, string> map, string prefix) {
 			string key = "";
+			int i;
 			key = prefix + "lastFourOfAccountNumber";
 			if (map.ContainsKey(key)) {
 				this.lastFourOfAccountNumber = map[key];
@@ -1806,11 +1863,15 @@ return null;
 
 	 public FundingTypeList(Dictionary<string, string> map, string prefix) {
 			string key = "";
-			for (int i = 0; i < 10; i++) {
+			int i;
+			i = 0;
+			while(true) {
 				key = prefix + "fundingTypeInfo" + '(' + i + ")";
 				if (map.ContainsKey(key)) {
 					this.fundingTypeInfo.Add( new FundingTypeInfo(map, key) ); 
 				}
+				else break;
+				i++;
 			}
 		}
 	}
@@ -1901,21 +1962,28 @@ return null;
 
 	 public GetAllowedFundingSourcesResponse(Dictionary<string, string> map, string prefix) {
 			string key = "";
+			int i;
 			key = prefix + "responseEnvelope";
 			if (map.ContainsKey(key + ".timestamp")) {
 				this.responseEnvelope = new ResponseEnvelope(map, key + '.');
 			}
-			for (int i = 0; i < 10; i++) {
+			i = 0;
+			while(true) {
 				key = prefix + "fundingSource" + '(' + i + ")";
 				if (map.ContainsKey(key + ".lastFourOfAccountNumber")) {
 					this.fundingSource.Add( new FundingSource(map, key + '.')); 
 				}
+				else break;
+				i++;
 			}
-			for (int i = 0; i < 10; i++) {
+			i = 0;
+			while(true) {
 				key = prefix + "error" + '(' + i + ")";
 				if (map.ContainsKey(key + ".errorId")) {
 					this.error.Add( new ErrorData(map, key + '.')); 
 				}
+				else break;
+				i++;
 			}
 		}
 	}
@@ -2012,21 +2080,28 @@ return null;
 
 	 public GetAvailableShippingAddressesResponse(Dictionary<string, string> map, string prefix) {
 			string key = "";
+			int i;
 			key = prefix + "responseEnvelope";
 			if (map.ContainsKey(key + ".timestamp")) {
 				this.responseEnvelope = new ResponseEnvelope(map, key + '.');
 			}
-			for (int i = 0; i < 10; i++) {
+			i = 0;
+			while(true) {
 				key = prefix + "availableAddress" + '(' + i + ")";
 				if (map.ContainsKey(key + ".addresseeName")) {
 					this.availableAddress.Add( new Address(map, key + '.')); 
 				}
+				else break;
+				i++;
 			}
-			for (int i = 0; i < 10; i++) {
+			i = 0;
+			while(true) {
 				key = prefix + "error" + '(' + i + ")";
 				if (map.ContainsKey(key + ".errorId")) {
 					this.error.Add( new ErrorData(map, key + '.')); 
 				}
+				else break;
+				i++;
 			}
 		}
 	}
@@ -2117,21 +2192,28 @@ return null;
 
 	 public GetFundingPlansResponse(Dictionary<string, string> map, string prefix) {
 			string key = "";
+			int i;
 			key = prefix + "responseEnvelope";
 			if (map.ContainsKey(key + ".timestamp")) {
 				this.responseEnvelope = new ResponseEnvelope(map, key + '.');
 			}
-			for (int i = 0; i < 10; i++) {
+			i = 0;
+			while(true) {
 				key = prefix + "fundingPlan" + '(' + i + ")";
 				if (map.ContainsKey(key + ".fundingPlanId")) {
 					this.fundingPlan.Add( new FundingPlan(map, key + '.')); 
 				}
+				else break;
+				i++;
 			}
-			for (int i = 0; i < 10; i++) {
+			i = 0;
+			while(true) {
 				key = prefix + "error" + '(' + i + ")";
 				if (map.ContainsKey(key + ".errorId")) {
 					this.error.Add( new ErrorData(map, key + '.')); 
 				}
+				else break;
+				i++;
 			}
 		}
 	}
@@ -2262,12 +2344,13 @@ return null;
 
 	 public GetPaymentOptionsResponse(Dictionary<string, string> map, string prefix) {
 			string key = "";
+			int i;
 			key = prefix + "responseEnvelope";
 			if (map.ContainsKey(key + ".timestamp")) {
 				this.responseEnvelope = new ResponseEnvelope(map, key + '.');
 			}
 			key = prefix + "initiatingEntity";
-			if (map.ContainsKey(key + ".institutionCustomer(0).institutionId")) {
+			if (map.ContainsKey(key + ".institutionCustomer.institutionId")) {
 				this.initiatingEntity = new InitiatingEntity(map, key + '.');
 			}
 			key = prefix + "displayOptions";
@@ -2282,17 +2365,23 @@ return null;
 			if (map.ContainsKey(key + ".requireShippingAddressSelection")) {
 				this.senderOptions = new SenderOptions(map, key + '.');
 			}
-			for (int i = 0; i < 10; i++) {
+			i = 0;
+			while(true) {
 				key = prefix + "receiverOptions" + '(' + i + ")";
 				if (map.ContainsKey(key + ".description")) {
 					this.receiverOptions.Add( new ReceiverOptions(map, key + '.')); 
 				}
+				else break;
+				i++;
 			}
-			for (int i = 0; i < 10; i++) {
+			i = 0;
+			while(true) {
 				key = prefix + "error" + '(' + i + ")";
 				if (map.ContainsKey(key + ".errorId")) {
 					this.error.Add( new ErrorData(map, key + '.')); 
 				}
+				else break;
+				i++;
 			}
 		}
 	}
@@ -2389,6 +2478,7 @@ return null;
 
 	 public GetShippingAddressesResponse(Dictionary<string, string> map, string prefix) {
 			string key = "";
+			int i;
 			key = prefix + "responseEnvelope";
 			if (map.ContainsKey(key + ".timestamp")) {
 				this.responseEnvelope = new ResponseEnvelope(map, key + '.');
@@ -2397,11 +2487,14 @@ return null;
 			if (map.ContainsKey(key + ".addresseeName")) {
 				this.selectedAddress = new Address(map, key + '.');
 			}
-			for (int i = 0; i < 10; i++) {
+			i = 0;
+			while(true) {
 				key = prefix + "error" + '(' + i + ")";
 				if (map.ContainsKey(key + ".errorId")) {
 					this.error.Add( new ErrorData(map, key + '.')); 
 				}
+				else break;
+				i++;
 			}
 		}
 	}
@@ -2553,25 +2646,32 @@ return null;
 
 	 public GetUserLimitsResponse(Dictionary<string, string> map, string prefix) {
 			string key = "";
+			int i;
 			key = prefix + "responseEnvelope";
 			if (map.ContainsKey(key + ".timestamp")) {
 				this.responseEnvelope = new ResponseEnvelope(map, key + '.');
 			}
-			for (int i = 0; i < 10; i++) {
+			i = 0;
+			while(true) {
 				key = prefix + "userLimit" + '(' + i + ")";
 				if (map.ContainsKey(key + ".limitType")) {
 					this.userLimit.Add( new UserLimit(map, key + '.')); 
 				}
+				else break;
+				i++;
 			}
 			key = prefix + "warningDataList";
 			if (map.ContainsKey(key + ".warningData(0).warningId")) {
 				this.warningDataList = new WarningDataList(map, key + '.');
 			}
-			for (int i = 0; i < 10; i++) {
+			i = 0;
+			while(true) {
 				key = prefix + "error" + '(' + i + ")";
 				if (map.ContainsKey(key + ".errorId")) {
 					this.error.Add( new ErrorData(map, key + '.')); 
 				}
+				else break;
+				i++;
 			}
 		}
 	}
@@ -2609,6 +2709,7 @@ return null;
 
 	 public InitiatingEntity(Dictionary<string, string> map, string prefix) {
 			string key = "";
+			int i;
 			key = prefix + "institutionCustomer";
 			if (map.ContainsKey(key + ".institutionId")) {
 				this.institutionCustomer = new InstitutionCustomer(map, key + '.');
@@ -2754,6 +2855,7 @@ return null;
 
 	 public InstitutionCustomer(Dictionary<string, string> map, string prefix) {
 			string key = "";
+			int i;
 			key = prefix + "institutionId";
 			if (map.ContainsKey(key)) {
 				this.institutionId = map[key];
@@ -2844,11 +2946,15 @@ return null;
 
 	 public InvoiceData(Dictionary<string, string> map, string prefix) {
 			string key = "";
-			for (int i = 0; i < 10; i++) {
+			int i;
+			i = 0;
+			while(true) {
 				key = prefix + "item" + '(' + i + ")";
 				if (map.ContainsKey(key + ".name")) {
 					this.item.Add( new InvoiceItem(map, key + '.')); 
 				}
+				else break;
+				i++;
 			}
 			key = prefix + "totalTax";
 			if (map.ContainsKey(key)) {
@@ -2941,6 +3047,7 @@ return null;
 
 	 public InvoiceItem(Dictionary<string, string> map, string prefix) {
 			string key = "";
+			int i;
 			key = prefix + "name";
 			if (map.ContainsKey(key)) {
 				this.name = map[key];
@@ -2993,6 +3100,7 @@ return null;
 
 	 public PayError(Dictionary<string, string> map, string prefix) {
 			string key = "";
+			int i;
 			key = prefix + "receiver";
 			if (map.ContainsKey(key + ".amount")) {
 				this.receiver = new Receiver(map, key + '.');
@@ -3021,11 +3129,15 @@ return null;
 
 	 public PayErrorList(Dictionary<string, string> map, string prefix) {
 			string key = "";
-			for (int i = 0; i < 10; i++) {
+			int i;
+			i = 0;
+			while(true) {
 				key = prefix + "payError" + '(' + i + ")";
-				if (map.ContainsKey(key + ".receiver(0).amount")) {
+				if (map.ContainsKey(key + ".receiver.amount")) {
 					this.payError.Add( new PayError(map, key + '.')); 
 				}
+				else break;
+				i++;
 			}
 		}
 	}
@@ -3350,6 +3462,7 @@ return null;
 
 	 public PayResponse(Dictionary<string, string> map, string prefix) {
 			string key = "";
+			int i;
 			key = prefix + "responseEnvelope";
 			if (map.ContainsKey(key + ".timestamp")) {
 				this.responseEnvelope = new ResponseEnvelope(map, key + '.');
@@ -3370,11 +3483,14 @@ return null;
 			if (map.ContainsKey(key + ".fundingPlanId")) {
 				this.defaultFundingPlan = new FundingPlan(map, key + '.');
 			}
-			for (int i = 0; i < 10; i++) {
+			i = 0;
+			while(true) {
 				key = prefix + "error" + '(' + i + ")";
 				if (map.ContainsKey(key + ".errorId")) {
 					this.error.Add( new ErrorData(map, key + '.')); 
 				}
+				else break;
+				i++;
 			}
 		}
 	}
@@ -3642,6 +3758,7 @@ return null;
 
 	 public PaymentDetailsResponse(Dictionary<string, string> map, string prefix) {
 			string key = "";
+			int i;
 			key = prefix + "responseEnvelope";
 			if (map.ContainsKey(key + ".timestamp")) {
 				this.responseEnvelope = new ResponseEnvelope(map, key + '.');
@@ -3710,11 +3827,14 @@ return null;
 			if (map.ContainsKey(key)) {
 				this.sender = new SenderIdentifier(map, key);
 			}
-			for (int i = 0; i < 10; i++) {
+			i = 0;
+			while(true) {
 				key = prefix + "error" + '(' + i + ")";
 				if (map.ContainsKey(key + ".errorId")) {
 					this.error.Add( new ErrorData(map, key + '.')); 
 				}
+				else break;
+				i++;
 			}
 		}
 	}
@@ -3810,6 +3930,7 @@ return null;
 
 	 public PaymentInfo(Dictionary<string, string> map, string prefix) {
 			string key = "";
+			int i;
 			key = prefix + "transactionId";
 			if (map.ContainsKey(key)) {
 				this.transactionId = map[key];
@@ -3862,11 +3983,15 @@ return null;
 
 	 public PaymentInfoList(Dictionary<string, string> map, string prefix) {
 			string key = "";
-			for (int i = 0; i < 10; i++) {
+			int i;
+			i = 0;
+			while(true) {
 				key = prefix + "paymentInfo" + '(' + i + ")";
 				if (map.ContainsKey(key + ".transactionId")) {
 					this.paymentInfo.Add( new PaymentInfo(map, key + '.')); 
 				}
+				else break;
+				i++;
 			}
 		}
 	}
@@ -3928,6 +4053,7 @@ return null;
 
 	 public PhoneNumberType(Dictionary<string, string> map, string prefix) {
 			string key = "";
+			int i;
 			key = prefix + "countryCode";
 			if (map.ContainsKey(key)) {
 				this.countryCode = map[key];
@@ -4282,6 +4408,7 @@ return null;
 
 	 public PreapprovalDetailsResponse(Dictionary<string, string> map, string prefix) {
 			string key = "";
+			int i;
 			key = prefix + "responseEnvelope";
 			if (map.ContainsKey(key + ".timestamp")) {
 				this.responseEnvelope = new ResponseEnvelope(map, key + '.');
@@ -4386,11 +4513,14 @@ return null;
 			if (map.ContainsKey(key)) {
 				this.displayMaxTotalAmount = System.Convert.ToBoolean( map[key] );
 			}
-			for (int i = 0; i < 10; i++) {
+			i = 0;
+			while(true) {
 				key = prefix + "error" + '(' + i + ")";
 				if (map.ContainsKey(key + ".errorId")) {
 					this.error.Add( new ErrorData(map, key + '.')); 
 				}
+				else break;
+				i++;
 			}
 		}
 	}
@@ -4723,6 +4853,7 @@ return null;
 
 	 public PreapprovalResponse(Dictionary<string, string> map, string prefix) {
 			string key = "";
+			int i;
 			key = prefix + "responseEnvelope";
 			if (map.ContainsKey(key + ".timestamp")) {
 				this.responseEnvelope = new ResponseEnvelope(map, key + '.');
@@ -4731,11 +4862,14 @@ return null;
 			if (map.ContainsKey(key)) {
 				this.preapprovalKey = map[key];
 			}
-			for (int i = 0; i < 10; i++) {
+			i = 0;
+			while(true) {
 				key = prefix + "error" + '(' + i + ")";
 				if (map.ContainsKey(key + ".errorId")) {
 					this.error.Add( new ErrorData(map, key + '.')); 
 				}
+				else break;
+				i++;
 			}
 		}
 	}
@@ -4855,6 +4989,7 @@ return null;
 
 	 public Receiver(Dictionary<string, string> map, string prefix) {
 			string key = "";
+			int i;
 			key = prefix + "amount";
 			if (map.ContainsKey(key)) {
 				this.amount = System.Convert.ToDecimal( map[key] );
@@ -4903,6 +5038,7 @@ sb.Append(base.toNVPString(prefix));
 
 	 public ReceiverIdentifier(Dictionary<string, string> map, string prefix):base(map,prefix) {
 			string key = "";
+			int i;
 		}
 	}
 
@@ -5026,6 +5162,7 @@ sb.Append(base.toNVPString(prefix));
 
 	 public ReceiverOptions(Dictionary<string, string> map, string prefix) {
 			string key = "";
+			int i;
 			key = prefix + "description";
 			if (map.ContainsKey(key)) {
 				this.description = map[key];
@@ -5158,6 +5295,7 @@ sb.Append(base.toNVPString(prefix));
 
 	 public RefundInfo(Dictionary<string, string> map, string prefix) {
 			string key = "";
+			int i;
 			key = prefix + "receiver";
 			if (map.ContainsKey(key + ".amount")) {
 				this.receiver = new Receiver(map, key + '.');
@@ -5218,11 +5356,15 @@ sb.Append(base.toNVPString(prefix));
 
 	 public RefundInfoList(Dictionary<string, string> map, string prefix) {
 			string key = "";
-			for (int i = 0; i < 10; i++) {
+			int i;
+			i = 0;
+			while(true) {
 				key = prefix + "refundInfo" + '(' + i + ")";
 				if (map.ContainsKey(key + ".receiver.amount")) {
 					this.refundInfo.Add( new RefundInfo(map, key + '.')); 
 				}
+				else break;
+				i++;
 			}
 		}
 	}
@@ -5377,6 +5519,7 @@ sb.Append(base.toNVPString(prefix));
 
 	 public RefundResponse(Dictionary<string, string> map, string prefix) {
 			string key = "";
+			int i;
 			key = prefix + "responseEnvelope";
 			if (map.ContainsKey(key + ".timestamp")) {
 				this.responseEnvelope = new ResponseEnvelope(map, key + '.');
@@ -5389,11 +5532,14 @@ sb.Append(base.toNVPString(prefix));
 			if (map.ContainsKey(key + ".refundInfo(0).refundStatus")) {
 				this.refundInfoList = new RefundInfoList(map, key + '.');
 			}
-			for (int i = 0; i < 10; i++) {
+			i = 0;
+			while(true) {
 				key = prefix + "error" + '(' + i + ")";
 				if (map.ContainsKey(key + ".errorId")) {
 					this.error.Add( new ErrorData(map, key + '.')); 
 				}
+				else break;
+				i++;
 			}
 		}
 	}
@@ -5511,6 +5657,7 @@ sb.Append(base.toNVPString(prefix));
 
 	 public ResponseEnvelope(Dictionary<string, string> map, string prefix) {
 			string key = "";
+			int i;
 			key = prefix + "timestamp";
 			if (map.ContainsKey(key)) {
 				this.timestamp = map[key];
@@ -5611,6 +5758,7 @@ sb.Append(base.toNVPString(prefix));
 
 	 public SenderOptions(Dictionary<string, string> map, string prefix) {
 			string key = "";
+			int i;
 			key = prefix + "requireShippingAddressSelection";
 			if (map.ContainsKey(key)) {
 				this.requireShippingAddressSelection = System.Convert.ToBoolean( map[key] );
@@ -5769,15 +5917,19 @@ sb.Append(base.toNVPString(prefix));
 
 	 public SetPaymentOptionsResponse(Dictionary<string, string> map, string prefix) {
 			string key = "";
+			int i;
 			key = prefix + "responseEnvelope";
 			if (map.ContainsKey(key + ".timestamp")) {
 				this.responseEnvelope = new ResponseEnvelope(map, key + '.');
 			}
-			for (int i = 0; i < 10; i++) {
+			i = 0;
+			while(true) {
 				key = prefix + "error" + '(' + i + ")";
 				if (map.ContainsKey(key + ".errorId")) {
 					this.error.Add( new ErrorData(map, key + '.')); 
 				}
+				else break;
+				i++;
 			}
 		}
 	}
@@ -5809,6 +5961,7 @@ sb.Append(base.toNVPString(prefix));
 
 	 public UserLimit(Dictionary<string, string> map, string prefix) {
 			string key = "";
+			int i;
 			key = prefix + "limitType";
 			if (map.ContainsKey(key)) {
 				this.limitType = map[key];
@@ -5850,6 +6003,7 @@ sb.Append(base.toNVPString(prefix));
 
 	 public WarningData(Dictionary<string, string> map, string prefix) {
 			string key = "";
+			int i;
 			key = prefix + "warningId";
 			if (map.ContainsKey(key)) {
 				this.warningId = System.Convert.ToInt32( map[key] );
@@ -5878,11 +6032,15 @@ sb.Append(base.toNVPString(prefix));
 
 	 public WarningDataList(Dictionary<string, string> map, string prefix) {
 			string key = "";
-			for (int i = 0; i < 10; i++) {
+			int i;
+			i = 0;
+			while(true) {
 				key = prefix + "warningData" + '(' + i + ")";
 				if (map.ContainsKey(key + ".warningId")) {
 					this.warningData.Add( new WarningData(map, key + '.')); 
 				}
+				else break;
+				i++;
 			}
 		}
 	}

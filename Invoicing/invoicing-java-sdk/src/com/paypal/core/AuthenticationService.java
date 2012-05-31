@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package com.paypal.core;
 
@@ -14,7 +14,7 @@ import com.paypal.sdk.util.OAuthSignature;
 
 /**
  * @author lvairamani
- * 
+ *
  */
 public class AuthenticationService {
 	private Map<String, String> headers = new HashMap<String, String>();
@@ -48,6 +48,7 @@ public class AuthenticationService {
 				&& (Constants.EMPTY_STRING != tokenSecret && tokenSecret != null)) {
 			authString = generateAuthString(apiCred, accessToken, tokenSecret,
 					httpConfiguration.getEndPointUrl());
+			System.out.println("*******" + authString);
 			headers.put("X-PAYPAL-AUTHORIZATION", authString);
 			connection.setDefaultSSL(true);
 			connection.setupClientSSL(null, null,

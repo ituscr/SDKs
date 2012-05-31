@@ -8,27 +8,28 @@ namespace PayPal.Invoice.Model {
 	using System.Collections.Generic;
 	using PayPal.Util;
 
-public class EnumUtils{
-public static string getDescription(Enum value){
-string description="";DescriptionAttribute[] attributes = (DescriptionAttribute[])value.GetType().GetField(value.ToString()).GetCustomAttributes(typeof(DescriptionAttribute), false);
-            if (attributes.Length > 0)
-            {
-                description= attributes[0].Description;
-            }
-return description;
-}
-public static object getValue(String value,Type enumType){
-string[] names = Enum.GetNames(enumType);
-            foreach (string name in names)
-            {
-                if (getDescription((Enum)Enum.Parse(enumType, name)).Equals(value))
-                {
-                    return Enum.Parse(enumType, name);
-                }
-            }
-return null;
+	public class EnumUtils{
+		public static string getDescription(Enum value){
+			string description="";
+			DescriptionAttribute[] attributes = (DescriptionAttribute[])value.GetType().GetField(value.ToString()).GetCustomAttributes(typeof(DescriptionAttribute), false);
+			if (attributes.Length > 0)
+			{
+				description= attributes[0].Description;
+			}
+			return description;
 		}
-}
+		public static object getValue(String value,Type enumType){
+			string[] names = Enum.GetNames(enumType);
+			foreach (string name in names)
+			{
+				if (getDescription((Enum)Enum.Parse(enumType, name)).Equals(value))
+				{
+					return Enum.Parse(enumType, name);
+				}
+			}
+			return null;
+		}
+	}
 	public enum AckCode {
 [Description("Success")]SUCCESS,
 [Description("Failure")]FAILURE,
@@ -149,6 +150,7 @@ return null;
 
 	 public BaseAddress(Dictionary<string, string> map, string prefix) {
 			string key = "";
+			int i;
 			key = prefix + "line1";
 			if (map.ContainsKey(key)) {
 				this.line1 = map[key];
@@ -324,6 +326,7 @@ return null;
 
 	 public BusinessInfoType(Dictionary<string, string> map, string prefix) {
 			string key = "";
+			int i;
 			key = prefix + "firstName";
 			if (map.ContainsKey(key)) {
 				this.firstName = map[key];
@@ -522,6 +525,7 @@ return null;
 
 	 public CancelInvoiceResponse(Dictionary<string, string> map, string prefix) {
 			string key = "";
+			int i;
 			key = prefix + "responseEnvelope";
 			if (map.ContainsKey(key + ".timestamp")) {
 				this.responseEnvelope = new ResponseEnvelope(map, key + '.');
@@ -538,11 +542,14 @@ return null;
 			if (map.ContainsKey(key)) {
 				this.invoiceURL = map[key];
 			}
-			for (int i = 0; i < 10; i++) {
+			i = 0;
+			while(true) {
 				key = prefix + "error" + '(' + i + ")";
 				if (map.ContainsKey(key + ".errorId")) {
 					this.error.Add( new ErrorData(map, key + '.')); 
 				}
+				else break;
+				i++;
 			}
 		}
 	}
@@ -652,6 +659,19 @@ return null;
 			}
 		}
 
+		/**
+		 * The total amount of the invoice (cost of items, shipping and tax, less any discount).
+		 */
+		private int? totalAmountField;
+		public int? totalAmount {
+			get {
+				return this.totalAmountField;
+			}
+			set {
+				this.totalAmountField = value;
+			}
+		}
+
 		private List<ErrorData> errorField = new List<ErrorData>();
 		public List<ErrorData> error {
 			get {
@@ -664,6 +684,7 @@ return null;
 
 	 public CreateAndSendInvoiceResponse(Dictionary<string, string> map, string prefix) {
 			string key = "";
+			int i;
 			key = prefix + "responseEnvelope";
 			if (map.ContainsKey(key + ".timestamp")) {
 				this.responseEnvelope = new ResponseEnvelope(map, key + '.');
@@ -680,11 +701,18 @@ return null;
 			if (map.ContainsKey(key)) {
 				this.invoiceURL = map[key];
 			}
-			for (int i = 0; i < 10; i++) {
+			key = prefix + "totalAmount";
+			if (map.ContainsKey(key)) {
+				this.totalAmount = System.Convert.ToInt32( map[key] );
+			}
+			i = 0;
+			while(true) {
 				key = prefix + "error" + '(' + i + ")";
 				if (map.ContainsKey(key + ".errorId")) {
 					this.error.Add( new ErrorData(map, key + '.')); 
 				}
+				else break;
+				i++;
 			}
 		}
 	}
@@ -794,6 +822,19 @@ return null;
 			}
 		}
 
+		/**
+		 * The total amount of the invoice (cost of items, shipping and tax, less any discount).
+		 */
+		private int? totalAmountField;
+		public int? totalAmount {
+			get {
+				return this.totalAmountField;
+			}
+			set {
+				this.totalAmountField = value;
+			}
+		}
+
 		private List<ErrorData> errorField = new List<ErrorData>();
 		public List<ErrorData> error {
 			get {
@@ -806,6 +847,7 @@ return null;
 
 	 public CreateInvoiceResponse(Dictionary<string, string> map, string prefix) {
 			string key = "";
+			int i;
 			key = prefix + "responseEnvelope";
 			if (map.ContainsKey(key + ".timestamp")) {
 				this.responseEnvelope = new ResponseEnvelope(map, key + '.');
@@ -822,11 +864,18 @@ return null;
 			if (map.ContainsKey(key)) {
 				this.invoiceURL = map[key];
 			}
-			for (int i = 0; i < 10; i++) {
+			key = prefix + "totalAmount";
+			if (map.ContainsKey(key)) {
+				this.totalAmount = System.Convert.ToInt32( map[key] );
+			}
+			i = 0;
+			while(true) {
 				key = prefix + "error" + '(' + i + ")";
 				if (map.ContainsKey(key + ".errorId")) {
 					this.error.Add( new ErrorData(map, key + '.')); 
 				}
+				else break;
+				i++;
 			}
 		}
 	}
@@ -974,6 +1023,7 @@ return null;
 
 	 public ErrorData(Dictionary<string, string> map, string prefix) {
 			string key = "";
+			int i;
 			key = prefix + "errorId";
 			if (map.ContainsKey(key)) {
 				this.errorId = System.Convert.ToInt32( map[key] );
@@ -1002,11 +1052,14 @@ return null;
 			if (map.ContainsKey(key)) {
 				this.exceptionId = map[key];
 			}
-			for (int i = 0; i < 10; i++) {
+			i = 0;
+			while(true) {
 				key = prefix + "parameter" + '(' + i + ")";
 				if (map.ContainsKey(key + ".name")) {
 					this.parameter.Add( new ErrorParameter(map, key + '.')); 
 				}
+				else break;
+				i++;
 			}
 		}
 	}
@@ -1038,6 +1091,7 @@ return null;
 
 	 public ErrorParameter(Dictionary<string, string> map, string prefix) {
 			string key = "";
+			int i;
 			key = prefix + "name";
 			if (map.ContainsKey(key)) {
 				this.name = map[key];
@@ -1082,15 +1136,19 @@ return null;
 
 	 public FaultMessage(Dictionary<string, string> map, string prefix) {
 			string key = "";
+			int i;
 			key = prefix + "responseEnvelope";
 			if (map.ContainsKey(key + ".timestamp")) {
 				this.responseEnvelope = new ResponseEnvelope(map, key + '.');
 			}
-			for (int i = 0; i < 10; i++) {
+			i = 0;
+			while(true) {
 				key = prefix + "error" + '(' + i + ")";
 				if (map.ContainsKey(key + ".errorId")) {
 					this.error.Add( new ErrorData(map, key + '.')); 
 				}
+				else break;
+				i++;
 			}
 		}
 	}
@@ -1224,6 +1282,7 @@ return null;
 
 	 public GetInvoiceDetailsResponse(Dictionary<string, string> map, string prefix) {
 			string key = "";
+			int i;
 			key = prefix + "responseEnvelope";
 			if (map.ContainsKey(key + ".timestamp")) {
 				this.responseEnvelope = new ResponseEnvelope(map, key + '.');
@@ -1244,11 +1303,14 @@ return null;
 			if (map.ContainsKey(key)) {
 				this.invoiceURL = map[key];
 			}
-			for (int i = 0; i < 10; i++) {
+			i = 0;
+			while(true) {
 				key = prefix + "error" + '(' + i + ")";
 				if (map.ContainsKey(key + ".errorId")) {
 					this.error.Add( new ErrorData(map, key + '.')); 
 				}
+				else break;
+				i++;
 			}
 		}
 	}
@@ -1444,6 +1506,7 @@ return null;
 
 	 public InvoiceDetailsType(Dictionary<string, string> map, string prefix) {
 			string key = "";
+			int i;
 			key = prefix + "status";
 			if (map.ContainsKey(key)) {
 				this.status = (StatusType)EnumUtils.getValue(map[key],typeof(StatusType));;
@@ -1537,11 +1600,15 @@ return null;
 
 	 public InvoiceItemListType(Dictionary<string, string> map, string prefix) {
 			string key = "";
-			for (int i = 0; i < 10; i++) {
+			int i;
+			i = 0;
+			while(true) {
 				key = prefix + "item" + '(' + i + ")";
 				if (map.ContainsKey(key + ".name")) {
 					this.item.Add( new InvoiceItemType(map, key + '.')); 
 				}
+				else break;
+				i++;
 			}
 		}
 	}
@@ -1678,6 +1745,7 @@ return null;
 
 	 public InvoiceItemType(Dictionary<string, string> map, string prefix) {
 			string key = "";
+			int i;
 			key = prefix + "name";
 			if (map.ContainsKey(key)) {
 				this.name = map[key];
@@ -1727,11 +1795,15 @@ return null;
 
 	 public InvoiceSummaryListType(Dictionary<string, string> map, string prefix) {
 			string key = "";
-			for (int i = 0; i < 10; i++) {
+			int i;
+			i = 0;
+			while(true) {
 				key = prefix + "invoice" + '(' + i + ")";
 				if (map.ContainsKey(key + ".invoiceID")) {
 					this.invoice.Add( new InvoiceSummaryType(map, key + '.')); 
 				}
+				else break;
+				i++;
 			}
 		}
 	}
@@ -1950,8 +2022,22 @@ return null;
 			}
 		}
 
+		/**
+		 * BN code for tracking transactions with a particular partner. 
+		 */
+		private string referrerCodeField;
+		public string referrerCode {
+			get {
+				return this.referrerCodeField;
+			}
+			set {
+				this.referrerCodeField = value;
+			}
+		}
+
 	 public InvoiceSummaryType(Dictionary<string, string> map, string prefix) {
 			string key = "";
+			int i;
 			key = prefix + "invoiceID";
 			if (map.ContainsKey(key)) {
 				this.invoiceID = map[key];
@@ -2015,6 +2101,10 @@ return null;
 			key = prefix + "origin";
 			if (map.ContainsKey(key)) {
 				this.origin = (OriginType)EnumUtils.getValue(map[key],typeof(OriginType));;
+			}
+			key = prefix + "referrerCode";
+			if (map.ContainsKey(key)) {
+				this.referrerCode = map[key];
 			}
 		}
 	}
@@ -2285,6 +2375,19 @@ return null;
 			}
 		}
 
+		/**
+		 * BN code for tracking transactions with a particular partner. 
+		 */
+		private string referrerCodeField;
+		public string referrerCode {
+			get {
+				return this.referrerCodeField;
+			}
+			set {
+				this.referrerCodeField = value;
+			}
+		}
+
 		public InvoiceType(string merchantEmail, string payerEmail, InvoiceItemListType itemList, string currencyCode, PaymentTermsType? paymentTerms) {
 			this.merchantEmail = merchantEmail;
 			this.payerEmail = payerEmail;
@@ -2361,11 +2464,15 @@ return null;
 			if (this.logoUrl != null) {
 				sb.Append(prefix).Append("logoUrl").Append('=').Append(HttpUtility.UrlEncode(this.logoUrl, BaseConstants.ENCODING_FORMAT)).Append('&');
 			}
+			if (this.referrerCode != null) {
+				sb.Append(prefix).Append("referrerCode").Append('=').Append(HttpUtility.UrlEncode(this.referrerCode, BaseConstants.ENCODING_FORMAT)).Append('&');
+			}
 			return sb.ToString();
 		}
 
 	 public InvoiceType(Dictionary<string, string> map, string prefix) {
 			string key = "";
+			int i;
 			key = prefix + "merchantEmail";
 			if (map.ContainsKey(key)) {
 				this.merchantEmail = map[key];
@@ -2445,6 +2552,10 @@ return null;
 			key = prefix + "logoUrl";
 			if (map.ContainsKey(key)) {
 				this.logoUrl = map[key];
+			}
+			key = prefix + "referrerCode";
+			if (map.ContainsKey(key)) {
+				this.referrerCode = map[key];
 			}
 		}
 	}
@@ -2583,6 +2694,7 @@ return null;
 
 	 public MarkInvoiceAsPaidResponse(Dictionary<string, string> map, string prefix) {
 			string key = "";
+			int i;
 			key = prefix + "responseEnvelope";
 			if (map.ContainsKey(key + ".timestamp")) {
 				this.responseEnvelope = new ResponseEnvelope(map, key + '.');
@@ -2599,11 +2711,14 @@ return null;
 			if (map.ContainsKey(key)) {
 				this.invoiceURL = map[key];
 			}
-			for (int i = 0; i < 10; i++) {
+			i = 0;
+			while(true) {
 				key = prefix + "error" + '(' + i + ")";
 				if (map.ContainsKey(key + ".errorId")) {
 					this.error.Add( new ErrorData(map, key + '.')); 
 				}
+				else break;
+				i++;
 			}
 		}
 	}
@@ -2676,6 +2791,7 @@ return null;
 
 	 public OtherPaymentDetailsType(Dictionary<string, string> map, string prefix) {
 			string key = "";
+			int i;
 			key = prefix + "method";
 			if (map.ContainsKey(key)) {
 				this.method = (PaymentMethodsType)EnumUtils.getValue(map[key],typeof(PaymentMethodsType));;
@@ -2725,6 +2841,7 @@ return null;
 
 	 public PayPalPaymentDetailsType(Dictionary<string, string> map, string prefix) {
 			string key = "";
+			int i;
 			key = prefix + "transactionID";
 			if (map.ContainsKey(key)) {
 				this.transactionID = map[key];
@@ -2783,6 +2900,7 @@ return null;
 
 	 public PaymentDetailsType(Dictionary<string, string> map, string prefix) {
 			string key = "";
+			int i;
 			key = prefix + "viaPayPal";
 			if (map.ContainsKey(key)) {
 				this.viaPayPal = System.Convert.ToBoolean( map[key] );
@@ -2929,6 +3047,7 @@ return null;
 
 	 public ResponseEnvelope(Dictionary<string, string> map, string prefix) {
 			string key = "";
+			int i;
 			key = prefix + "timestamp";
 			if (map.ContainsKey(key)) {
 				this.timestamp = map[key];
@@ -3142,6 +3261,7 @@ return null;
 
 	 public SearchInvoicesResponse(Dictionary<string, string> map, string prefix) {
 			string key = "";
+			int i;
 			key = prefix + "responseEnvelope";
 			if (map.ContainsKey(key + ".timestamp")) {
 				this.responseEnvelope = new ResponseEnvelope(map, key + '.');
@@ -3166,11 +3286,14 @@ return null;
 			if (map.ContainsKey(key)) {
 				this.hasPreviousPage = System.Convert.ToBoolean( map[key] );
 			}
-			for (int i = 0; i < 10; i++) {
+			i = 0;
+			while(true) {
 				key = prefix + "error" + '(' + i + ")";
 				if (map.ContainsKey(key + ".errorId")) {
 					this.error.Add( new ErrorData(map, key + '.')); 
 				}
+				else break;
+				i++;
 			}
 		}
 	}
@@ -3379,7 +3502,7 @@ return null;
 			}
 			for (int i = 0; i < this.status.Count; i++) {
 				if (this.status[i] != null) {
-				sb.Append(prefix).Append("status(").Append(i).Append(")=").Append(EnumUtils.getDescription(status[i]));
+				sb.Append(prefix).Append("status").Append(i).Append(")=").Append(EnumUtils.getDescription(status[i]));
 				sb.Append('&');
 				}
 			}
@@ -3523,6 +3646,7 @@ return null;
 
 	 public SendInvoiceResponse(Dictionary<string, string> map, string prefix) {
 			string key = "";
+			int i;
 			key = prefix + "responseEnvelope";
 			if (map.ContainsKey(key + ".timestamp")) {
 				this.responseEnvelope = new ResponseEnvelope(map, key + '.');
@@ -3535,11 +3659,14 @@ return null;
 			if (map.ContainsKey(key)) {
 				this.invoiceURL = map[key];
 			}
-			for (int i = 0; i < 10; i++) {
+			i = 0;
+			while(true) {
 				key = prefix + "error" + '(' + i + ")";
 				if (map.ContainsKey(key + ".errorId")) {
 					this.error.Add( new ErrorData(map, key + '.')); 
 				}
+				else break;
+				i++;
 			}
 		}
 	}
@@ -3551,6 +3678,8 @@ return null;
 [Description("Paid")]PAID,
 [Description("MarkedAsPaid")]MARKEDASPAID,
 [Description("Canceled")]CANCELED,
+[Description("Refunded")]REFUNDED,
+[Description("PartiallyRefunded")]PARTIALLYREFUNDED,
 	}
 	/**
 	 * The request object for UpdateInvoice.
@@ -3673,6 +3802,19 @@ return null;
 			}
 		}
 
+		/**
+		 * The total amount of the invoice (cost of items, shipping and tax, less any discount).
+		 */
+		private int? totalAmountField;
+		public int? totalAmount {
+			get {
+				return this.totalAmountField;
+			}
+			set {
+				this.totalAmountField = value;
+			}
+		}
+
 		private List<ErrorData> errorField = new List<ErrorData>();
 		public List<ErrorData> error {
 			get {
@@ -3685,6 +3827,7 @@ return null;
 
 	 public UpdateInvoiceResponse(Dictionary<string, string> map, string prefix) {
 			string key = "";
+			int i;
 			key = prefix + "responseEnvelope";
 			if (map.ContainsKey(key + ".timestamp")) {
 				this.responseEnvelope = new ResponseEnvelope(map, key + '.');
@@ -3701,11 +3844,18 @@ return null;
 			if (map.ContainsKey(key)) {
 				this.invoiceURL = map[key];
 			}
-			for (int i = 0; i < 10; i++) {
+			key = prefix + "totalAmount";
+			if (map.ContainsKey(key)) {
+				this.totalAmount = System.Convert.ToInt32( map[key] );
+			}
+			i = 0;
+			while(true) {
 				key = prefix + "error" + '(' + i + ")";
 				if (map.ContainsKey(key + ".errorId")) {
 					this.error.Add( new ErrorData(map, key + '.')); 
 				}
+				else break;
+				i++;
 			}
 		}
 	}

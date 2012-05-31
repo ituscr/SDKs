@@ -98,11 +98,12 @@ public class GetPaymentOptionsResponse {
 	public GetPaymentOptionsResponse() {
 	}
 	public GetPaymentOptionsResponse(Map<String, String> map, String prefix) {
+		int i=0; 
 		if( map.containsKey(prefix + "responseEnvelope" + ".timestamp") ) {
 			String newPrefix = prefix + "responseEnvelope" + '.';
 			this.responseEnvelope =  new ResponseEnvelope(map, newPrefix);
 		}
-		if( map.containsKey(prefix + "initiatingEntity" + ".institutionCustomer(0).institutionId") ) {
+		if( map.containsKey(prefix + "initiatingEntity" + ".institutionCustomer.institutionId") ) {
 			String newPrefix = prefix + "initiatingEntity" + '.';
 			this.initiatingEntity =  new InitiatingEntity(map, newPrefix);
 		}
@@ -117,17 +118,23 @@ public class GetPaymentOptionsResponse {
 			String newPrefix = prefix + "senderOptions" + '.';
 			this.senderOptions =  new SenderOptions(map, newPrefix);
 		}
-		for(int i=0; i<10; i++) {
+		 i=0; 
+		 while(true) {
 			if( map.containsKey(prefix + "receiverOptions" + '(' + i + ')'+ ".description") ) {
 				String newPrefix = prefix + "receiverOptions" + '(' + i + ')' + '.';
 				this.receiverOptions.add(new ReceiverOptions(map, newPrefix));
 			}
+			else break;
+			i++;
 		}
-		for(int i=0; i<10; i++) {
+		 i=0; 
+		 while(true) {
 			if( map.containsKey(prefix + "error" + '(' + i + ')'+ ".errorId") ) {
 				String newPrefix = prefix + "error" + '(' + i + ')' + '.';
 				this.error.add(new ErrorData(map, newPrefix));
 			}
+			else break;
+			i++;
 		}
 	}
 }
