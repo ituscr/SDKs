@@ -46,7 +46,7 @@ try {
 	$addPaymentCard->issueNumber = $_REQUEST['issueNumber'];
 	$addPaymentCard->startDate  = $startDate;
 	$addPaymentCard->expirationDate  = $expDate;
-	$addPaymentCard->billingAddress = $_REQUEST['branchLocation'];
+    $addPaymentCard->billingAddress = $billingAddress;
 	$addPaymentCard->confirmationType = $_REQUEST['confirmationType'];
 
 	if($addPaymentCard->confirmationType == 'WEB')
@@ -95,6 +95,14 @@ try {
 		echo "<pre>";
 		print_r($response);
 		echo "</pre>";
+		$fundingSrcKey = $response->fundingSourceKey;
+		$payPalURL = $response->redirectURL;
+		
+		echo "<table>";
+		echo "<tr><td>Ack :</td><td><div id='Ack'>$ack</div> </td></tr>";
+		echo "<tr><td>FundingSrcKey :</td><td><div id='FundingSrcKey'>$fundingSrcKey</div> </td></tr>";
+		echo "<tr><td>Redirect URL :</td><td> <div id='Redirect URL'><a href=$payPalURL><b>Redirect To PayPal</b></a><br></div></td></tr>";
+		echo "</table>";
 		require_once 'Common/Response.php';
 
 	}

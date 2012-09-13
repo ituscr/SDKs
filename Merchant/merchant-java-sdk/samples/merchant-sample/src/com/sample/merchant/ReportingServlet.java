@@ -91,18 +91,18 @@ public class ReportingServlet extends HttpServlet {
 				if ((request.getParameter("startDate") != null)
 						&& !request.getParameter("startDate").toString()
 								.equals("")) {
-					type.setStartDate(request.getParameter("startDate")
-							+ "T00:00:00.000Z");
+					type.setStartDate(request.getParameter("startDate"));
 				}
 
 				if ((request.getParameter("endDate") != null)
 						&& !request.getParameter("endDate").toString()
 								.equals("")) {
-					type.setEndDate(request.getParameter("endDate")
-							+ "T23:59:59.000Z");
+					type.setEndDate(request.getParameter("endDate"));
 				}
 
-				type.setTransactionID(request.getParameter("transactionID"));
+				if(request.getParameter("transactionID") !=""){
+					type.setTransactionID(request.getParameter("transactionID"));
+				}
 
 				txnreq.setTransactionSearchRequest(type);
 				TransactionSearchResponseType txnresponse = null;
@@ -124,10 +124,13 @@ public class ReportingServlet extends HttpServlet {
 										.next();
 								map.put("Transaction ID" + index,
 										result.getTransactionID());
-								map.put("Net Amount" + index, result
-										.getNetAmount().getValue()
-										+ " "
-										+ result.getNetAmount().getCurrencyID());
+								if(result.getNetAmount() !=null)
+								{
+									map.put("Net Amount" + index, result
+											.getNetAmount().getValue()
+											+ " "
+											+ result.getNetAmount().getCurrencyID());
+								}
 								map.put("Payer" + index, result.getPayer());
 								map.put("Status" + index, result.getStatus());
 								index++;
