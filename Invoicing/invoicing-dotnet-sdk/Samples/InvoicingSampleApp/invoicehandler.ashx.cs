@@ -779,12 +779,42 @@ namespace InvoicingSampleApp
             }
             context.Response.Write("<div class='section_header'>Key values from response</div>");
             context.Response.Write("<div class='note'>Consult response object and reference doc for complete list of response values.</div><table>");
+            
+            /*
             foreach (KeyValuePair<String, String> entry in responseValues)
             {
                 context.Response.Write("<tr><td class='label'>");
                 context.Response.Write(entry.Key);
                 context.Response.Write(": </td><td>");
                 context.Response.Write(entry.Value);
+                context.Response.Write("</td></tr>");
+            }
+            */
+
+            //Selenium Test Case            
+            foreach (KeyValuePair<String, String> entry in responseValues)
+            {
+
+                context.Response.Write("<tr><td class='label'>");
+                context.Response.Write(entry.Key);
+                context.Response.Write(": </td><td>");
+
+                if (entry.Key == "Redirect To PayPal")
+                {
+                    context.Response.Write("<a id='");
+                    context.Response.Write(entry.Key);
+                    context.Response.Write("' href=");
+                    context.Response.Write(entry.Value);
+                    context.Response.Write(">Redirect To PayPal</a>");
+                }
+                else
+                {
+                    context.Response.Write("<div id='");
+                    context.Response.Write(entry.Key);
+                    context.Response.Write("'>");
+                    context.Response.Write(entry.Value);
+                }
+
                 context.Response.Write("</td></tr>");
             }
 

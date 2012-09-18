@@ -12,7 +12,6 @@ $itemTrackingDetails->ItemCost = $_REQUEST['itemCost'];
 
 $BMSetInventoryReqest = new BMSetInventoryRequestType();
 $BMSetInventoryReqest->HostedButtonID = $_REQUEST['hostedID'];
-$BMSetInventoryReqest->Version = 86.0;
 $BMSetInventoryReqest->TrackInv = $_REQUEST['trackInv'];
 $BMSetInventoryReqest->TrackPnl = $_REQUEST['trackPnl'];
 $BMSetInventoryReqest->ItemTrackingDetails = $itemTrackingDetails;
@@ -22,6 +21,11 @@ $BMSetInventoryReq->BMSetInventoryRequest = $BMSetInventoryReqest;
 
 $paypalService = new PayPalAPIInterfaceServiceService();
 $BMSetInventoryResponse = $paypalService->BMSetInventory($BMSetInventoryReq);
+
+echo "<table>";
+echo "<tr><td>Ack :</td><td><div id='Ack'>$BMSetInventoryResponse->Ack</div> </td></tr>";
+echo "</table>";
+
 echo "<pre>";
 print_r($BMSetInventoryResponse);
 echo "</pre>";

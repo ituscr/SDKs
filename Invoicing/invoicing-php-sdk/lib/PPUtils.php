@@ -1,7 +1,7 @@
 <?php
 class PPUtils {
 
-	const SDK_VERSION = "1.2.92";
+	const SDK_VERSION = "1.3.93";
 	const SDK_NAME = "sdk-invoice-php ";
 
 	/**
@@ -64,7 +64,7 @@ class PPUtils {
 	 * Compute the value that needs to sent for the PAYPAL_REQUEST_SOURCE
 	 * parameter when making API calls
 	 */
-	public function getRequestSource() {
+	public static function getRequestSource() {
 		return str_replace(" ", "-", self::SDK_NAME). self::SDK_VERSION;
 	}
 	public static function xmlToArray($xmlInput) {

@@ -204,6 +204,9 @@ namespace AdaptivePaymentsSampleApp
                     keyResponseParams.Add("Sender fees", resp.defaultFundingPlan.senderFees.amount +
                                                 resp.defaultFundingPlan.senderFees.code);
                 }
+
+                //Selenium Test Case
+                keyResponseParams.Add("Acknowledgement", resp.responseEnvelope.ack.ToString());
             }
             displayResponse(context, "Pay", keyResponseParams, service.getLastRequest(), service.getLastResponse(), 
                 resp.error, redirectUrl);            
@@ -247,6 +250,10 @@ namespace AdaptivePaymentsSampleApp
                 keyResponseParams.Add("Pay key", resp.payKey);
                 keyResponseParams.Add("Payment execution status", resp.status);
                 keyResponseParams.Add("Sender email", resp.senderEmail);
+
+                //Selenium Test Case
+                keyResponseParams.Add("Acknowledgement", resp.responseEnvelope.ack.ToString());
+                keyResponseParams.Add("Action Type", resp.actionType);
             }
             displayResponse(context, "PaymentDetails", keyResponseParams, service.getLastRequest(), service.getLastResponse(),
                 resp.error, redirectUrl);
@@ -344,6 +351,12 @@ namespace AdaptivePaymentsSampleApp
                 !(resp.responseEnvelope.ack == AckCode.FAILUREWITHWARNING))
             {
                 keyResponseParams.Add("Preapproval key", resp.preapprovalKey);
+
+                //Selenium Test Case
+                redirectUrl = ConfigurationManager.AppSettings["PAYPAL_REDIRECT_URL"]
+                                     + "_ap-preapproval&preapprovalkey=" + resp.preapprovalKey;
+                keyResponseParams.Add("Acknowledgement", resp.responseEnvelope.ack.ToString());
+                keyResponseParams.Add("Redirect To PayPal", redirectUrl);
             }
             displayResponse(context, "Preapproval", keyResponseParams, service.getLastRequest(), service.getLastResponse(),
                 resp.error, redirectUrl);
@@ -387,7 +400,10 @@ namespace AdaptivePaymentsSampleApp
                 keyResponseParams.Add("Ending date", resp.endingDate);
                 keyResponseParams.Add("Sender email", resp.senderEmail);
                 keyResponseParams.Add("Currency code", resp.currencyCode);
-                keyResponseParams.Add("Maximum amount (across all payments)", resp.maxTotalAmountOfAllPayments.ToString());                
+                keyResponseParams.Add("Maximum amount (across all payments)", resp.maxTotalAmountOfAllPayments.ToString());
+
+                //Selenium Test Case
+                keyResponseParams.Add("Acknowledgement", resp.responseEnvelope.ack.ToString());
             }
             displayResponse(context, "PreapprovalDetails", keyResponseParams, service.getLastRequest(), service.getLastResponse(),
                 resp.error, redirectUrl);
@@ -422,7 +438,8 @@ namespace AdaptivePaymentsSampleApp
             if (!(resp.responseEnvelope.ack == AckCode.FAILURE) &&
                 !(resp.responseEnvelope.ack == AckCode.FAILUREWITHWARNING))
             {
-                //nothing to add
+                //Selenium Test Case
+                keyResponseParams.Add("Acknowledgement", resp.responseEnvelope.ack.ToString());
             }
             displayResponse(context, "CancelPreapproval", keyResponseParams, service.getLastRequest(), service.getLastResponse(),
                 resp.error, redirectUrl);
@@ -553,6 +570,9 @@ namespace AdaptivePaymentsSampleApp
                     keyResponseParams.Add("Refund receiver " + idx, refund.receiver.email);
                     keyResponseParams.Add("Refund amount " + idx, refund.receiver.amount.ToString());
                     keyResponseParams.Add("Refund status " + idx, refund.refundStatus);
+
+                    //Selenium Test Case
+                    keyResponseParams.Add("Acknowledgement", resp.responseEnvelope.ack.ToString());
                 }
             }
             displayResponse(context, "Refund", keyResponseParams, service.getLastRequest(), service.getLastResponse(),
@@ -624,6 +644,9 @@ namespace AdaptivePaymentsSampleApp
                         idx++;
                     }
                 }
+
+                //Selenium Test Case
+                keyResponseParams.Add("Acknowledgement", resp.responseEnvelope.ack.ToString());
             }
             displayResponse(context, "ConvertCurrency", keyResponseParams, service.getLastRequest(), service.getLastResponse(),
                 resp.error, redirectUrl);
@@ -750,7 +773,7 @@ namespace AdaptivePaymentsSampleApp
                     {
                         keyResponseParams.Add("Address line", resp.selectedAddress.baseAddress.line1);
                         keyResponseParams.Add("City", resp.selectedAddress.baseAddress.city);
-                        keyResponseParams.Add("State", resp.selectedAddress.baseAddress.state);
+                        keyResponseParams.Add("State", resp.selectedAddress.baseAddress.state);                       
                     }
                 }
             }
@@ -797,6 +820,9 @@ namespace AdaptivePaymentsSampleApp
                         keyResponseParams.Add("Address line " + idx, addr.baseAddress.line1);
                         keyResponseParams.Add("City " + idx, addr.baseAddress.city);
                         keyResponseParams.Add("State " + idx, addr.baseAddress.state);
+
+                        //Selenium Test Case
+                        keyResponseParams.Add("Acknowledgement", resp.responseEnvelope.ack.ToString());
                     }
                 }
             }
@@ -916,9 +942,17 @@ namespace AdaptivePaymentsSampleApp
                 context.Response.Write(e.Message);
                 return;
             }
-
+                        
             // Display response values. 
-            Dictionary<string, string> keyResponseParams = new Dictionary<string, string>();            
+            Dictionary<string, string> keyResponseParams = new Dictionary<string, string>();
+
+            //Selenium Test Case
+            if (!(resp.responseEnvelope.ack == AckCode.FAILURE) &&
+                !(resp.responseEnvelope.ack == AckCode.FAILUREWITHWARNING))
+            {
+                keyResponseParams.Add("Acknowledgement", resp.responseEnvelope.ack.ToString());
+            }
+
             displayResponse(context, "SetPaymentOptions", keyResponseParams, service.getLastRequest(), service.getLastResponse(),
                 resp.error, null);
         }
@@ -967,6 +1001,9 @@ namespace AdaptivePaymentsSampleApp
                     keyResponseParams.Add("Email header image", resp.displayOptions.emailHeaderImageUrl);
                 }
                 keyResponseParams.Add("Shipping address Id", resp.shippingAddressId);
+
+                //Selenium Test Case
+                keyResponseParams.Add("Acknowledgement", resp.responseEnvelope.ack.ToString());
             }
             displayResponse(context, "GetPaymentOptions", keyResponseParams, service.getLastRequest(), service.getLastResponse(),
                 resp.error, redirectUrl);
@@ -1002,6 +1039,9 @@ namespace AdaptivePaymentsSampleApp
                 !(resp.responseEnvelope.ack == AckCode.FAILUREWITHWARNING))
             {
                 keyResponseParams.Add("Payment exeucution status", resp.paymentExecStatus);
+
+                //Selenium Test Case
+                keyResponseParams.Add("Acknowledgement", resp.responseEnvelope.ack.ToString());
             }
             displayResponse(context, "ExecutePayment", keyResponseParams, service.getLastRequest(), service.getLastResponse(),
                 resp.error, redirectUrl);
@@ -1103,11 +1143,41 @@ namespace AdaptivePaymentsSampleApp
             }
             context.Response.Write("<div class='section_header'>Key values from response</div>");
             context.Response.Write("<div class='note'>Consult response object and reference doc for complete list of response values.</div><table>");
+            
+            /*
             foreach (KeyValuePair<String, String> entry in responseValues) {
                 context.Response.Write("<tr><td class='label'>");
                 context.Response.Write(entry.Key);
                 context.Response.Write(": </td><td>");
                 context.Response.Write(entry.Value);
+                context.Response.Write("</td></tr>");
+            }
+            */
+
+            //Selenium Test Case            
+            foreach (KeyValuePair<String, String> entry in responseValues)
+            {
+
+                context.Response.Write("<tr><td class='label'>");
+                context.Response.Write(entry.Key);
+                context.Response.Write(": </td><td>");
+
+                if (entry.Key == "Redirect To PayPal")
+                {
+                    context.Response.Write("<a id='");
+                    context.Response.Write(entry.Key);
+                    context.Response.Write("' href=");
+                    context.Response.Write(entry.Value);
+                    context.Response.Write(">Redirect To PayPal</a>");
+                }
+                else
+                {
+                    context.Response.Write("<div id='");
+                    context.Response.Write(entry.Key);
+                    context.Response.Write("'>");
+                    context.Response.Write(entry.Value);
+                }
+
                 context.Response.Write("</td></tr>");
             }
 

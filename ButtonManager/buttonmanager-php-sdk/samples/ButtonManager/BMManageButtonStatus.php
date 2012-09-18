@@ -8,7 +8,6 @@ $logger = new PPLoggingManager('BMManageButtonStatus');
 
 $BMManageButtonStatusReqest = new BMManageButtonStatusRequestType();
 $BMManageButtonStatusReqest->HostedButtonID = $_REQUEST['hostedID'];
-$BMManageButtonStatusReqest->Version = 86.0;
 $BMManageButtonStatusReqest->ButtonStatus = $_REQUEST['buttonStatus'];
 
 $BMManageButtonStatusReq = new BMManageButtonStatusReq();
@@ -16,6 +15,11 @@ $BMManageButtonStatusReq->BMManageButtonStatusRequest = $BMManageButtonStatusReq
 
 $paypalService = new PayPalAPIInterfaceServiceService();
 $BMManageButtonStatusResponse = $paypalService->BMManageButtonStatus($BMManageButtonStatusReq);
+
+echo "<table>";
+echo "<tr><td>Ack :</td><td><div id='Ack'>$BMManageButtonStatusResponse->Ack</div> </td></tr>";
+echo "</table>";
+
 echo "<pre>";
 print_r($BMManageButtonStatusResponse);
 echo "</pre>";
