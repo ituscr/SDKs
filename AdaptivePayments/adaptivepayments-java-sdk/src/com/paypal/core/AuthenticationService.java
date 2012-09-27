@@ -28,8 +28,8 @@ public class AuthenticationService {
 	 * @param connection
 	 * @param accessToken
 	 * @param tokenSecret
-	 * @param config
-	 * @return
+	 * @param httpConfiguration
+	 * @return map of HTTP headers to be added to request
 	 * @throws SSLConfigurationException
 	 * @throws InvalidCredentialException
 	 * @throws MissingCredentialException
@@ -81,6 +81,7 @@ public class AuthenticationService {
 				httpConfiguration.getIpAddress());
 		headers.put("X-PAYPAL-REQUEST-SOURCE", Constants.SDK_NAME + "-"
 				+ Constants.SDK_VERSION);
+
 		if (httpConfiguration.getEndPointUrl().contains("sandbox")) {
 			headers.put("X-PAYPAL-SANDBOX-EMAIL-ADDRESS",
 					Constants.SANDBOX_EMAIL_ADDRESS);
