@@ -23,9 +23,8 @@ public class BaseService {
 	private String version;
 	protected String accessToken = null;
 	protected String tokenSecret = null;
-	protected String lastRequest=null;
-	protected String lastResponse=null;
-
+	protected String lastRequest = null;
+	protected String lastResponse = null;
 
 	public String getLastRequest() {
 		return lastRequest;
@@ -70,7 +69,7 @@ public class BaseService {
 
 	/**
 	 * overloaded static method used to load the configuration file.
-	 *
+	 * 
 	 * @param is
 	 */
 	public static void initConfig(InputStream is) throws IOException {
@@ -84,11 +83,10 @@ public class BaseService {
 
 	/**
 	 * overloaded static method used to load the configuration file
-	 *
+	 * 
 	 * @param file
 	 */
-	public static void initConfig(File file) throws FileNotFoundException,
-			IOException {
+	public static void initConfig(File file) throws IOException {
 		try {
 			if (!file.exists()) {
 				throw new FileNotFoundException("File doesn't exist: "
@@ -96,9 +94,6 @@ public class BaseService {
 			}
 			FileInputStream fis = new FileInputStream(file);
 			initConfig(fis);
-		} catch (FileNotFoundException fe) {
-			LoggingManager.debug(BaseService.class, fe.getMessage(), fe);
-			throw fe;
 		} catch (IOException ioe) {
 			LoggingManager.debug(BaseService.class, ioe.getMessage(), ioe);
 			throw ioe;
@@ -107,17 +102,13 @@ public class BaseService {
 
 	/**
 	 * overloaded static method used to load the configuration file
-	 *
+	 * 
 	 * @param filepath
 	 */
-	public static void initConfig(String filepath) throws IOException,
-			FileNotFoundException {
+	public static void initConfig(String filepath) throws IOException {
 		try {
 			File file = new File(filepath);
 			initConfig(file);
-		} catch (FileNotFoundException fe) {
-			LoggingManager.debug(BaseService.class, fe.getMessage(), fe);
-			throw fe;
 		} catch (IOException ioe) {
 			LoggingManager.debug(BaseService.class, ioe.getMessage(), ioe);
 			throw ioe;
@@ -126,7 +117,7 @@ public class BaseService {
 
 	/**
 	 * Wrapper call for APIservice.makeRequest(), used by InvoiceService class.
-	 *
+	 * 
 	 * @param method
 	 *            (API method)
 	 * @param payload
@@ -149,16 +140,15 @@ public class BaseService {
 			throws HttpErrorException, InterruptedException,
 			InvalidResponseDataException, ClientActionRequiredException,
 			MissingCredentialException, SSLConfigurationException,
-			InvalidCredentialException, FileNotFoundException, IOException,
-			OAuthException {
+			InvalidCredentialException, IOException, OAuthException {
 		if (!ConfigManager.getInstance().isPropertyLoaded()) {
 			throw new FileNotFoundException("Property file not loaded");
 		}
 		APIService apiService = new APIService(serviceName);
-		lastRequest=payload;
-		String response= apiService.makeRequest(method, payload, apiUsername,
+		lastRequest = payload;
+		String response = apiService.makeRequest(method, payload, apiUsername,
 				accessToken, tokenSecret);
-		lastResponse=response;
+		lastResponse = response;
 		return response;
 	}
 

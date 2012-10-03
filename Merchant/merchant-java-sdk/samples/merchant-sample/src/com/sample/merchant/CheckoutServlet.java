@@ -38,6 +38,7 @@ import urn.ebay.api.PayPalAPI.SetExpressCheckoutReq;
 import urn.ebay.api.PayPalAPI.SetExpressCheckoutRequestType;
 import urn.ebay.api.PayPalAPI.SetExpressCheckoutResponseType;
 import urn.ebay.apis.CoreComponentTypes.BasicAmountType;
+import urn.ebay.apis.eBLBaseComponents.AddressType;
 import urn.ebay.apis.eBLBaseComponents.ApprovalSubTypeType;
 import urn.ebay.apis.eBLBaseComponents.ApprovalTypeType;
 import urn.ebay.apis.eBLBaseComponents.AuthorizationRequestType;
@@ -45,6 +46,7 @@ import urn.ebay.apis.eBLBaseComponents.BillingAgreementDetailsType;
 import urn.ebay.apis.eBLBaseComponents.BillingApprovalDetailsType;
 import urn.ebay.apis.eBLBaseComponents.BillingCodeType;
 import urn.ebay.apis.eBLBaseComponents.BuyerDetailType;
+import urn.ebay.apis.eBLBaseComponents.CountryCodeType;
 import urn.ebay.apis.eBLBaseComponents.CurrencyCodeType;
 import urn.ebay.apis.eBLBaseComponents.DoExpressCheckoutPaymentRequestDetailsType;
 import urn.ebay.apis.eBLBaseComponents.ExecuteCheckoutOperationsRequestDetailsType;
@@ -184,18 +186,18 @@ public class CheckoutServlet extends HttpServlet {
 				item.setAmount(amt);
 				item.setItemCategory(ItemCategoryType.fromValue(request
 						.getParameter("itemCategory")));
+				item.setDescription(request.getParameter("itemDescription"));
 				lineItems.add(item);
 
 				if (request.getParameter("salesTax") != "") {
 					item.setTax(new BasicAmountType(CurrencyCodeType
 							.fromValue(request.getParameter("currencyCode")),
-							request.getParameter("salesTax")));
-					orderTotal += Double.parseDouble(request
-							.getParameter("salesTax"));
+							request.getParameter("salesTax")));					
 				}
-				itemTotal += Double.parseDouble(qtyItems)
-						* Double.parseDouble(amountItems);
-
+				
+				itemTotal += Double.parseDouble(qtyItems) * Double.parseDouble(amountItems);
+				orderTotal += itemTotal;
+				
 				List<PaymentDetailsType> payDetails = new ArrayList<PaymentDetailsType>();
 				PaymentDetailsType paydtl = new PaymentDetailsType();
 				paydtl.setPaymentAction(PaymentActionCodeType.fromValue(request
@@ -239,7 +241,7 @@ public class CheckoutServlet extends HttpServlet {
 							.getParameter("orderDescription"));
 				}
 
-				orderTotal += itemTotal;
+				
 				BasicAmountType itemsTotal = new BasicAmountType();
 				itemsTotal.setValue(Double.toString(itemTotal));
 				itemsTotal.setCurrencyID(CurrencyCodeType.fromValue(request
@@ -262,9 +264,32 @@ public class CheckoutServlet extends HttpServlet {
 					billList.add(billingAgreement);
 					details.setBillingAgreementDetails(billList);
 				}
-				// populate shipping address details}
+				
+				//shipping address
+				details.setReqConfirmShipping(request.getParameter("reqConfirmShipping"));
+				details.setAddressOverride(request.getParameter("addressoverride"));
+				AddressType shipToAddress=new AddressType();
+				shipToAddress.setName(request.getParameter("name"));
+				shipToAddress.setStreet1(request.getParameter("street1"));
+				shipToAddress.setStreet2(request.getParameter("street2"));
+				shipToAddress.setCityName(request.getParameter("city"));
+				shipToAddress.setStateOrProvince(request.getParameter("state"));
+				shipToAddress.setPostalCode(request.getParameter("postalCode"));
+				shipToAddress.setCountry(CountryCodeType.fromValue(request.getParameter("countryCode")));
+				details.setAddress(shipToAddress);
+				
+				// shipping display options
 				details.setNoShipping(request.getParameter("noShipping"));
-
+				
+				// PayPal page styling attributes
+				details.setBrandName(request.getParameter("brandName"));
+				details.setCustom(request.getParameter("pageStyle"));
+				details.setCppHeaderImage(request.getParameter("cppheaderimage"));
+				details.setCppHeaderBorderColor(request.getParameter("cppheaderbordercolor"));
+				details.setCppHeaderBackColor(request.getParameter("cppheaderbackcolor"));
+				details.setCppPayflowColor(request.getParameter("cpppayflowcolor"));
+				details.setAllowNote(request.getParameter("allowNote"));
+				
 				setExpressCheckoutReq
 						.setSetExpressCheckoutRequestDetails(details);
 
