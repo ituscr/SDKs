@@ -1,11 +1,9 @@
 <?php
-require_once 'PHPUnit/Framework.php';
-
 require_once 'exceptions/PPConnectionException.php';
 
 /**
  * Test class for PPConnectionException.
- * 
+ *
  */
 class PPConnectionExceptionTest extends PHPUnit_Framework_TestCase
 {
@@ -45,7 +43,7 @@ class PPConnectionExceptionTest extends PHPUnit_Framework_TestCase
     {
     	$this->setExpectedException('PPConnectionException');
     	throw new PPConnectionException('http://testURL','Test msg PPConnectionException');
-    	
+
     }
 }
 ?>

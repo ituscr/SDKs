@@ -7,8 +7,9 @@ Prerequisites
 
 PayPal's PHP Adaptive Accounts SDK requires 
 
- * PHP 5.2 and above with curl extension enabled
-  
+ * PHP 5.2 and above 
+ * curl extension with support for OpenSSL 
+ * PHPUnit 3.5 for running test suite (Optional)
 
 Using the SDK
 -------------

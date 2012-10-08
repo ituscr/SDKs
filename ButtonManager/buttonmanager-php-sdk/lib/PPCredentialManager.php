@@ -54,8 +54,7 @@ class PPCredentialManager
 		if(count($arrayPartKeys) == 0)
 			throw new MissingCredentialException("No valid API accounts have been configured");
 			
-		while (in_array($prefix.$suffix, $arrayPartKeys)){
-							
+		while (in_array($prefix.$suffix, $arrayPartKeys)){			
 			if(isset($credArr[$prefix.$suffix.".Signature"]) 
 					&& $credArr[$prefix.$suffix.".Signature"] != null && $credArr[$prefix.$suffix.".Signature"] != ""){
 					
@@ -71,11 +70,11 @@ class PPCredentialManager
 						
 				$userName = isset($credArr[$prefix.$suffix.'.UserName']) ? $credArr[$prefix.$suffix.'.UserName'] : "";
 				$password = isset($credArr[$prefix.$suffix.'.Password']) ? $credArr[$prefix.$suffix.'.Password'] : "";
-				$passPhrase = isset($credArr[$prefix.$suffix.'.CertKey']) ? $credArr[$prefix.$suffix.'.CertKey'] : "";	
+				$certPassPhrase = isset($credArr[$prefix.$suffix.'.CertKey']) ? $credArr[$prefix.$suffix.'.CertKey'] : "";	
 				$certPath = isset($credArr[$prefix.$suffix.'.CertPath']) ? $credArr[$prefix.$suffix.'.CertPath'] : "";				
 				$appId = isset($credArr[$prefix.$suffix.'.AppId']) ? $credArr[$prefix.$suffix.'.AppId'] : "";
 				$subject = isset($credArr[$prefix.$suffix.'.Subject']) ? $credArr[$prefix.$suffix.'.Subject'] : "";
-				$this->credentialHashmap[$userName] = new PPCertificateCredential($userName, $password, $certPath, $appId, $passPhrase,$subject);
+				$this->credentialHashmap[$userName] = new PPCertificateCredential($userName, $password, $certPath, $certPassPhrase, $appId, $subject);
 				
 			}
 			if ($this->defaultAccountName == null)

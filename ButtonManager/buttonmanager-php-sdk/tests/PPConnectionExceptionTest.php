@@ -1,5 +1,4 @@
 <?php
-
 require_once 'exceptions/PPConnectionException.php';
 
 /**

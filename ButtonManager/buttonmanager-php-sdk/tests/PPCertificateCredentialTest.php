@@ -18,7 +18,7 @@ class PPCertificateCredentialTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$this->object = new PPCertificateCredential("platfo_1255077030_biz_api1.gmail.com", "1255077037", "config/sandbox-cert.pem", "APP-80W284485P519543T");
+		$this->object = new PPCertificateCredential("platfo_1255077030_biz_api1.gmail.com", "1255077037", "sdk-cert.pem", "password", "APP-80W284485P519543T", "");
 	}
 
 	/**
@@ -34,10 +34,10 @@ class PPCertificateCredentialTest extends PHPUnit_Framework_TestCase
 	public function testValidateUname()
 	{
 		$this->setExpectedException('PPMissingCredentialException');
-		$credUname = new PPCertificateCredential("", "1255077037", "config/sandbox-cert.pem", "APP-80W284485P519543T");
+		$credUname = new PPCertificateCredential("", "1255077037", "sdk-cert.pem", "password",  "APP-80W284485P519543T", "");
 		$credUname->validate();
 		$setNotExpectedException('PPMissingCredentialException');
-		$credCorrect = new PPCertificateCredential("platfo_1255077030_biz_api1.gmail.com", "1255077037", "config/sandbox-cert.pem", "APP-80W284485P519543T");
+		$credCorrect = new PPCertificateCredential("platfo_1255077030_biz_api1.gmail.com", "1255077037", "sdk-cert.pem", "password",  "APP-80W284485P519543T", "");
 		$var = $credCorrect->validate();
 		$this->assertNull($var);
 	}
@@ -47,7 +47,7 @@ class PPCertificateCredentialTest extends PHPUnit_Framework_TestCase
 	public function testValidatePwd()
 	{
 		$this->setExpectedException('PPMissingCredentialException');
-		$credpwd = new PPCertificateCredential("platfo_1255077030_biz_api1.gmail.com", "", "config/sandbox-cert.pem", "APP-80W284485P519543T");
+		$credpwd = new PPCertificateCredential("platfo_1255077030_biz_api1.gmail.com", "", "sdk-cert.pem", "password",  "APP-80W284485P519543T", "");
 		$credpwd->validate();
 
 	}
@@ -57,17 +57,26 @@ class PPCertificateCredentialTest extends PHPUnit_Framework_TestCase
 	public function testValidateCertPath()
 	{
 		$this->setExpectedException('PPMissingCredentialException');
-		$credCertPath = new PPCertificateCredential("platfo_1255077030_biz_api1.gmail.com", "1255077037", "", "APP-80W284485P519543T");
+		$credCertPath = new PPCertificateCredential("platfo_1255077030_biz_api1.gmail.com", "1255077037", "", "password", "APP-80W284485P519543T", "");
 		$credCertPath->validate();
 	}
+	/**
+	 * @test
+	 */
+	public function testValidateCertPassphrase()
+	{
+		$this->setExpectedException('PPMissingCredentialException');
+		$credCertPath = new PPCertificateCredential("platfo_1255077030_biz_api1.gmail.com", "1255077037", "cert_key", "", "APP-80W284485P519543T", "");
+		$credCertPath->validate();
+	}	
 	/**
 	 * @test
 	 */
 	public function testValidateAppId()
 	{
 		$this->setExpectedException('PPMissingCredentialException');
-	 $credAppid = new PPCertificateCredential("platfo_1255077030_biz_api1.gmail.com", "1255077037", "config/sandbox-cert.pem", "");
-	 $credAppid->validate();
+		$credAppid = new PPCertificateCredential("platfo_1255077030_biz_api1.gmail.com", "1255077037", "sdk-cert.pem", "password",  "", "");
+		$credAppid->validate();
 	}
 
 	/**
@@ -92,7 +101,7 @@ class PPCertificateCredentialTest extends PHPUnit_Framework_TestCase
 	 */
 	public function testGetCertificatePath()
 	{
-		$this->assertEquals('config/sandbox-cert.pem', $this->object->getCertificatePath());
+		$this->assertStringEndsWith('sdk-cert.pem', $this->object->getCertificatePath());
 	}
 
 	/**@test

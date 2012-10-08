@@ -16,7 +16,7 @@ class PPSignatureCredential extends IPPCredential {
 	private $signature;
     private $subject;
     
-	public function __construct($userName, $password, $signature, $appId, $subject){
+	public function __construct($userName, $password, $signature, $appId, $subject=""){
 		parent::__construct($userName, $password, $appId);		
 		$this->signature = $signature;
 		$this->subject = $subject;

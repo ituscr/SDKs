@@ -1,5 +1,4 @@
 <?php
-require_once 'PHPUnit/Framework.php';
 require_once 'PPConfigManager.php';
 require_once 'PPObjectTransformer.php';
 require_once 'exceptions/PPTransformerException.php';

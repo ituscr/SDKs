@@ -35,9 +35,9 @@ class PPSignatureCredentialTest extends PHPUnit_Framework_TestCase
      */
     public function testValidateSignature()
     {
-       $this->setExpectedException('PPMissingCredentialException');
-	 $credSignature = new PPSignatureCredential("platfo_1255077030_biz_api1.gmail.com", "1255077037","", "APP-80W284485P519543T");
-	  $credSignature->validate();
+		$this->setExpectedException('PPMissingCredentialException');
+		$credSignature = new PPSignatureCredential("platfo_1255077030_biz_api1.gmail.com", "1255077037", "", "APP-80W284485P519543T");
+		$credSignature->validate();
     }
 /**
      * @test

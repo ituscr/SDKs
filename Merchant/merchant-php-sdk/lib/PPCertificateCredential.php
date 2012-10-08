@@ -6,10 +6,21 @@ require_once 'exceptions/PPMissingCredentialException.php';
 class PPCertificateCredential extends IPPCredential{
 	
 	private $certificatePath;
+
 	private $passPhrase;
+
 	private $subject;
 	
-	public function __construct($userName, $password, $certPath, $appId, $passPhrase, $subject) {
+	/**
+	 * Constructs a new certificate credential object
+	 * 
+	 * @param string $userName	API username
+	 * @param string $password	API password
+	 * @param string $certPath	Path to PEM encoded client certificate file
+	 * @param string $passPhrase	password need to use the certificate
+	 * @param string $appId		Application Id from PayPal
+	 */
+	public function __construct($userName, $password, $certPath, $passPhrase, $appId, $subject="") {
 		parent::__construct($userName, $password, $appId);
 		$this->certificatePath = $certPath;
 		$this->passPhrase = $passPhrase;

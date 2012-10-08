@@ -1,6 +1,4 @@
 <?php
-require_once 'PHPUnit/Framework.php';
-
 require_once 'PPCredentialManager.php';
 
 /**
@@ -48,17 +46,20 @@ class PPCredentialManagerTest extends PHPUnit_Framework_TestCase
 	{
 		$IPPCredential = $this->object->getCredentialObject('jb-us-seller_api1.paypal.com');
 		$this->assertNotNull($IPPCredential);
+		
 		$IPPCredential = $this->object->getCredentialObject('suarumugam-biz_api1.paypal.com');
 		$this->assertNotNull($IPPCredential);
 		$this->assertEquals('suarumugam-biz_api1.paypal.com', $IPPCredential->getUsername());
-		$this->assertEquals('config/cert_key.pem', $IPPCredential->getCertificatePath());
+		$this->assertStringEndsWith('cert_key.pem', $IPPCredential->getCertificatePath());
+		
 		$IPPCredential = $this->object->getCredentialObject('suarumugam-biz_api1.paypal.com');
 		$this->assertNotNull($IPPCredential->getUserName());
+		
 		$IPPCredential = $this->object->getCredentialObject();
 		$this->assertEquals('jb-us-seller_api1.paypal.com', $IPPCredential->getUsername());
+		
 		$this->setExpectedException('PPInvalidCredentialException');
 		$IPPCredential = $this->object->getCredentialObject('invalid_biz_api1.gmail.com');
-
 
 	}
 
