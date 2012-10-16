@@ -47,6 +47,8 @@ namespace PayPal.Permissions.Model
       *
       */
 	public partial class ErrorData	{
+		private const string NameSpace="com.paypal.svcs.types.common";
+		private const string PreferredPrefix="";
 
 		/**
           *
@@ -279,6 +281,8 @@ namespace PayPal.Permissions.Model
       *
       */
 	public partial class ErrorParameter	{
+		private const string NameSpace="com.paypal.svcs.types.common";
+		private const string PreferredPrefix="";
 
 		/**
           *
@@ -364,6 +368,8 @@ namespace PayPal.Permissions.Model
       *This is the sample message 
       */
 	public partial class ResponseEnvelope	{
+		private const string NameSpace="com.paypal.svcs.types.common";
+		private const string PreferredPrefix="";
 
 		/**
           *
@@ -496,6 +502,8 @@ namespace PayPal.Permissions.Model
       *the service. 
       */
 	public partial class RequestEnvelope	{
+		private const string NameSpace="com.paypal.svcs.types.common";
+		private const string PreferredPrefix="";
 
 		/**
           *
@@ -546,6 +554,8 @@ namespace PayPal.Permissions.Model
       *
       */
 	public partial class FaultMessage	{
+		private const string NameSpace="com.paypal.svcs.types.common";
+		private const string PreferredPrefix="";
 
 		/**
           *
@@ -714,6 +724,8 @@ namespace PayPal.Permissions.Model
       *needed. 
       */
 	public partial class RequestPermissionsRequest	{
+		private const string NameSpace="com.paypal.svcs.types.perm";
+		private const string PreferredPrefix="";
 
 		/**
           *
@@ -811,6 +823,8 @@ namespace PayPal.Permissions.Model
       *Returns the temporary request token 
       */
 	public partial class RequestPermissionsResponse	{
+		private const string NameSpace="com.paypal.svcs.types.perm";
+		private const string PreferredPrefix="";
 
 		/**
           *
@@ -930,6 +944,8 @@ namespace PayPal.Permissions.Model
       *
       */
 	public partial class GetAccessTokenRequest	{
+		private const string NameSpace="com.paypal.svcs.types.perm";
+		private const string PreferredPrefix="";
 
 		/**
           *
@@ -1039,6 +1055,8 @@ namespace PayPal.Permissions.Model
       *account. 
       */
 	public partial class GetAccessTokenResponse	{
+		private const string NameSpace="com.paypal.svcs.types.perm";
+		private const string PreferredPrefix="";
 
 		/**
           *
@@ -1212,6 +1230,8 @@ namespace PayPal.Permissions.Model
       *associated with a token. 
       */
 	public partial class GetPermissionsRequest	{
+		private const string NameSpace="com.paypal.svcs.types.perm";
+		private const string PreferredPrefix="";
 
 		/**
           *
@@ -1284,6 +1304,8 @@ namespace PayPal.Permissions.Model
       *The list of permissions associated with the token. 
       */
 	public partial class GetPermissionsResponse	{
+		private const string NameSpace="com.paypal.svcs.types.perm";
+		private const string PreferredPrefix="";
 
 		/**
           *
@@ -1411,6 +1433,8 @@ namespace PayPal.Permissions.Model
       *permissions associated with it. 
       */
 	public partial class CancelPermissionsRequest	{
+		private const string NameSpace="com.paypal.svcs.types.perm";
+		private const string PreferredPrefix="";
 
 		/**
           *
@@ -1483,6 +1507,8 @@ namespace PayPal.Permissions.Model
       *
       */
 	public partial class CancelPermissionsResponse	{
+		private const string NameSpace="com.paypal.svcs.types.perm";
+		private const string PreferredPrefix="";
 
 		/**
           *
@@ -1577,6 +1603,8 @@ namespace PayPal.Permissions.Model
       *List of Personal Attributes to be sent as a request. 
       */
 	public partial class PersonalAttributeList	{
+		private const string NameSpace="com.paypal.svcs.types.perm";
+		private const string PreferredPrefix="";
 
 		/**
           *
@@ -1626,6 +1654,8 @@ namespace PayPal.Permissions.Model
       *requested and value being the data. 
       */
 	public partial class PersonalData	{
+		private const string NameSpace="com.paypal.svcs.types.perm";
+		private const string PreferredPrefix="";
 
 		/**
           *
@@ -1712,6 +1742,8 @@ namespace PayPal.Permissions.Model
       *GetPersonalData call. 
       */
 	public partial class PersonalDataList	{
+		private const string NameSpace="com.paypal.svcs.types.perm";
+		private const string PreferredPrefix="";
 
 		/**
           *
@@ -1786,6 +1818,8 @@ namespace PayPal.Permissions.Model
       *attributes and ignore others. 
       */
 	public partial class GetBasicPersonalDataRequest	{
+		private const string NameSpace="com.paypal.svcs.types.perm";
+		private const string PreferredPrefix="";
 
 		/**
           *
@@ -1862,6 +1896,8 @@ namespace PayPal.Permissions.Model
       *Advanced attributes. 
       */
 	public partial class GetAdvancedPersonalDataRequest	{
+		private const string NameSpace="com.paypal.svcs.types.perm";
+		private const string PreferredPrefix="";
 
 		/**
           *
@@ -1935,6 +1971,8 @@ namespace PayPal.Permissions.Model
       *
       */
 	public partial class GetBasicPersonalDataResponse	{
+		private const string NameSpace="com.paypal.svcs.types.perm";
+		private const string PreferredPrefix="";
 
 		/**
           *
@@ -2052,6 +2090,8 @@ namespace PayPal.Permissions.Model
       *
       */
 	public partial class GetAdvancedPersonalDataResponse	{
+		private const string NameSpace="com.paypal.svcs.types.perm";
+		private const string PreferredPrefix="";
 
 		/**
           *

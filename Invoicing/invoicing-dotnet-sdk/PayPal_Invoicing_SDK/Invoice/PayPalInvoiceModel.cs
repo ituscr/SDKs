@@ -47,6 +47,8 @@ namespace PayPal.Invoice.Model
       *
       */
 	public partial class BaseAddress	{
+		private const string NameSpace="com.paypal.svcs.types.common";
+		private const string PreferredPrefix="";
 
 		/**
           *
@@ -290,6 +292,8 @@ namespace PayPal.Invoice.Model
       *from the service operation. 
       */
 	public partial class ErrorData	{
+		private const string NameSpace="com.paypal.svcs.types.common";
+		private const string PreferredPrefix="";
 
 		/**
           *
@@ -522,6 +526,8 @@ namespace PayPal.Invoice.Model
       *
       */
 	public partial class ErrorParameter	{
+		private const string NameSpace="com.paypal.svcs.types.common";
+		private const string PreferredPrefix="";
 
 		/**
           *
@@ -608,6 +614,8 @@ namespace PayPal.Invoice.Model
       *specific error codes. 
       */
 	public partial class FaultMessage	{
+		private const string NameSpace="com.paypal.svcs.types.common";
+		private const string PreferredPrefix="";
 
 		/**
           *
@@ -703,6 +711,8 @@ namespace PayPal.Invoice.Model
       *the service. 
       */
 	public partial class RequestEnvelope	{
+		private const string NameSpace="com.paypal.svcs.types.common";
+		private const string PreferredPrefix="";
 
 		/**
           *
@@ -776,6 +786,8 @@ namespace PayPal.Invoice.Model
       *a service. 
       */
 	public partial class ResponseEnvelope	{
+		private const string NameSpace="com.paypal.svcs.types.common";
+		private const string PreferredPrefix="";
 
 		/**
           *
@@ -1048,6 +1060,8 @@ namespace PayPal.Invoice.Model
       *invoicing system. 
       */
 	public partial class BusinessInfoType	{
+		private const string NameSpace="com.paypal.svcs.types.pt";
+		private const string PreferredPrefix="";
 
 		/**
           *
@@ -1310,6 +1324,8 @@ namespace PayPal.Invoice.Model
       *invoice. 
       */
 	public partial class InvoiceItemType	{
+		private const string NameSpace="com.paypal.svcs.types.pt";
+		private const string PreferredPrefix="";
 
 		/**
           *
@@ -1552,6 +1568,8 @@ namespace PayPal.Invoice.Model
       *A list of invoice items. 
       */
 	public partial class InvoiceItemListType	{
+		private const string NameSpace="com.paypal.svcs.types.pt";
+		private const string PreferredPrefix="";
 
 		/**
           *
@@ -1644,6 +1662,8 @@ namespace PayPal.Invoice.Model
       *
       */
 	public partial class InvoiceType	{
+		private const string NameSpace="com.paypal.svcs.types.pt";
+		private const string PreferredPrefix="";
 
 		/**
           *
@@ -2326,6 +2346,8 @@ namespace PayPal.Invoice.Model
       *dates. 
       */
 	public partial class InvoiceDetailsType	{
+		private const string NameSpace="com.paypal.svcs.types.pt";
+		private const string PreferredPrefix="";
 
 		/**
           *
@@ -2687,6 +2709,8 @@ namespace PayPal.Invoice.Model
       *Details of the refund made against this invoice. 
       */
 	public partial class OtherPaymentRefundDetailsType	{
+		private const string NameSpace="com.paypal.svcs.types.pt";
+		private const string PreferredPrefix="";
 
 		/**
           *
@@ -2785,6 +2809,8 @@ namespace PayPal.Invoice.Model
       *Details of the paypal refund made against this invoice. 
       */
 	public partial class PayPalPaymentRefundDetailsType	{
+		private const string NameSpace="com.paypal.svcs.types.pt";
+		private const string PreferredPrefix="";
 
 		/**
           *
@@ -2847,6 +2873,8 @@ namespace PayPal.Invoice.Model
       *PayPal payment details about the invoice. 
       */
 	public partial class PayPalPaymentDetailsType	{
+		private const string NameSpace="com.paypal.svcs.types.pt";
+		private const string PreferredPrefix="";
 
 		/**
           *
@@ -2932,6 +2960,8 @@ namespace PayPal.Invoice.Model
       *Offline payment details about the invoice. 
       */
 	public partial class OtherPaymentDetailsType	{
+		private const string NameSpace="com.paypal.svcs.types.pt";
+		private const string PreferredPrefix="";
 
 		/**
           *
@@ -3058,6 +3088,8 @@ namespace PayPal.Invoice.Model
       *Payment details about the invoice. 
       */
 	public partial class PaymentDetailsType	{
+		private const string NameSpace="com.paypal.svcs.types.pt";
+		private const string PreferredPrefix="";
 
 		/**
           *
@@ -3166,6 +3198,8 @@ namespace PayPal.Invoice.Model
       *Determines an inclusive date range. 
       */
 	public partial class DateRangeType	{
+		private const string NameSpace="com.paypal.svcs.types.pt";
+		private const string PreferredPrefix="";
 
 		/**
           *
@@ -3230,6 +3264,8 @@ namespace PayPal.Invoice.Model
       *Search parameters criteria. 
       */
 	public partial class SearchParametersType	{
+		private const string NameSpace="com.paypal.svcs.types.pt";
+		private const string PreferredPrefix="";
 
 		/**
           *
@@ -3555,6 +3591,8 @@ namespace PayPal.Invoice.Model
       *Summary of invoice information. 
       */
 	public partial class InvoiceSummaryType	{
+		private const string NameSpace="com.paypal.svcs.types.pt";
+		private const string PreferredPrefix="";
 
 		/**
           *
@@ -3985,6 +4023,8 @@ namespace PayPal.Invoice.Model
       *A list of invoice summaries. 
       */
 	public partial class InvoiceSummaryListType	{
+		private const string NameSpace="com.paypal.svcs.types.pt";
+		private const string PreferredPrefix="";
 
 		/**
           *
@@ -4056,6 +4096,8 @@ namespace PayPal.Invoice.Model
       *The request object for CreateInvoice. 
       */
 	public partial class CreateInvoiceRequest	{
+		private const string NameSpace="com.paypal.svcs.types.pt";
+		private const string PreferredPrefix="";
 
 		/**
           *
@@ -4130,6 +4172,8 @@ namespace PayPal.Invoice.Model
       *The response object for CreateInvoice. 
       */
 	public partial class CreateInvoiceResponse	{
+		private const string NameSpace="com.paypal.svcs.types.pt";
+		private const string PreferredPrefix="";
 
 		/**
           *
@@ -4316,6 +4360,8 @@ namespace PayPal.Invoice.Model
       *The request object for SendInvoice. 
       */
 	public partial class SendInvoiceRequest	{
+		private const string NameSpace="com.paypal.svcs.types.pt";
+		private const string PreferredPrefix="";
 
 		/**
           *
@@ -4389,6 +4435,8 @@ namespace PayPal.Invoice.Model
       *The response object for SendInvoice. 
       */
 	public partial class SendInvoiceResponse	{
+		private const string NameSpace="com.paypal.svcs.types.pt";
+		private const string PreferredPrefix="";
 
 		/**
           *
@@ -4529,6 +4577,8 @@ namespace PayPal.Invoice.Model
       *The request object for CreateAndSendInvoice. 
       */
 	public partial class CreateAndSendInvoiceRequest	{
+		private const string NameSpace="com.paypal.svcs.types.pt";
+		private const string PreferredPrefix="";
 
 		/**
           *
@@ -4603,6 +4653,8 @@ namespace PayPal.Invoice.Model
       *The response object for CreateAndSendInvoice. 
       */
 	public partial class CreateAndSendInvoiceResponse	{
+		private const string NameSpace="com.paypal.svcs.types.pt";
+		private const string PreferredPrefix="";
 
 		/**
           *
@@ -4789,6 +4841,8 @@ namespace PayPal.Invoice.Model
       *The request object for UpdateInvoice. 
       */
 	public partial class UpdateInvoiceRequest	{
+		private const string NameSpace="com.paypal.svcs.types.pt";
+		private const string PreferredPrefix="";
 
 		/**
           *
@@ -4885,6 +4939,8 @@ namespace PayPal.Invoice.Model
       *The response object for UpdateInvoice. 
       */
 	public partial class UpdateInvoiceResponse	{
+		private const string NameSpace="com.paypal.svcs.types.pt";
+		private const string PreferredPrefix="";
 
 		/**
           *
@@ -5071,6 +5127,8 @@ namespace PayPal.Invoice.Model
       *The request object for GetInvoiceDetails. 
       */
 	public partial class GetInvoiceDetailsRequest	{
+		private const string NameSpace="com.paypal.svcs.types.pt";
+		private const string PreferredPrefix="";
 
 		/**
           *
@@ -5144,6 +5202,8 @@ namespace PayPal.Invoice.Model
       *The response object for CreateInvoice. 
       */
 	public partial class GetInvoiceDetailsResponse	{
+		private const string NameSpace="com.paypal.svcs.types.pt";
+		private const string PreferredPrefix="";
 
 		/**
           *
@@ -5353,6 +5413,8 @@ namespace PayPal.Invoice.Model
       *The request object for CancelInvoice. 
       */
 	public partial class CancelInvoiceRequest	{
+		private const string NameSpace="com.paypal.svcs.types.pt";
+		private const string PreferredPrefix="";
 
 		/**
           *
@@ -5488,6 +5550,8 @@ namespace PayPal.Invoice.Model
       *The response object for CancelInvoice. 
       */
 	public partial class CancelInvoiceResponse	{
+		private const string NameSpace="com.paypal.svcs.types.pt";
+		private const string PreferredPrefix="";
 
 		/**
           *
@@ -5651,6 +5715,8 @@ namespace PayPal.Invoice.Model
       *The request object for SearchInvoices. 
       */
 	public partial class SearchInvoicesRequest	{
+		private const string NameSpace="com.paypal.svcs.types.pt";
+		private const string PreferredPrefix="";
 
 		/**
           *
@@ -5791,6 +5857,8 @@ namespace PayPal.Invoice.Model
       *The response object for SearchInvoices. 
       */
 	public partial class SearchInvoicesResponse	{
+		private const string NameSpace="com.paypal.svcs.types.pt";
+		private const string PreferredPrefix="";
 
 		/**
           *
@@ -6000,6 +6068,8 @@ namespace PayPal.Invoice.Model
       *The request object for MarkInvoiceAsPaid. 
       */
 	public partial class MarkInvoiceAsPaidRequest	{
+		private const string NameSpace="com.paypal.svcs.types.pt";
+		private const string PreferredPrefix="";
 
 		/**
           *
@@ -6096,6 +6166,8 @@ namespace PayPal.Invoice.Model
       *The response object for MarkInvoiceAsPaid. 
       */
 	public partial class MarkInvoiceAsPaidResponse	{
+		private const string NameSpace="com.paypal.svcs.types.pt";
+		private const string PreferredPrefix="";
 
 		/**
           *
@@ -6259,6 +6331,8 @@ namespace PayPal.Invoice.Model
       *The request object for MarkInvoiceAsRefunded. 
       */
 	public partial class MarkInvoiceAsRefundedRequest	{
+		private const string NameSpace="com.paypal.svcs.types.pt";
+		private const string PreferredPrefix="";
 
 		/**
           *
@@ -6355,6 +6429,8 @@ namespace PayPal.Invoice.Model
       *The response object for MarkInvoiceAsRefunded. 
       */
 	public partial class MarkInvoiceAsRefundedResponse	{
+		private const string NameSpace="com.paypal.svcs.types.pt";
+		private const string PreferredPrefix="";
 
 		/**
           *
@@ -6518,6 +6594,8 @@ namespace PayPal.Invoice.Model
       *The request object for MarkInvoiceAsUnpaid. 
       */
 	public partial class MarkInvoiceAsUnpaidRequest	{
+		private const string NameSpace="com.paypal.svcs.types.pt";
+		private const string PreferredPrefix="";
 
 		/**
           *
@@ -6591,6 +6669,8 @@ namespace PayPal.Invoice.Model
       *The response object for MarkInvoiceAsUnpaid. 
       */
 	public partial class MarkInvoiceAsUnpaidResponse	{
+		private const string NameSpace="com.paypal.svcs.types.pt";
+		private const string PreferredPrefix="";
 
 		/**
           *
@@ -6754,6 +6834,8 @@ namespace PayPal.Invoice.Model
       *Payment refund details about the invoice.  
       */
 	public partial class PaymentRefundDetailsType	{
+		private const string NameSpace="com.paypal.svcs.types.pt";
+		private const string PreferredPrefix="";
 
 		/**
           *

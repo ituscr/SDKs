@@ -48,6 +48,8 @@ namespace PayPal.AdaptiveAccounts.Model
       *from the service operation. 
       */
 	public partial class ErrorData	{
+		private const string NameSpace="com.paypal.svcs.types.common";
+		private const string PreferredPrefix="";
 
 		/**
           *
@@ -280,6 +282,8 @@ namespace PayPal.AdaptiveAccounts.Model
       *
       */
 	public partial class ErrorParameter	{
+		private const string NameSpace="com.paypal.svcs.types.common";
+		private const string PreferredPrefix="";
 
 		/**
           *
@@ -366,6 +370,8 @@ namespace PayPal.AdaptiveAccounts.Model
       *the service. 
       */
 	public partial class RequestEnvelope	{
+		private const string NameSpace="com.paypal.svcs.types.common";
+		private const string PreferredPrefix="";
 
 		/**
           *
@@ -432,6 +438,8 @@ namespace PayPal.AdaptiveAccounts.Model
       *a service. 
       */
 	public partial class ResponseEnvelope	{
+		private const string NameSpace="com.paypal.svcs.types.common";
+		private const string PreferredPrefix="";
 
 		/**
           *
@@ -564,6 +572,8 @@ namespace PayPal.AdaptiveAccounts.Model
       *application invoking this service. 
       */
 	public partial class ClientDetailsType	{
+		private const string NameSpace="com.paypal.svcs.types.common";
+		private const string PreferredPrefix="";
 
 		/**
           *
@@ -755,6 +765,8 @@ namespace PayPal.AdaptiveAccounts.Model
       *specific error codes. 
       */
 	public partial class FaultMessage	{
+		private const string NameSpace="com.paypal.svcs.types.common";
+		private const string PreferredPrefix="";
 
 		/**
           *
@@ -1077,6 +1089,8 @@ namespace PayPal.AdaptiveAccounts.Model
       *these inputs: emailAddress, accountId or phoneNumber. 
       */
 	public partial class AccountIdentifierType	{
+		private const string NameSpace="com.paypal.svcs.types.aa";
+		private const string PreferredPrefix="";
 
 		/**
           *
@@ -1173,6 +1187,8 @@ namespace PayPal.AdaptiveAccounts.Model
       *meaning the strings are not case-sensitive 
       */
 	public partial class CreateAccountRequest	{
+		private const string NameSpace="com.paypal.svcs.types.aa";
+		private const string PreferredPrefix="";
 
 		/**
           *
@@ -1736,6 +1752,8 @@ namespace PayPal.AdaptiveAccounts.Model
       *Valid values are: COMPLETED 
       */
 	public partial class CreateAccountResponse	{
+		private const string NameSpace="com.paypal.svcs.types.aa";
+		private const string PreferredPrefix="";
 
 		/**
           *
@@ -1922,6 +1940,8 @@ namespace PayPal.AdaptiveAccounts.Model
       *
       */
 	public partial class GetUserAgreementRequest	{
+		private const string NameSpace="com.paypal.svcs.types.aa";
+		private const string PreferredPrefix="";
 
 		/**
           *
@@ -2036,6 +2056,8 @@ namespace PayPal.AdaptiveAccounts.Model
       *
       */
 	public partial class GetUserAgreementResponse	{
+		private const string NameSpace="com.paypal.svcs.types.aa";
+		private const string PreferredPrefix="";
 
 		/**
           *
@@ -2155,6 +2177,8 @@ namespace PayPal.AdaptiveAccounts.Model
       *support matchCriteria of 'NAME' and 'NONE'. 
       */
 	public partial class GetVerifiedStatusRequest	{
+		private const string NameSpace="com.paypal.svcs.types.aa";
+		private const string PreferredPrefix="";
 
 		/**
           *
@@ -2292,6 +2316,8 @@ namespace PayPal.AdaptiveAccounts.Model
       *Returned values are: VERIFIED|UNVERIFIED. 
       */
 	public partial class GetVerifiedStatusResponse	{
+		private const string NameSpace="com.paypal.svcs.types.aa";
+		private const string PreferredPrefix="";
 
 		/**
           *
@@ -2457,6 +2483,8 @@ namespace PayPal.AdaptiveAccounts.Model
       *emailAddress or an accountId. 
       */
 	public partial class AddBankAccountRequest	{
+		private const string NameSpace="com.paypal.svcs.types.aa";
+		private const string PreferredPrefix="";
 
 		/**
           *
@@ -3039,6 +3067,8 @@ namespace PayPal.AdaptiveAccounts.Model
       *WEB_URL_VERIFICATION_NEEDED 
       */
 	public partial class AddBankAccountResponse	{
+		private const string NameSpace="com.paypal.svcs.types.aa";
+		private const string PreferredPrefix="";
 
 		/**
           *
@@ -3204,6 +3234,8 @@ namespace PayPal.AdaptiveAccounts.Model
       *emailAddress or an accountId. 
       */
 	public partial class AddPaymentCardRequest	{
+		private const string NameSpace="com.paypal.svcs.types.aa";
+		private const string PreferredPrefix="";
 
 		/**
           *
@@ -3562,6 +3594,8 @@ namespace PayPal.AdaptiveAccounts.Model
       *WEB_URL_VERIFICATION_NEEDED 
       */
 	public partial class AddPaymentCardResponse	{
+		private const string NameSpace="com.paypal.svcs.types.aa";
+		private const string PreferredPrefix="";
 
 		/**
           *
@@ -3726,6 +3760,8 @@ namespace PayPal.AdaptiveAccounts.Model
       *financialProductCategory=PRE_PAID_CARD 
       */
 	public partial class AddPartnerFinancialProductRequest	{
+		private const string NameSpace="com.paypal.svcs.types.aa";
+		private const string PreferredPrefix="";
 
 		/**
           *
@@ -3996,6 +4032,8 @@ namespace PayPal.AdaptiveAccounts.Model
       *Valid values are: CARD_ADDED 
       */
 	public partial class AddPartnerFinancialProductResponse	{
+		private const string NameSpace="com.paypal.svcs.types.aa";
+		private const string PreferredPrefix="";
 
 		/**
           *
@@ -4115,6 +4153,8 @@ namespace PayPal.AdaptiveAccounts.Model
       *emailAddress or an accountId. 
       */
 	public partial class SetFundingSourceConfirmedRequest	{
+		private const string NameSpace="com.paypal.svcs.types.aa";
+		private const string PreferredPrefix="";
 
 		/**
           *
@@ -4230,6 +4270,8 @@ namespace PayPal.AdaptiveAccounts.Model
       *
       */
 	public partial class SetFundingSourceConfirmedResponse	{
+		private const string NameSpace="com.paypal.svcs.types.aa";
+		private const string PreferredPrefix="";
 
 		/**
           *
@@ -4326,6 +4368,8 @@ namespace PayPal.AdaptiveAccounts.Model
       *these inputs: emailAddress, accountId or phoneNumber. 
       */
 	public partial class CheckComplianceStatusRequest	{
+		private const string NameSpace="com.paypal.svcs.types.aa";
+		private const string PreferredPrefix="";
 
 		/**
           *
@@ -4400,6 +4444,8 @@ namespace PayPal.AdaptiveAccounts.Model
       *Returned values are: ALLOW|DENY 
       */
 	public partial class CheckComplianceStatusResponse	{
+		private const string NameSpace="com.paypal.svcs.types.aa";
+		private const string PreferredPrefix="";
 
 		/**
           *
@@ -4541,6 +4587,8 @@ namespace PayPal.AdaptiveAccounts.Model
       *
       */
 	public partial class ActivateProductRequest	{
+		private const string NameSpace="com.paypal.svcs.types.aa";
+		private const string PreferredPrefix="";
 
 		/**
           *
@@ -4615,6 +4663,8 @@ namespace PayPal.AdaptiveAccounts.Model
       *Valid values are: SUCCESS, FAILED 
       */
 	public partial class ActivateProductResponse	{
+		private const string NameSpace="com.paypal.svcs.types.aa";
+		private const string PreferredPrefix="";
 
 		/**
           *
@@ -4764,6 +4814,8 @@ namespace PayPal.AdaptiveAccounts.Model
       *
       */
 	public partial class NameType	{
+		private const string NameSpace="com.paypal.svcs.types.aa";
+		private const string PreferredPrefix="";
 
 		/**
           *
@@ -4951,6 +5003,8 @@ namespace PayPal.AdaptiveAccounts.Model
       *
       */
 	public partial class AddressType	{
+		private const string NameSpace="com.paypal.svcs.types.aa";
+		private const string PreferredPrefix="";
 
 		/**
           *
@@ -5109,6 +5163,8 @@ namespace PayPal.AdaptiveAccounts.Model
       *mobilePhoneNumber) Default=false. 
       */
 	public partial class CreateAccountWebOptionsType	{
+		private const string NameSpace="com.paypal.svcs.types.aa";
+		private const string PreferredPrefix="";
 
 		/**
           *
@@ -5257,6 +5313,8 @@ namespace PayPal.AdaptiveAccounts.Model
       *PayPal Business Category. i.e., baby - 1004 
       */
 	public partial class BusinessInfoType	{
+		private const string NameSpace="com.paypal.svcs.types.aa";
+		private const string PreferredPrefix="";
 
 		/**
           *
@@ -5911,6 +5969,8 @@ namespace PayPal.AdaptiveAccounts.Model
       *director etc. 
       */
 	public partial class BusinessStakeholderType	{
+		private const string NameSpace="com.paypal.svcs.types.aa";
+		private const string PreferredPrefix="";
 
 		/**
           *
@@ -6049,6 +6109,8 @@ namespace PayPal.AdaptiveAccounts.Model
       *firstName, lastName etc. 
       */
 	public partial class UserInfoType	{
+		private const string NameSpace="com.paypal.svcs.types.aa";
+		private const string PreferredPrefix="";
 
 		/**
           *
@@ -6203,6 +6265,8 @@ namespace PayPal.AdaptiveAccounts.Model
       *
       */
 	public partial class WebOptionsType	{
+		private const string NameSpace="com.paypal.svcs.types.aa";
+		private const string PreferredPrefix="";
 
 		/**
           *
@@ -6309,6 +6373,8 @@ namespace PayPal.AdaptiveAccounts.Model
       *Month in integer format, between 1 and 12 
       */
 	public partial class CardDateType	{
+		private const string NameSpace="com.paypal.svcs.types.aa";
+		private const string PreferredPrefix="";
 
 		/**
           *

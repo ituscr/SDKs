@@ -47,6 +47,8 @@ namespace PayPal.AdaptivePayments.Model
       *
       */
 	public partial class AccountIdentifier	{
+		private const string NameSpace="com.paypal.svcs.types.common";
+		private const string PreferredPrefix="";
 
 		/**
           *
@@ -146,6 +148,8 @@ namespace PayPal.AdaptivePayments.Model
       *
       */
 	public partial class BaseAddress	{
+		private const string NameSpace="com.paypal.svcs.types.common";
+		private const string PreferredPrefix="";
 
 		/**
           *
@@ -347,6 +351,8 @@ namespace PayPal.AdaptivePayments.Model
       *service. 
       */
 	public partial class ClientDetailsType	{
+		private const string NameSpace="com.paypal.svcs.types.common";
+		private const string PreferredPrefix="";
 
 		/**
           *
@@ -537,6 +543,8 @@ namespace PayPal.AdaptivePayments.Model
       *
       */
 	public partial class CurrencyType	{
+		private const string NameSpace="com.paypal.svcs.types.common";
+		private const string PreferredPrefix="";
 
 		/**
           *
@@ -644,6 +652,8 @@ namespace PayPal.AdaptivePayments.Model
       *from the service operation. 
       */
 	public partial class ErrorData	{
+		private const string NameSpace="com.paypal.svcs.types.common";
+		private const string PreferredPrefix="";
 
 		/**
           *
@@ -876,6 +886,8 @@ namespace PayPal.AdaptivePayments.Model
       *
       */
 	public partial class ErrorParameter	{
+		private const string NameSpace="com.paypal.svcs.types.common";
+		private const string PreferredPrefix="";
 
 		/**
           *
@@ -962,6 +974,8 @@ namespace PayPal.AdaptivePayments.Model
       *specific error codes. 
       */
 	public partial class FaultMessage	{
+		private const string NameSpace="com.paypal.svcs.types.common";
+		private const string PreferredPrefix="";
 
 		/**
           *
@@ -1056,6 +1070,8 @@ namespace PayPal.AdaptivePayments.Model
       *
       */
 	public partial class PhoneNumberType	{
+		private const string NameSpace="com.paypal.svcs.types.common";
+		private const string PreferredPrefix="";
 
 		/**
           *
@@ -1190,6 +1206,8 @@ namespace PayPal.AdaptivePayments.Model
       *the service. 
       */
 	public partial class RequestEnvelope	{
+		private const string NameSpace="com.paypal.svcs.types.common";
+		private const string PreferredPrefix="";
 
 		/**
           *
@@ -1263,6 +1281,8 @@ namespace PayPal.AdaptivePayments.Model
       *a service. 
       */
 	public partial class ResponseEnvelope	{
+		private const string NameSpace="com.paypal.svcs.types.common";
+		private const string PreferredPrefix="";
 
 		/**
           *
@@ -1470,6 +1490,8 @@ namespace PayPal.AdaptivePayments.Model
       *
       */
 	public partial class Address	{
+		private const string NameSpace="com.paypal.svcs.types.ap";
+		private const string PreferredPrefix="";
 
 		/**
           *
@@ -1578,6 +1600,8 @@ namespace PayPal.AdaptivePayments.Model
       *
       */
 	public partial class AddressList	{
+		private const string NameSpace="com.paypal.svcs.types.ap";
+		private const string PreferredPrefix="";
 
 		/**
           *
@@ -1649,6 +1673,8 @@ namespace PayPal.AdaptivePayments.Model
       *A list of ISO currency codes. 
       */
 	public partial class CurrencyCodeList	{
+		private const string NameSpace="com.paypal.svcs.types.ap";
+		private const string PreferredPrefix="";
 
 		/**
           *
@@ -1703,6 +1729,8 @@ namespace PayPal.AdaptivePayments.Model
       *currency. 
       */
 	public partial class CurrencyConversionList	{
+		private const string NameSpace="com.paypal.svcs.types.ap";
+		private const string PreferredPrefix="";
 
 		/**
           *
@@ -1789,6 +1817,8 @@ namespace PayPal.AdaptivePayments.Model
       *conversions for a base currency in each row. 
       */
 	public partial class CurrencyConversionTable	{
+		private const string NameSpace="com.paypal.svcs.types.ap";
+		private const string PreferredPrefix="";
 
 		/**
           *
@@ -1860,6 +1890,8 @@ namespace PayPal.AdaptivePayments.Model
       *A list of ISO currencies. 
       */
 	public partial class CurrencyList	{
+		private const string NameSpace="com.paypal.svcs.types.ap";
+		private const string PreferredPrefix="";
 
 		/**
           *
@@ -1952,6 +1984,8 @@ namespace PayPal.AdaptivePayments.Model
       *for display purposes. 
       */
 	public partial class DisplayOptions	{
+		private const string NameSpace="com.paypal.svcs.types.ap";
+		private const string PreferredPrefix="";
 
 		/**
           *
@@ -2104,6 +2138,8 @@ namespace PayPal.AdaptivePayments.Model
       *
       */
 	public partial class ErrorList	{
+		private const string NameSpace="com.paypal.svcs.types.ap";
+		private const string PreferredPrefix="";
 
 		/**
           *
@@ -2175,6 +2211,8 @@ namespace PayPal.AdaptivePayments.Model
       *
       */
 	public partial class FundingConstraint	{
+		private const string NameSpace="com.paypal.svcs.types.ap";
+		private const string PreferredPrefix="";
 
 		/**
           *
@@ -2247,6 +2285,8 @@ namespace PayPal.AdaptivePayments.Model
       *FundingTypeInfo represents one allowed funding type. 
       */
 	public partial class FundingTypeInfo	{
+		private const string NameSpace="com.paypal.svcs.types.ap";
+		private const string PreferredPrefix="";
 
 		/**
           *
@@ -2325,6 +2365,8 @@ namespace PayPal.AdaptivePayments.Model
       *
       */
 	public partial class FundingTypeList	{
+		private const string NameSpace="com.paypal.svcs.types.ap";
+		private const string PreferredPrefix="";
 
 		/**
           *
@@ -2416,6 +2458,8 @@ namespace PayPal.AdaptivePayments.Model
       *Describes the conversion between 2 currencies. 
       */
 	public partial class CurrencyConversion	{
+		private const string NameSpace="com.paypal.svcs.types.ap";
+		private const string PreferredPrefix="";
 
 		/**
           *
@@ -2524,6 +2568,8 @@ namespace PayPal.AdaptivePayments.Model
       *Funding source information. 
       */
 	public partial class FundingSource	{
+		private const string NameSpace="com.paypal.svcs.types.ap";
+		private const string PreferredPrefix="";
 
 		/**
           *
@@ -2678,6 +2724,8 @@ namespace PayPal.AdaptivePayments.Model
       *Amount to be charged to a particular funding source. 
       */
 	public partial class FundingPlanCharge	{
+		private const string NameSpace="com.paypal.svcs.types.ap";
+		private const string PreferredPrefix="";
 
 		/**
           *
@@ -2764,6 +2812,8 @@ namespace PayPal.AdaptivePayments.Model
       *specific payment. 
       */
 	public partial class FundingPlan	{
+		private const string NameSpace="com.paypal.svcs.types.ap";
+		private const string PreferredPrefix="";
 
 		/**
           *
@@ -2953,6 +3003,8 @@ namespace PayPal.AdaptivePayments.Model
       *institution. 
       */
 	public partial class InitiatingEntity	{
+		private const string NameSpace="com.paypal.svcs.types.ap";
+		private const string PreferredPrefix="";
 
 		/**
           *
@@ -3025,6 +3077,8 @@ namespace PayPal.AdaptivePayments.Model
       *The customer of the initiating institution 
       */
 	public partial class InstitutionCustomer	{
+		private const string NameSpace="com.paypal.svcs.types.ap";
+		private const string PreferredPrefix="";
 
 		/**
           *
@@ -3270,6 +3324,8 @@ namespace PayPal.AdaptivePayments.Model
       *Describes an individual item for an invoice. 
       */
 	public partial class InvoiceItem	{
+		private const string NameSpace="com.paypal.svcs.types.ap";
+		private const string PreferredPrefix="";
 
 		/**
           *
@@ -3450,6 +3506,8 @@ namespace PayPal.AdaptivePayments.Model
       *contains list of additional per item details. 
       */
 	public partial class InvoiceData	{
+		private const string NameSpace="com.paypal.svcs.types.ap";
+		private const string PreferredPrefix="";
 
 		/**
           *
@@ -3589,6 +3647,8 @@ namespace PayPal.AdaptivePayments.Model
       *a receiver. 
       */
 	public partial class PayError	{
+		private const string NameSpace="com.paypal.svcs.types.ap";
+		private const string PreferredPrefix="";
 
 		/**
           *
@@ -3674,6 +3734,8 @@ namespace PayPal.AdaptivePayments.Model
       *
       */
 	public partial class PayErrorList	{
+		private const string NameSpace="com.paypal.svcs.types.ap";
+		private const string PreferredPrefix="";
 
 		/**
           *
@@ -3748,6 +3810,8 @@ namespace PayPal.AdaptivePayments.Model
       *details. 
       */
 	public partial class PaymentInfo	{
+		private const string NameSpace="com.paypal.svcs.types.ap";
+		private const string PreferredPrefix="";
 
 		/**
           *
@@ -3971,6 +4035,8 @@ namespace PayPal.AdaptivePayments.Model
       *
       */
 	public partial class PaymentInfoList	{
+		private const string NameSpace="com.paypal.svcs.types.ap";
+		private const string PreferredPrefix="";
 
 		/**
           *
@@ -4045,6 +4111,8 @@ namespace PayPal.AdaptivePayments.Model
       *specified when making a single or parallel split payment. 
       */
 	public partial class Receiver	{
+		private const string NameSpace="com.paypal.svcs.types.ap";
+		private const string PreferredPrefix="";
 
 		/**
           *
@@ -4286,6 +4354,8 @@ namespace PayPal.AdaptivePayments.Model
       *
       */
 	public partial class ReceiverList	{
+		private const string NameSpace="com.paypal.svcs.types.ap";
+		private const string PreferredPrefix="";
 
 		/**
           *
@@ -4341,6 +4411,8 @@ namespace PayPal.AdaptivePayments.Model
       *a PayPal account. 
       */
 	public partial class ReceiverIdentifier : AccountIdentifier	{
+		private const string NameSpace="com.paypal.svcs.types.ap";
+		private const string PreferredPrefix="";
 
 		/**
 	 	  * Default Constructor
@@ -4394,6 +4466,8 @@ namespace PayPal.AdaptivePayments.Model
       *setting additional details for payment using invoice. 
       */
 	public partial class ReceiverOptions	{
+		private const string NameSpace="com.paypal.svcs.types.ap";
+		private const string PreferredPrefix="";
 
 		/**
           *
@@ -4583,6 +4657,8 @@ namespace PayPal.AdaptivePayments.Model
       *of a PayRequest. 
       */
 	public partial class RefundInfo	{
+		private const string NameSpace="com.paypal.svcs.types.ap";
+		private const string PreferredPrefix="";
 
 		/**
           *
@@ -4852,6 +4928,8 @@ namespace PayPal.AdaptivePayments.Model
       *
       */
 	public partial class RefundInfoList	{
+		private const string NameSpace="com.paypal.svcs.types.ap";
+		private const string PreferredPrefix="";
 
 		/**
           *
@@ -4923,6 +5001,8 @@ namespace PayPal.AdaptivePayments.Model
       *Options that apply to the sender of a payment. 
       */
 	public partial class SenderOptions	{
+		private const string NameSpace="com.paypal.svcs.types.ap";
+		private const string PreferredPrefix="";
 
 		/**
           *
@@ -5022,6 +5102,8 @@ namespace PayPal.AdaptivePayments.Model
       *or partner. 
       */
 	public partial class TaxIdDetails	{
+		private const string NameSpace="com.paypal.svcs.types.ap";
+		private const string PreferredPrefix="";
 
 		/**
           *
@@ -5121,6 +5203,8 @@ namespace PayPal.AdaptivePayments.Model
       *a PayPal account. 
       */
 	public partial class SenderIdentifier : AccountIdentifier	{
+		private const string NameSpace="com.paypal.svcs.types.ap";
+		private const string PreferredPrefix="";
 
 		/**
           *
@@ -5228,6 +5312,8 @@ namespace PayPal.AdaptivePayments.Model
       *
       */
 	public partial class UserLimit	{
+		private const string NameSpace="com.paypal.svcs.types.ap";
+		private const string PreferredPrefix="";
 
 		/**
           *
@@ -5314,6 +5400,8 @@ namespace PayPal.AdaptivePayments.Model
       *resulting from the service operation. 
       */
 	public partial class WarningData	{
+		private const string NameSpace="com.paypal.svcs.types.ap";
+		private const string PreferredPrefix="";
 
 		/**
           *
@@ -5399,6 +5487,8 @@ namespace PayPal.AdaptivePayments.Model
       *
       */
 	public partial class WarningDataList	{
+		private const string NameSpace="com.paypal.svcs.types.ap";
+		private const string PreferredPrefix="";
 
 		/**
           *
@@ -5470,6 +5560,8 @@ namespace PayPal.AdaptivePayments.Model
       *The request to cancel a Preapproval. 
       */
 	public partial class CancelPreapprovalRequest	{
+		private const string NameSpace="com.paypal.svcs.types.ap";
+		private const string PreferredPrefix="";
 
 		/**
           *
@@ -5543,6 +5635,8 @@ namespace PayPal.AdaptivePayments.Model
       *The result of the CancelPreapprovalRequest. 
       */
 	public partial class CancelPreapprovalResponse	{
+		private const string NameSpace="com.paypal.svcs.types.ap";
+		private const string PreferredPrefix="";
 
 		/**
           *
@@ -5637,6 +5731,8 @@ namespace PayPal.AdaptivePayments.Model
       *The request to confirm a Preapproval. 
       */
 	public partial class ConfirmPreapprovalRequest	{
+		private const string NameSpace="com.paypal.svcs.types.ap";
+		private const string PreferredPrefix="";
 
 		/**
           *
@@ -5752,6 +5848,8 @@ namespace PayPal.AdaptivePayments.Model
       *The result of the ConfirmPreapprovalRequest. 
       */
 	public partial class ConfirmPreapprovalResponse	{
+		private const string NameSpace="com.paypal.svcs.types.ap";
+		private const string PreferredPrefix="";
 
 		/**
           *
@@ -5847,6 +5945,8 @@ namespace PayPal.AdaptivePayments.Model
       *estimated values in other currencies. 
       */
 	public partial class ConvertCurrencyRequest	{
+		private const string NameSpace="com.paypal.svcs.types.ap";
+		private const string PreferredPrefix="";
 
 		/**
           *
@@ -5987,6 +6087,8 @@ namespace PayPal.AdaptivePayments.Model
       *currencies based on the Convert Currency Request. 
       */
 	public partial class ConvertCurrencyResponse	{
+		private const string NameSpace="com.paypal.svcs.types.ap";
+		private const string PreferredPrefix="";
 
 		/**
           *
@@ -6104,6 +6206,8 @@ namespace PayPal.AdaptivePayments.Model
       *The request to execute the payment request. 
       */
 	public partial class ExecutePaymentRequest	{
+		private const string NameSpace="com.paypal.svcs.types.ap";
+		private const string PreferredPrefix="";
 
 		/**
           *
@@ -6219,6 +6323,8 @@ namespace PayPal.AdaptivePayments.Model
       *The result of a payment execution. 
       */
 	public partial class ExecutePaymentResponse	{
+		private const string NameSpace="com.paypal.svcs.types.ap";
+		private const string PreferredPrefix="";
 
 		/**
           *
@@ -6360,6 +6466,8 @@ namespace PayPal.AdaptivePayments.Model
       *a preapproval. 
       */
 	public partial class GetAllowedFundingSourcesRequest	{
+		private const string NameSpace="com.paypal.svcs.types.ap";
+		private const string PreferredPrefix="";
 
 		/**
           *
@@ -6434,6 +6542,8 @@ namespace PayPal.AdaptivePayments.Model
       *a preapproval. 
       */
 	public partial class GetAllowedFundingSourcesResponse	{
+		private const string NameSpace="com.paypal.svcs.types.ap";
+		private const string PreferredPrefix="";
 
 		/**
           *
@@ -6560,6 +6670,8 @@ namespace PayPal.AdaptivePayments.Model
       *The request to get the options of a payment request. 
       */
 	public partial class GetPaymentOptionsRequest	{
+		private const string NameSpace="com.paypal.svcs.types.ap";
+		private const string PreferredPrefix="";
 
 		/**
           *
@@ -6633,6 +6745,8 @@ namespace PayPal.AdaptivePayments.Model
       *The response message for the GetPaymentOption request 
       */
 	public partial class GetPaymentOptionsResponse	{
+		private const string NameSpace="com.paypal.svcs.types.ap";
+		private const string PreferredPrefix="";
 
 		/**
           *
@@ -6853,6 +6967,8 @@ namespace PayPal.AdaptivePayments.Model
       *trackingId, or a transactionId of the PayRequest. 
       */
 	public partial class PaymentDetailsRequest	{
+		private const string NameSpace="com.paypal.svcs.types.ap";
+		private const string PreferredPrefix="";
 
 		/**
           *
@@ -6968,6 +7084,8 @@ namespace PayPal.AdaptivePayments.Model
       *operation. 
       */
 	public partial class PaymentDetailsResponse	{
+		private const string NameSpace="com.paypal.svcs.types.ap";
+		private const string PreferredPrefix="";
 
 		/**
           *
@@ -7431,6 +7549,8 @@ namespace PayPal.AdaptivePayments.Model
       *from sender to receivers. 
       */
 	public partial class PayRequest	{
+		private const string NameSpace="com.paypal.svcs.types.ap";
+		private const string PreferredPrefix="";
 
 		/**
           *
@@ -7829,6 +7949,8 @@ namespace PayPal.AdaptivePayments.Model
       *be provided. 
       */
 	public partial class PayResponse	{
+		private const string NameSpace="com.paypal.svcs.types.ap";
+		private const string PreferredPrefix="";
 
 		/**
           *
@@ -8015,6 +8137,8 @@ namespace PayPal.AdaptivePayments.Model
       *The request to look up the details of a Preapproval. 
       */
 	public partial class PreapprovalDetailsRequest	{
+		private const string NameSpace="com.paypal.svcs.types.ap";
+		private const string PreferredPrefix="";
 
 		/**
           *
@@ -8110,6 +8234,8 @@ namespace PayPal.AdaptivePayments.Model
       *Preapproval operation. 
       */
 	public partial class PreapprovalDetailsResponse	{
+		private const string NameSpace="com.paypal.svcs.types.ap";
+		private const string PreferredPrefix="";
 
 		/**
           *
@@ -8782,6 +8908,8 @@ namespace PayPal.AdaptivePayments.Model
       *the the sender's behalf with various limitations defined. 
       */
 	public partial class PreapprovalRequest	{
+		private const string NameSpace="com.paypal.svcs.types.ap";
+		private const string PreferredPrefix="";
 
 		/**
           *
@@ -9238,6 +9366,8 @@ namespace PayPal.AdaptivePayments.Model
       *The result of the PreapprovalRequest is a preapprovalKey. 
       */
 	public partial class PreapprovalResponse	{
+		private const string NameSpace="com.paypal.svcs.types.ap";
+		private const string PreferredPrefix="";
 
 		/**
           *
@@ -9358,6 +9488,8 @@ namespace PayPal.AdaptivePayments.Model
       *specific receiver of a payKey. 
       */
 	public partial class RefundRequest	{
+		private const string NameSpace="com.paypal.svcs.types.ap";
+		private const string PreferredPrefix="";
 
 		/**
           *
@@ -9515,6 +9647,8 @@ namespace PayPal.AdaptivePayments.Model
       *The result of a Refund request. 
       */
 	public partial class RefundResponse	{
+		private const string NameSpace="com.paypal.svcs.types.ap";
+		private const string PreferredPrefix="";
 
 		/**
           *
@@ -9655,6 +9789,8 @@ namespace PayPal.AdaptivePayments.Model
       *The request to set the options of a payment request. 
       */
 	public partial class SetPaymentOptionsRequest	{
+		private const string NameSpace="com.paypal.svcs.types.ap";
+		private const string PreferredPrefix="";
 
 		/**
           *
@@ -9840,6 +9976,8 @@ namespace PayPal.AdaptivePayments.Model
       *The response message for the SetPaymentOption request 
       */
 	public partial class SetPaymentOptionsResponse	{
+		private const string NameSpace="com.paypal.svcs.types.ap";
+		private const string PreferredPrefix="";
 
 		/**
           *
@@ -9935,6 +10073,8 @@ namespace PayPal.AdaptivePayments.Model
       *payment. 
       */
 	public partial class GetFundingPlansRequest	{
+		private const string NameSpace="com.paypal.svcs.types.ap";
+		private const string PreferredPrefix="";
 
 		/**
           *
@@ -10009,6 +10149,8 @@ namespace PayPal.AdaptivePayments.Model
       *payment. 
       */
 	public partial class GetFundingPlansResponse	{
+		private const string NameSpace="com.paypal.svcs.types.ap";
+		private const string PreferredPrefix="";
 
 		/**
           *
@@ -10135,6 +10277,8 @@ namespace PayPal.AdaptivePayments.Model
       *The request to get the addresses available for a payment. 
       */
 	public partial class GetAvailableShippingAddressesRequest	{
+		private const string NameSpace="com.paypal.svcs.types.ap";
+		private const string PreferredPrefix="";
 
 		/**
           *
@@ -10209,6 +10353,8 @@ namespace PayPal.AdaptivePayments.Model
       *payment. 
       */
 	public partial class GetAvailableShippingAddressesResponse	{
+		private const string NameSpace="com.paypal.svcs.types.ap";
+		private const string PreferredPrefix="";
 
 		/**
           *
@@ -10335,6 +10481,8 @@ namespace PayPal.AdaptivePayments.Model
       *The request to get the addresses available for a payment. 
       */
 	public partial class GetShippingAddressesRequest	{
+		private const string NameSpace="com.paypal.svcs.types.ap";
+		private const string PreferredPrefix="";
 
 		/**
           *
@@ -10409,6 +10557,8 @@ namespace PayPal.AdaptivePayments.Model
       *payment. 
       */
 	public partial class GetShippingAddressesResponse	{
+		private const string NameSpace="com.paypal.svcs.types.ap";
+		private const string PreferredPrefix="";
 
 		/**
           *
@@ -10526,6 +10676,8 @@ namespace PayPal.AdaptivePayments.Model
       *The request to get the remaining limits for a user 
       */
 	public partial class GetUserLimitsRequest	{
+		private const string NameSpace="com.paypal.svcs.types.ap";
+		private const string PreferredPrefix="";
 
 		/**
           *
@@ -10669,6 +10821,8 @@ namespace PayPal.AdaptivePayments.Model
       *A response that contains a list of remaining limits 
       */
 	public partial class GetUserLimitsResponse	{
+		private const string NameSpace="com.paypal.svcs.types.ap";
+		private const string PreferredPrefix="";
 
 		/**
           *
