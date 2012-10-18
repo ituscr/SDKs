@@ -69,8 +69,7 @@ public class GetAllowedFundingSourcesServlet extends HttpServlet {
 		req.setKey(request.getParameter("preapprovalKey"));
 		req.setRequestEnvelope(requestEnvelope);
 		AdaptivePaymentsService service = new AdaptivePaymentsService(this
-				.getServletContext().getRealPath("/")
-				+ "/WEB-INF/sdk_config.properties");
+				.getClass().getResourceAsStream("/sdk_config.properties"));
 		response.setContentType("text/html");
 		try {
 			GetAllowedFundingSourcesResponse resp = service

@@ -69,8 +69,7 @@ public class GetFundingPlansServlet extends HttpServlet {
 		req.setPayKey(request.getParameter("payKey"));
 		req.setRequestEnvelope(requestEnvelope);
 		AdaptivePaymentsService service = new AdaptivePaymentsService(this
-				.getServletContext().getRealPath("/")
-				+ "/WEB-INF/sdk_config.properties");
+				.getClass().getResourceAsStream("/sdk_config.properties"));
 		response.setContentType("text/html");
 		try {
 			GetFundingPlansResponse resp = service.getFundingPlans(req);

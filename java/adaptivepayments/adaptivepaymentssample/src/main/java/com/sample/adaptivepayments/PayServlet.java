@@ -180,8 +180,7 @@ public class PayServlet extends HttpServlet {
 		if (request.getParameter("returnURL") != "")
 			req.setReturnUrl(request.getParameter("returnURL"));
 		AdaptivePaymentsService service = new AdaptivePaymentsService(this
-				.getServletContext().getRealPath("/")
-				+ "/WEB-INF/sdk_config.properties");
+				.getClass().getResourceAsStream("/sdk_config.properties"));
 		try {
 			PayResponse resp = service.pay(req);
 			response.setContentType("text/html");

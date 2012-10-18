@@ -102,8 +102,7 @@ public class RefundServlet extends HttpServlet {
 		ReceiverList receiverlst = new ReceiverList(receiver);
 		req.setReceiverList(receiverlst);
 		AdaptivePaymentsService service = new AdaptivePaymentsService(this
-				.getServletContext().getRealPath("/")
-				+ "/WEB-INF/sdk_config.properties");
+				.getClass().getResourceAsStream("/sdk_config.properties"));
 		try {
 			RefundResponse resp = service.refund(req);
 			response.setContentType("text/html");

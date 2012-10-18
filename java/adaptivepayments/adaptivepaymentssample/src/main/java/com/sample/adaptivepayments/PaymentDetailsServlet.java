@@ -71,8 +71,7 @@ public class PaymentDetailsServlet extends HttpServlet {
 		if (request.getParameter("trackingID") != "")
 			req.setTrackingId(request.getParameter("trackingID"));
 		AdaptivePaymentsService service = new AdaptivePaymentsService(this
-				.getServletContext().getRealPath("/")
-				+ "/WEB-INF/sdk_config.properties");
+				.getClass().getResourceAsStream("/sdk_config.properties"));
 		response.setContentType("text/html");
 		try {
 			PaymentDetailsResponse resp = service.paymentDetails(req);

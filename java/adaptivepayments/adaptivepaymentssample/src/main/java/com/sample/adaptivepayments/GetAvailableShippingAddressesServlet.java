@@ -70,8 +70,7 @@ public class GetAvailableShippingAddressesServlet extends HttpServlet {
 
 		req.setRequestEnvelope(requestEnvelope);
 		AdaptivePaymentsService service = new AdaptivePaymentsService(this
-				.getServletContext().getRealPath("/")
-				+ "/WEB-INF/sdk_config.properties");
+				.getClass().getResourceAsStream("/sdk_config.properties"));
 		try {
 			GetAvailableShippingAddressesResponse resp = service
 					.getAvailableShippingAddresses(req);

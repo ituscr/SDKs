@@ -69,8 +69,7 @@ public class ExecutePaymentServlet extends HttpServlet {
 		req.setFundingPlanId(request.getParameter("fundingPlanID"));
 		req.setRequestEnvelope(requestEnvelope);
 		AdaptivePaymentsService service = new AdaptivePaymentsService(this
-				.getServletContext().getRealPath("/")
-				+ "/WEB-INF/sdk_config.properties");
+				.getClass().getResourceAsStream("/sdk_config.properties"));
 		response.setContentType("text/html");
 		try {
 			ExecutePaymentResponse resp = service.executePayment(req);
